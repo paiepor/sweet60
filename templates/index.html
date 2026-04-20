@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -57,7 +58,7 @@
             
 
             <div class="w-72 h-72 flex justify-center items-center z-10 mb-12 drop-shadow-2xl">
-                <img src="logo.png" alt="Sweet Sixty Logo" class="w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/300x300/F5F3FF/7C3AED?text=ใส่รูป+logo.png+ที่นี่'">
+                <img src="{% static 'logo.png' %}" alt="Sweet Sixty Logo" class="w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/300x300/F5F3FF/7C3AED?text=ใส่รูป+logo.png+ที่นี่'">
             </div>
             
             <div class="w-full space-y-4 z-10">
