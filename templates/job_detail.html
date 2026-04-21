@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ job.title }} - Sweet Sixty</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Kanit', 'sans-serif'] },
+                    colors: { 
+                        brand: { 50: '#F5F3FF', 100: '#EDE9FE', 500: '#8B5CF6', 600: '#7C3AED', 700: '#6D28D9' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #E2E8F0; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        #mobile-frame { width: 390px; height: 844px; background: #ffffff; border: 12px solid #1e1e1e; border-radius: 50px; position: relative; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
+        .notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 150px; height: 30px; background-color: #1e1e1e; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; z-index: 100; }
+        .screen { flex-direction: column; height: 100%; background-color: #FAFAFA; overflow-y: auto; padding-top: 40px; display: flex; }
+    </style>
+</head>
+<body>
+
+<div id="mobile-frame">
+    <div class="notch"></div>
+    
+    <div class="screen">
+        <div class="p-6 flex items-center border-b border-gray-50 bg-white">
+            <a href="/" class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-800 shadow-sm transition active:scale-90">
+                <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <h2 class="ml-4 font-bold text-lg text-gray-900">รายละเอียดงาน</h2>
+        </div>
+
+        <div class="p-6">
+            <div class="mb-6">
+                <span class="bg-brand-50 text-brand-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">เปิดรับสมัครอยู่</span>
+                <h1 class="text-2xl font-extrabold text-gray-900 mt-3 leading-tight">{{ job.title }}</h1>
+                <p class="text-gray-500 mt-2 flex items-center text-sm">
+                    <i class="fa-solid fa-building mr-2 text-brand-500"></i> {{ job.company_name }}
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="bg-brand-50 p-4 rounded-[24px] border border-brand-100">
+                    <p class="text-[10px] text-brand-600 font-bold uppercase mb-1">ค่าตอบแทน</p>
+                    <p class="text-lg font-bold text-gray-900">฿{{ job.salary }}</p>
+                </div>
+                <div class="bg-orange-50 p-4 rounded-[24px] border border-orange-100">
+                    <p class="text-[10px] text-orange-600 font-bold uppercase mb-1">สถานที่</p>
+                    <p class="text-sm font-bold text-gray-900 leading-tight">กทม. และปริมณฑล</p>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-2 flex items-center">
+                        <i class="fa-solid fa-circle-info mr-2 text-brand-500"></i> เกี่ยวกับงานนี้
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
+                        {{ job.description }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <button onclick="alert('ส่งใบสมัครสำเร็จ! เจ้าหน้าที่จะติดต่อกลับหาคุณนิราโดยเร็วที่สุดค่ะ')" 
+                        class="w-full bg-brand-600 text-white py-4 rounded-[20px] font-bold shadow-lg shadow-brand-200 active:scale-95 transition-all text-lg">
+                    ส่งใบสมัครทันที
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

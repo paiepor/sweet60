@@ -212,13 +212,24 @@
                 <div onclick="nav('screen-profile')" id="nav-avatar-display" class="cursor-pointer w-11 h-11 bg-brand-50 rounded-full flex justify-center items-center text-brand-600 border border-brand-100 btn-press text-xl"><i class="fa-solid fa-user text-sm"></i></div>
             </div>
             <div class="relative">
-                <i class="fa-solid fa-search absolute left-5 top-4 text-gray-400"></i>
-                <input type="text" id="search-input" onkeyup="renderFeed()" placeholder="ค้นหางาน, ทักษะ..." class="w-full bg-gray-50 border border-gray-100 py-3.5 pl-12 pr-4 rounded-[18px] text-sm outline-none focus:bg-white focus:border-brand-300 focus:ring-4 focus:ring-brand-50 transition-all">
-            </div>
+               <div id="feed-container" class="space-y-4 p-4">
+                
+    {% for job in jobs %}
+    <a href="/job/{{ job.id }}/" class="block bg-white p-5 rounded-2xl shadow-sm border border-gray-100 mb-3 hover:border-purple-500 transition-all">
+        <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-gray-900">{{ job.title }}</h3>
+            <span class="text-purple-600 font-bold text-sm">💰 {{ job.salary }}</span>
         </div>
-        <div class="p-6 flex-1">
-            <div class="flex justify-between items-end mb-4"><h3 class="font-bold text-gray-900 text-lg">งานล่าสุดที่เปิดรับ</h3></div>
-            <div id="feed-container" class="space-y-4"></div>
+        <p class="text-sm text-gray-500 mb-2">🏢 {{ job.company_name }}</p>
+        <p class="text-sm text-gray-600 mb-4">{{ job.description }}</p>
+       <div class="bg-purple-600 text-white py-2 rounded-xl text-center text-xs font-bold">
+    ดูรายละเอียดและสมัครงาน
+</div>
+    </a>
+    {% empty %}
+    <div class="text-center text-gray-500 py-10">ยังไม่มีงานที่เปิดรับในตอนนี้ครับ 🥺</div>
+    {% endfor %}
+</div>
         </div>
     </div>
 
@@ -346,9 +357,18 @@
     </div>
 
     <div id="bottom-nav" class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-xl rounded-full shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-white px-6 py-4 flex justify-between items-center z-30 hidden">
-        <button onclick="nav('screen-feed')" id="nav-feed" class="flex flex-col items-center w-16 text-gray-400 transition transform hover:scale-105"><i class="fa-solid fa-house text-xl mb-1"></i></button>
-        <button onclick="nav('screen-my-jobs')" id="nav-my-jobs" class="flex flex-col items-center w-16 text-gray-400 transition transform hover:scale-105"><i class="fa-solid fa-briefcase text-xl mb-1"></i></button>
-        <button onclick="nav('screen-profile')" id="nav-profile" class="flex flex-col items-center w-16 text-gray-400 transition transform hover:scale-105"><i class="fa-solid fa-user text-xl mb-1"></i></button>
+        <a href="{% url 'home' %}" class="flex flex-col items-center w-16 text-purple-600 transition-transform hover:scale-105">
+    <i class="fa-solid fa-house text-xl mb-1"></i>
+    <span class="text-[10px] font-medium">หน้าหลัก</span>
+</a>
+        <a href="{% url 'create_job' %}" class="flex flex-col items-center w-16 text-gray-400 transition-transform hover:scale-105">
+    <i class="fa-solid fa-briefcase text-xl mb-1"></i>
+    <span class="text-[10px] font-medium">ลงประกาศ</span>
+</a>
+        <a href="{% url 'profile' %}" class="flex flex-col items-center w-16 text-gray-400 transition-transform hover:scale-105">
+    <i class="fa-solid fa-user text-xl mb-1"></i>
+    <span class="text-[10px] font-medium">โปรไฟล์</span>
+</a>
     </div>
 </div>
 
@@ -398,7 +418,7 @@
             if(['screen-profile', 'screen-edit-profile'].includes(screenId)) document.getElementById('nav-profile').classList.add('text-brand-600');
         }
 
-        if(screenId === 'screen-feed') renderFeed();
+        //if(screenId === 'screen-feed') renderFeed();
         if(screenId === 'screen-my-jobs') renderMyJobs();
         if(screenId === 'screen-profile') renderProfileHistory();
     }

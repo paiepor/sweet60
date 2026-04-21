@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -57,7 +58,7 @@
             
 
             <div class="w-72 h-72 flex justify-center items-center z-10 mb-12 drop-shadow-2xl">
-                <img src="logo.png" alt="Sweet Sixty Logo" class="w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/300x300/F5F3FF/7C3AED?text=ใส่รูป+logo.png+ที่นี่'">
+                <img src="{% static 'logo.png' %}" alt="Sweet Sixty Logo" class="w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/300x300/F5F3FF/7C3AED?text=ใส่รูป+logo.png+ที่นี่'">
             </div>
             
             <div class="w-full space-y-4 z-10">
@@ -211,13 +212,23 @@
                 <div onclick="nav('screen-profile')" id="nav-avatar-display" class="cursor-pointer w-11 h-11 bg-brand-50 rounded-full flex justify-center items-center text-brand-600 border border-brand-100 btn-press text-xl"><i class="fa-solid fa-user text-sm"></i></div>
             </div>
             <div class="relative">
-                <i class="fa-solid fa-search absolute left-5 top-4 text-gray-400"></i>
-                <input type="text" id="search-input" onkeyup="renderFeed()" placeholder="ค้นหางาน, ทักษะ..." class="w-full bg-gray-50 border border-gray-100 py-3.5 pl-12 pr-4 rounded-[18px] text-sm outline-none focus:bg-white focus:border-brand-300 focus:ring-4 focus:ring-brand-50 transition-all">
-            </div>
+               <div id="feed-container" class="space-y-4 p-4">
+    {% for job in jobs %}
+    <a href="/job/{{ job.id }}/" class="block bg-white p-5 rounded-2xl shadow-sm border border-gray-100 mb-3 hover:border-purple-500 transition-all">
+        <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-gray-900">{{ job.title }}</h3>
+            <span class="text-purple-600 font-bold text-sm">💰 {{ job.salary }}</span>
         </div>
-        <div class="p-6 flex-1">
-            <div class="flex justify-between items-end mb-4"><h3 class="font-bold text-gray-900 text-lg">งานล่าสุดที่เปิดรับ</h3></div>
-            <div id="feed-container" class="space-y-4"></div>
+        <p class="text-sm text-gray-500 mb-2">🏢 {{ job.company_name }}</p>
+        <p class="text-sm text-gray-600 mb-4">{{ job.description }}</p>
+        <div class="bg-purple-600 text-white py-2 rounded-xl text-center text-xs font-bold">
+            ดูรายละเอียดและสมัครงาน
+        </div>
+    </a>
+    {% empty %}
+    <div class="text-center text-gray-500 py-10">ยังไม่มีงานที่เปิดรับในตอนนี้ครับ 🥺</div>
+    {% endfor %}
+</div>
         </div>
     </div>
 
@@ -397,7 +408,7 @@
             if(['screen-profile', 'screen-edit-profile'].includes(screenId)) document.getElementById('nav-profile').classList.add('text-brand-600');
         }
 
-        if(screenId === 'screen-feed') renderFeed();
+        //if(screenId === 'screen-feed') renderFeed();
         if(screenId === 'screen-my-jobs') renderMyJobs();
         if(screenId === 'screen-profile') renderProfileHistory();
     }
