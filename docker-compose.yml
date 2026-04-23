@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=ceyfes*7_5oxhqvc)l!-5$a_d3@0jak5!4541(n!g$7pl(#ufk
+      - ALLOWED_HOSTS=*
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"

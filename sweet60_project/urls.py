@@ -1,13 +1,13 @@
 from django.contrib import admin
-from django.urls import path
-from jobs_app import views  # 1. แก้ไขให้ Import มาจากแอป jobs_app
+from django.urls import path, include
+from jobs_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='home'), # 2. หน้าแรกให้เรียกไปที่ views.index
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('register/', views.register_view, name='register'),
+    path('', views.index, name='home'),
     path('job/<int:job_id>/', views.job_detail, name='job_detail'),
-    
-    # 3. เพิ่มเส้นทางสำหรับหน้าลงประกาศงานและสมัครงาน
     path('create-job/', views.create_job, name='create_job'),
     path('apply/<int:job_id>/', views.apply_job, name='apply_job'),
     path('profile/', views.profile_page, name='profile'),

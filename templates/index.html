@@ -357,15 +357,15 @@
     </div>
 
     <div id="bottom-nav" class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-xl rounded-full shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-white px-6 py-4 flex justify-between items-center z-30 hidden">
-        <a href="{% url 'home' %}" class="flex flex-col items-center w-16 text-purple-600 transition-transform hover:scale-105">
+        <a id="nav-feed" href="{% url 'home' %}" class="flex flex-col items-center w-16 text-purple-600 transition-transform hover:scale-105">
     <i class="fa-solid fa-house text-xl mb-1"></i>
     <span class="text-[10px] font-medium">หน้าหลัก</span>
 </a>
-        <a href="{% url 'create_job' %}" class="flex flex-col items-center w-16 text-gray-400 transition-transform hover:scale-105">
+        <a id="nav-my-jobs" href="{% url 'create_job' %}" class="flex flex-col items-center w-16 text-gray-400 transition-transform hover:scale-105">
     <i class="fa-solid fa-briefcase text-xl mb-1"></i>
     <span class="text-[10px] font-medium">ลงประกาศ</span>
 </a>
-        <a href="{% url 'profile' %}" class="flex flex-col items-center w-16 text-gray-400 transition-transform hover:scale-105">
+        <a id="nav-profile" href="{% url 'profile' %}" class="flex flex-col items-center w-16 text-gray-400 transition-transform hover:scale-105">
     <i class="fa-solid fa-user text-xl mb-1"></i>
     <span class="text-[10px] font-medium">โปรไฟล์</span>
 </a>
@@ -517,7 +517,8 @@
 
     // --- ส่วนอื่นๆ (Feed, โพสต์งาน, ดูผู้สมัคร) ---
     function renderFeed() {
-        const searchText = document.getElementById('search-input').value.toLowerCase();
+        const searchEl = document.getElementById('search-input');
+        const searchText = searchEl ? searchEl.value.toLowerCase() : '';
         const container = document.getElementById('feed-container');
         container.innerHTML = '';
         const availableJobs = db.jobs.filter(j => j.status === 'Open' && j.created_by !== currentUser.user_id);
@@ -728,7 +729,7 @@ function submitScreening() {
 
     // ถ้าผ่านหมด ให้ไปหน้าหลัก
     alert("ระบบตรวจสอบเบื้องต้นผ่านเรียบร้อย! กำลังพาคุณเข้าสู่หน้าหางาน...");
-    nav('screen-main');
+    nav('screen-feed');
 }
 // ฟังก์ชันโชว์รูป (รองรับทั้งกล่อง 1 และกล่อง 2)
     function showPreview(event, num) {
