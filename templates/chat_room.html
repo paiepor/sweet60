@@ -18,9 +18,9 @@
 </head>
 <body class="bg-background font-body-md text-on-background min-h-screen flex flex-col h-screen overflow-hidden">
 
-<header class="flex-none w-full z-50 flex items-center px-4 h-20 bg-white border-b-2 border-violet-100 shadow-sm">
+<header class="flex-none w-full z-50 flex items-center px-4 h-20 bg-[#fef7ff] border-b-2 border-[#e040a0]/10 shadow-[0_4px_16px_rgba(224,64,160,0.15)]">
     <div class="flex items-center gap-4 w-full">
-        <a href="{% url 'community' %}" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-violet-50 transition-colors active:scale-95 text-violet-500">
+        <a href="{% url 'community' %}" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95 text-[#e040a0]">
             <span class="material-symbols-outlined" style="font-size:32px">arrow_back</span>
         </a>
         <div class="flex items-center gap-3">
@@ -62,7 +62,7 @@
 </main>
 
 <!-- Reply Form -->
-<div class="flex-none w-full p-4 bg-white border-t-2 border-violet-100 shadow-[0_-10px_20px_rgba(0,0,0,0.05)] z-40">
+<div class="flex-none w-full p-4 bg-white border-t-2 border-[#e040a0]/10 shadow-[0_-8px_20px_rgba(224,64,160,0.08)] z-40">
     <form method="POST" class="max-w-2xl mx-auto flex gap-3">
         {% csrf_token %}
         <input type="text" name="content" required placeholder="พิมพ์ข้อความ..." class="flex-1 h-14 px-5 rounded-full border-2 border-primary-fixed focus:border-primary outline-none transition-colors font-body-md bg-surface">
