@@ -50,6 +50,28 @@ class JobListing(models.Model):
     def __str__(self):
         return self.title
 
+class CommunityGroup(models.Model):
+    CATEGORY_CHOICES = [
+        ('fitness', 'สุขภาพและฟิตเนส'),
+        ('arts', 'ศิลปะและงานฝีมือ'),
+        ('travel', 'ท่องเที่ยวและกิจกรรมกลางแจ้ง'),
+        ('tech', 'เทคโนโลยีและการเรียนรู้'),
+        ('social', 'พบปะสังสรรค์'),
+    ]
+    name = models.CharField(max_length=200, verbose_name="ชื่อกลุ่ม")
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, blank=True, verbose_name="หมวดหมู่")
+    description = models.TextField(blank=True, verbose_name="คำอธิบาย")
+    cover_image = models.ImageField(upload_to='groups/', null=True, blank=True, verbose_name="รูปภาพกลุ่ม")
+    is_private = models.BooleanField(default=False, verbose_name="กลุ่มส่วนตัว")
+    location = models.CharField(max_length=255, blank=True, verbose_name="สถานที่")
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_groups')
+    members = models.ManyToManyField(User, related_name='joined_groups', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Application(models.Model):
     job = models.ForeignKey(JobListing, on_delete=models.CASCADE, related_name='applications')
     applicant = models.ForeignKey('auth.User', on_delete=models.CASCADE)

@@ -22,6 +22,7 @@ urlpatterns = [
     path('events/', views.events_list, name='events_list'),
     path('emergency/', views.emergency_page, name='emergency'),
     path('community/', views.community_page, name='community'),
+    path('groups/create/', views.create_group, name='create_group'),
     path('chat/<int:user_id>/', views.chat_room, name='chat_room'),
     path('chat/start/<int:job_id>/', views.start_chat, name='start_chat'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

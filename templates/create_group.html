@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sweet Sixty - สร้างกลุ่มใหม่</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#ffefff", surface: "#fff7fb", "secondary-container": "#cda0fe", "on-primary-fixed-variant": "#8a005e", "on-primary-container": "#fffbff", outline: "#8a707b", "primary-fixed-dim": "#ffafd5", "surface-dim": "#efd0f7", primary: "#af0a78", "on-surface-variant": "#57414a", "on-secondary-fixed": "#2b0052", secondary: "#744aa2", "surface-variant": "#f8d8ff", "on-primary-fixed": "#3d0027", "tertiary-container": "#007dab", "on-background": "#281330", "on-surface": "#281330", "inverse-on-surface": "#feebff", "primary-container": "#cf3192", error: "#ba1a1a", "tertiary-fixed": "#c5e7ff", "surface-bright": "#fff7fb", "secondary-fixed-dim": "#dbb8ff", "error-container": "#ffdad6", "on-tertiary-fixed": "#001e2d", "on-secondary-fixed-variant": "#5b3188", "secondary-fixed": "#efdbff", "on-secondary-container": "#5a3086", "primary-fixed": "#ffd8e8", "on-secondary": "#ffffff", "on-error-container": "#93000a", "surface-container-highest": "#f8d8ff", "on-tertiary-container": "#fcfcff", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "inverse-surface": "#3e2846", "inverse-primary": "#ffafd5", background: "#fff7fb", "on-tertiary-fixed-variant": "#004c6a", "surface-tint": "#b2107b", tertiary: "#006388", "tertiary-fixed-dim": "#7ed0ff", "surface-container": "#fde7ff", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "surface-container-high": "#fae0ff", "outline-variant": "#ddbfca"}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}, fontFamily: {headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}}}};
+</script>
+<style>
+    .bouncy-spring:active { transform: scale(0.95); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { min-height: max(884px, 100dvh); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen">
+
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 h-20 bg-[#fef7ff] border-b-2 border-[#e040a0]/10 shadow-[0_4px_16px_rgba(224,64,160,0.15)]">
+    <div class="flex items-center gap-4">
+        <a href="{% url 'community' %}" class="flex items-center justify-center w-12 h-12 rounded-full hover:bg-primary/10 transition-colors bouncy-spring">
+            <span class="material-symbols-outlined text-[#e040a0] text-2xl">arrow_back</span>
+        </a>
+        <h1 class="font-bold text-xl tracking-tight text-[#e040a0]">สร้างกลุ่มใหม่</h1>
+    </div>
+    <div class="font-black text-[#e040a0] text-2xl hidden md:block">Sweet Sixty</div>
+</nav>
+
+<!-- Main Content -->
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+    <div class="space-y-8">
+
+        <!-- Header -->
+        <header class="text-center space-y-2">
+            <h2 class="text-3xl font-bold tracking-tight text-on-surface">เริ่มต้นกลุ่มใหม่ของคุณ</h2>
+            <p class="text-on-surface-variant text-lg">รวบรวมกลุ่มเพื่อนมาทำกิจกรรมดีๆ ด้วยกัน</p>
+        </header>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-6" id="group-form">
+            {% csrf_token %}
+
+            <!-- Photo Upload -->
+            <section class="relative group cursor-pointer" onclick="document.getElementById('id_cover_image').click()">
+                <div class="w-full aspect-video rounded-lg border-4 border-dashed border-outline-variant bg-surface-container-low flex flex-col items-center justify-center gap-4 hover:border-primary/50 transition-all duration-300 hover:scale-[1.01] overflow-hidden" id="upload-area">
+                    <div class="w-20 h-20 rounded-full bg-primary-fixed flex items-center justify-center text-primary shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-4xl">add_a_photo</span>
+                    </div>
+                    <div class="text-center">
+                        <p class="font-bold text-lg text-primary">อัปโหลดรูปภาพกลุ่ม</p>
+                        <p class="text-sm text-on-surface-variant">เลือกรูปภาพหน้าปกที่สวยงาม</p>
+                    </div>
+                    <img id="preview-img" class="absolute inset-0 w-full h-full object-cover hidden" alt="preview"/>
+                </div>
+                <input type="file" id="id_cover_image" name="cover_image" accept="image/*" class="hidden" onchange="previewImage(this)"/>
+            </section>
+
+            <!-- Group Name -->
+            <div class="space-y-2">
+                <label class="block text-lg font-bold px-2 text-on-surface-variant">ชื่อกลุ่ม</label>
+                <div class="relative">
+                    <input class="w-full h-16 px-6 bg-surface-container rounded-full border-2 border-transparent focus:border-primary focus:ring-0 text-lg transition-all shadow-sm"
+                           type="text" name="name" placeholder="เช่น ชมรมเดินออกกำลังกายยามเช้า" required/>
+                    <span class="material-symbols-outlined absolute right-6 top-5 text-outline">edit</span>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="space-y-2">
+                <label class="block text-lg font-bold px-2 text-on-surface-variant">หมวดหมู่</label>
+                <div class="relative">
+                    <select class="w-full h-16 px-6 bg-surface-container rounded-full border-2 border-transparent focus:border-primary focus:ring-0 text-lg appearance-none transition-all shadow-sm" name="category">
+                        <option value="">เลือกสิ่งที่คุณสนใจ</option>
+                        <option value="fitness">สุขภาพและฟิตเนส</option>
+                        <option value="arts">ศิลปะและงานฝีมือ</option>
+                        <option value="travel">ท่องเที่ยวและกิจกรรมกลางแจ้ง</option>
+                        <option value="tech">เทคโนโลยีและการเรียนรู้</option>
+                        <option value="social">พบปะสังสรรค์</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-6 top-5 text-outline pointer-events-none">expand_more</span>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-2">
+                <label class="block text-lg font-bold px-2 text-on-surface-variant">คำอธิบายกลุ่ม</label>
+                <textarea class="w-full px-6 py-4 bg-surface-container rounded-lg border-2 border-transparent focus:border-primary focus:ring-0 text-lg transition-all shadow-sm resize-none"
+                          name="description" placeholder="บอกเล่าเรื่องราวเกี่ยวกับกลุ่มของคุณ..." rows="4"></textarea>
+            </div>
+
+            <!-- Options -->
+            <div class="grid grid-cols-2 gap-4">
+                <label class="p-4 bg-secondary-container rounded-lg flex items-center gap-3 bouncy-spring cursor-pointer" id="private-toggle">
+                    <input type="checkbox" name="is_private" class="hidden" id="is_private_check" onchange="togglePrivate()"/>
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-secondary">
+                        <span class="material-symbols-outlined" id="private-icon">lock_open</span>
+                    </div>
+                    <span class="font-bold text-on-secondary-container" id="private-label">กลุ่มสาธารณะ</span>
+                </label>
+
+                <div class="space-y-1">
+                    <div class="p-4 bg-tertiary-fixed rounded-lg flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-tertiary">
+                            <span class="material-symbols-outlined">location_on</span>
+                        </div>
+                        <input type="text" name="location" placeholder="เพิ่มสถานที่"
+                               class="bg-transparent font-bold text-on-tertiary-container placeholder:text-on-tertiary-container/60 outline-none w-full text-sm"/>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full p-6 bg-surface/80 backdrop-blur-md z-40 flex justify-center">
+    <button type="submit" form="group-form"
+            class="w-full max-w-2xl py-5 bg-primary text-white text-xl font-bold rounded-full shadow-[0_8px_24px_rgba(224,64,160,0.4)] hover:scale-[1.02] active:scale-95 transition-all duration-300 bouncy-spring flex items-center justify-center gap-3">
+        <span class="material-symbols-outlined text-2xl">group_add</span> สร้างกลุ่ม
+    </button>
+</div>
+
+<script>
+function previewImage(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = document.getElementById('preview-img');
+            img.src = e.target.result;
+            img.classList.remove('hidden');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function togglePrivate() {
+    const cb = document.getElementById('is_private_check');
+    const icon = document.getElementById('private-icon');
+    const label = document.getElementById('private-label');
+    if (cb.checked) {
+        icon.textContent = 'lock';
+        label.textContent = 'กลุ่มส่วนตัว';
+    } else {
+        icon.textContent = 'lock_open';
+        label.textContent = 'กลุ่มสาธารณะ';
+    }
+}
+</script>
+</body>
+</html>

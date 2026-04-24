@@ -2,8 +2,8 @@ import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .models import JobListing, Application, UserProfile, Event, ChatMessage
-from .forms import JobForm, UserUpdateForm, UserRegisterForm
+from .models import JobListing, Application, UserProfile, Event, ChatMessage, CommunityGroup
+from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -161,6 +161,21 @@ def start_chat(request, job_id):
     job = get_object_or_404(JobListing, id=job_id)
     # Start a chat with the job author
     return redirect('chat_room', user_id=job.author.id)
+
+
+@login_required
+def create_group(request):
+    if request.method == 'POST':
+        form = CommunityGroupForm(request.POST, request.FILES)
+        if form.is_valid():
+            group = form.save(commit=False)
+            group.creator = request.user
+            group.save()
+            group.members.add(request.user)
+            return redirect('community')
+    else:
+        form = CommunityGroupForm()
+    return render(request, 'create_group.html', {'form': form})
 
 
 @login_required

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import JobListing
+from .models import JobListing, CommunityGroup
 
 
 class JobForm(forms.ModelForm):
@@ -38,6 +38,12 @@ class UserRegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'full_name', 'email', 'birthdate', 'experience', 'id_card_image', 'password1', 'password2')
+
+
+class CommunityGroupForm(forms.ModelForm):
+    class Meta:
+        model = CommunityGroup
+        fields = ['name', 'category', 'description', 'cover_image', 'is_private', 'location']
 
 
 class UserUpdateForm(forms.ModelForm):
