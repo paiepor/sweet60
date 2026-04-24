@@ -176,6 +176,12 @@ def group_detail(request, group_id):
 
 
 @login_required
+def explore_groups(request):
+    groups = CommunityGroup.objects.filter(is_private=False).order_by('-created_at')
+    return render(request, 'explore_groups.html', {'groups': groups})
+
+
+@login_required
 def create_group(request):
     if request.method == 'POST':
         form = CommunityGroupForm(request.POST, request.FILES)
