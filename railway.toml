@@ -3,6 +3,7 @@ builder = "nixpacks"
 buildCommand = "python manage.py collectstatic --noinput"
 
 [deploy]
+releaseCommand = "python manage.py migrate && python manage.py create_admin"
 startCommand = "gunicorn sweet60_project.wsgi --log-file -"
 healthcheckPath = "/health/"
 healthcheckTimeout = 120
