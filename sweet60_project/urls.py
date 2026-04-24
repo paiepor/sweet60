@@ -2,12 +2,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
 from jobs_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('register/', views.register_view, name='register'),
+    path('health/', lambda request: HttpResponse('ok'), name='health'),
     path('', views.landing, name='landing'),
     path('home/', views.index, name='home'),
     path('job/<int:job_id>/', views.job_detail, name='job_detail'),
