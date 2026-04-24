@@ -164,6 +164,18 @@ def start_chat(request, job_id):
 
 
 @login_required
+def my_groups(request):
+    groups = CommunityGroup.objects.filter(members=request.user).order_by('-created_at')
+    return render(request, 'my_groups.html', {'groups': groups})
+
+
+@login_required
+def group_detail(request, group_id):
+    group = get_object_or_404(CommunityGroup, id=group_id)
+    return render(request, 'group_detail.html', {'group': group})
+
+
+@login_required
 def create_group(request):
     if request.method == 'POST':
         form = CommunityGroupForm(request.POST, request.FILES)
