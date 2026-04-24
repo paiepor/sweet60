@@ -68,7 +68,7 @@ def register_view(request):
                 no_criminal_record='no_criminal_record' in request.POST,
                 consent_id_upload='consent_id_upload' in request.POST,
             )
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
     else:
         form = UserRegisterForm()
