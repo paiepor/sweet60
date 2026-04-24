@@ -4,78 +4,181 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<title>Sweet Sixty - เบอร์โทรฉุกเฉิน</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-dim": "#d0dbed", "tertiary-container": "#cea700", "outline-variant": "#ccc3d8", "on-tertiary-fixed": "#231b00", "on-surface": "#121c2a", "surface-bright": "#f8f9ff", primary: "#630ed4", "tertiary-fixed": "#ffe083", "primary-fixed": "#eaddff", error: "#ba1a1a", surface: "#f8f9ff", "surface-container-highest": "#d9e3f6", "on-surface-variant": "#4a4455", "inverse-primary": "#d2bbff", "on-secondary-container": "#600037", "surface-variant": "#d9e3f6", "on-primary-fixed": "#25005a", "primary-container": "#7c3aed", "inverse-surface": "#27313f", "on-tertiary-container": "#4e3e00", "on-secondary": "#ffffff", "on-primary-container": "#ede0ff", "on-error": "#ffffff", "secondary-container": "#fd56a7", "secondary-fixed": "#ffd9e4", background: "#f8f9ff", "surface-tint": "#732ee4", "primary-fixed-dim": "#d2bbff", outline: "#7b7487", "on-secondary-fixed": "#3e0022", "on-error-container": "#93000a", "tertiary-fixed-dim": "#eec200", "secondary-fixed-dim": "#ffb0cd", "surface-container-high": "#dee9fc", tertiary: "#735c00", "on-tertiary": "#ffffff", "surface-container": "#e6eeff", "on-background": "#121c2a", "error-container": "#ffdad6", "inverse-on-surface": "#eaf1ff", "on-primary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-container-low": "#eff4ff", secondary: "#b4136d", "on-tertiary-fixed-variant": "#574500", "on-secondary-fixed-variant": "#8c0053", "on-primary-fixed-variant": "#5a00c6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}}}};</script>
 <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .card-border { border: 2px solid #ffdad6; }
-    body { min-height: max(884px, 100dvh); }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9ff; min-height: max(884px, 100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
 </style>
-<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"error-container": "#ffdad6", error: "#ba1a1a", background: "#f8f9ff", "on-background": "#121c2a", surface: "#f8f9ff", "on-surface": "#121c2a", "on-surface-variant": "#4a4455"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {"button-text": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-bold": ["Plus Jakarta Sans"]}, fontSize: {"button-text": ["20px", {lineHeight: "1.2", fontWeight: "700"}], "headline-lg": ["32px", {lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700"}], "label-bold": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "700"}], "headline-xl": ["40px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800"}], "body-md": ["18px", {lineHeight: "1.6", fontWeight: "400"}]}}};</script>
-<title>ฉุกเฉิน - Sweet Sixty</title>
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<body class="text-on-surface pb-32">
 
-<header class="bg-[#FDFCFE] top-0 border-b-2 border-error/20 shadow-[4px_4px_0px_0px_rgba(186,26,26,0.1)] flex justify-between items-center px-6 h-20 w-full sticky z-50">
+<!-- Drawer -->
+<div id="drawer" class="fixed inset-y-0 right-0 w-64 bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-6 flex flex-col h-full">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="font-bold text-xl text-primary">เมนู</h2>
+            <button onclick="toggleDrawer()" class="hover:text-error active:scale-90 transition-transform">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-4">
+            <a href="{% url 'home' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">home</span> หน้าหลัก
+            </a>
+            <a href="{% url 'profile' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">person</span> โปรไฟล์ของฉัน
+            </a>
+            <hr class="border-outline-variant my-4">
+            {% if user.is_authenticated %}
+            <form action="{% url 'account_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="flex items-center gap-3 font-label-bold text-on-surface-variant hover:text-error transition-colors w-full text-left">
+                    <span class="material-symbols-outlined">logout</span> ออกจากระบบ
+                </button>
+            </form>
+            {% else %}
+            <a href="{% url 'account_login' %}" class="flex items-center gap-3 font-label-bold text-primary hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">login</span> เข้าสู่ระบบ
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div id="drawer-overlay" onclick="toggleDrawer()" class="fixed inset-0 bg-black/50 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
+
+<!-- Header -->
+<header class="bg-[#FDFCFE] top-0 border-b-2 border-[#8A70FF]/20 shadow-[4px_4px_0px_0px_rgba(138,112,255,0.1)] flex justify-between items-center px-6 h-20 w-full fixed z-50">
     <div class="flex items-center gap-3">
-        <a href="{% url 'home' %}" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-error/10 transition-colors active:scale-95">
-            <span class="material-symbols-outlined text-error text-3xl">arrow_back</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#8A70FF]">Sweet Sixty</span>
+    </div>
+    <div class="flex items-center gap-3">
+        <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#8A70FF]/20 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>
         </a>
-        <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-error">เบอร์โทรฉุกเฉิน</span>
+        <button onclick="toggleDrawer()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#8A70FF]/10 transition-colors active:scale-95">
+            <span class="material-symbols-outlined text-[#8A70FF] text-3xl">menu</span>
+        </button>
     </div>
 </header>
 
-<main class="px-6 pt-8 max-w-2xl mx-auto">
-    <div class="mb-6 text-center">
-        <div class="w-24 h-24 bg-error-container rounded-full mx-auto flex items-center justify-center mb-4 border-4 border-error/20">
-            <span class="material-symbols-outlined text-error text-6xl" style="font-variation-settings:'FILL' 1">emergency</span>
+<main class="pt-28 pb-32 px-6 max-w-lg mx-auto">
+
+    <!-- Hero -->
+    <div class="mb-8 text-center">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-secondary-container mb-4 shadow-lg shadow-secondary/20">
+            <span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings:'FILL' 1">emergency_home</span>
         </div>
-        <h1 class="font-headline-xl text-headline-xl text-error mb-2">สายด่วนฉุกเฉิน</h1>
-        <p class="font-body-md text-on-surface-variant">กดที่ปุ่มเพื่อโทรออกทันที</p>
+        <h2 class="text-2xl font-extrabold text-primary mb-2">ช่วยเหลือฉุกเฉิน</h2>
+        <p class="text-on-surface-variant text-lg font-medium">กดที่ปุ่มเพื่อโทรออกทันที</p>
     </div>
 
-    <!-- Emergency Numbers -->
-    <div class="space-y-4">
-        <a href="tel:1669" class="bg-error-container p-6 rounded-[32px] border-2 border-error shadow-[0_4px_15px_rgba(186,26,26,0.2)] hover:bg-error hover:text-white transition-all active:scale-95 flex items-center justify-between group block">
-            <div class="flex items-center gap-4">
-                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center group-hover:text-error text-error">
-                    <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">local_hospital</span>
+    <!-- Emergency Cards -->
+    <div class="space-y-6">
+        <a href="tel:1669" class="w-full text-left bg-surface-container-lowest border border-outline-variant/30 p-6 rounded-[24px] shadow-[0_4px_20px_rgba(115,46,228,0.06)] flex items-center justify-between group active:scale-[0.98] transition-all duration-200 block">
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 rounded-2xl bg-error/10 flex items-center justify-center text-error">
+                    <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">ambulance</span>
                 </div>
                 <div>
-                    <h2 class="font-headline-lg text-error group-hover:text-white leading-tight">1669</h2>
-                    <p class="font-label-bold text-error/80 group-hover:text-white/80">เจ็บป่วยฉุกเฉิน / รถพยาบาล</p>
+                    <div class="text-[32px] font-extrabold text-on-surface leading-tight">1669</div>
+                    <div class="text-lg font-semibold text-on-surface-variant">เจ็บป่วยฉุกเฉิน / รถพยาบาล</div>
                 </div>
             </div>
-            <span class="material-symbols-outlined text-4xl text-error group-hover:text-white">call</span>
+            <div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:bg-primary-container transition-colors flex-shrink-0">
+                <span class="material-symbols-outlined text-white text-3xl">call</span>
+            </div>
         </a>
 
-        <a href="tel:191" class="bg-white p-6 rounded-[32px] border-2 border-error-container shadow-[0_4px_15px_rgba(0,0,0,0.05)] hover:border-error transition-all active:scale-95 flex items-center justify-between block">
-            <div class="flex items-center gap-4">
-                <div class="w-16 h-16 bg-error-container rounded-2xl flex items-center justify-center text-error">
+        <a href="tel:191" class="w-full text-left bg-surface-container-lowest border border-outline-variant/30 p-6 rounded-[24px] shadow-[0_4px_20px_rgba(115,46,228,0.06)] flex items-center justify-between group active:scale-[0.98] transition-all duration-200 block">
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">local_police</span>
                 </div>
                 <div>
-                    <h2 class="font-headline-lg text-on-surface leading-tight">191</h2>
-                    <p class="font-label-bold text-on-surface-variant">เหตุด่วนเหตุร้าย / แจ้งตำรวจ</p>
+                    <div class="text-[32px] font-extrabold text-on-surface leading-tight">191</div>
+                    <div class="text-lg font-semibold text-on-surface-variant">เหตุด่วนเหตุร้าย / แจ้งตำรวจ</div>
                 </div>
             </div>
-            <span class="material-symbols-outlined text-4xl text-error">call</span>
+            <div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:bg-primary-container transition-colors flex-shrink-0">
+                <span class="material-symbols-outlined text-white text-3xl">call</span>
+            </div>
         </a>
 
-        <a href="tel:199" class="bg-white p-6 rounded-[32px] border-2 border-error-container shadow-[0_4px_15px_rgba(0,0,0,0.05)] hover:border-error transition-all active:scale-95 flex items-center justify-between block">
-            <div class="flex items-center gap-4">
-                <div class="w-16 h-16 bg-error-container rounded-2xl flex items-center justify-center text-error">
-                    <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">local_fire_department</span>
+        <a href="tel:199" class="w-full text-left bg-surface-container-lowest border border-outline-variant/30 p-6 rounded-[24px] shadow-[0_4px_20px_rgba(115,46,228,0.06)] flex items-center justify-between group active:scale-[0.98] transition-all duration-200 block">
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
+                    <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">fire_truck</span>
                 </div>
                 <div>
-                    <h2 class="font-headline-lg text-on-surface leading-tight">199</h2>
-                    <p class="font-label-bold text-on-surface-variant">แจ้งเหตุไฟไหม้ / ดับเพลิง</p>
+                    <div class="text-[32px] font-extrabold text-on-surface leading-tight">199</div>
+                    <div class="text-lg font-semibold text-on-surface-variant">แจ้งเหตุไฟไหม้ / ดับเพลิง</div>
                 </div>
             </div>
-            <span class="material-symbols-outlined text-4xl text-error">call</span>
+            <div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:bg-primary-container transition-colors flex-shrink-0">
+                <span class="material-symbols-outlined text-white text-3xl">call</span>
+            </div>
         </a>
     </div>
+
+    <!-- Info Card -->
+    <div class="mt-10 p-6 bg-surface-container rounded-[24px] overflow-hidden relative border border-white/50">
+        <div class="relative z-10">
+            <h3 class="text-xl font-extrabold text-primary mb-2">ปลอดภัยทุกก้าว</h3>
+            <p class="text-on-surface-variant text-base leading-relaxed">เราพร้อมดูแลคุณตลอด 24 ชั่วโมง หากมีเหตุขัดข้องประการใด สามารถติดต่อสายด่วนได้ทันที</p>
+        </div>
+        <div class="absolute -bottom-4 -right-4 opacity-10">
+            <span class="material-symbols-outlined text-[120px] text-primary" style="font-variation-settings:'FILL' 1">health_and_safety</span>
+        </div>
+    </div>
+
+    <div class="mt-10 flex justify-center opacity-30">
+        <div class="flex items-center gap-2">
+            <span class="text-xl font-extrabold text-purple-700">Sweet Sixty</span>
+            <span class="w-2 h-2 rounded-full bg-secondary inline-block"></span>
+            <span class="text-sm font-bold text-slate-500">CARE</span>
+        </div>
+    </div>
 </main>
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 bg-[#FDFCFE] h-24 rounded-t-[32px] border-t-2 border-[#8A70FF]/30 shadow-[0_-8px_20px_rgba(138,112,255,0.15)]">
+    <a href="{% url 'home' %}" class="flex flex-col items-center justify-center text-[#8A70FF]/60 hover:text-[#8A70FF] hover:bg-[#8A70FF]/5 active:scale-90 transition-all duration-200 px-4 py-2">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Home</span>
+    </a>
+    <a href="{% url 'jobs_list' %}" class="flex flex-col items-center justify-center text-[#8A70FF]/60 hover:text-[#8A70FF] hover:bg-[#8A70FF]/5 active:scale-90 transition-all duration-200 px-4 py-2">
+        <span class="material-symbols-outlined">work</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Jobs</span>
+    </a>
+    <a href="{% url 'community' %}" class="flex flex-col items-center justify-center text-[#8A70FF]/60 hover:text-[#8A70FF] hover:bg-[#8A70FF]/5 active:scale-90 transition-all duration-200 px-4 py-2">
+        <span class="material-symbols-outlined">forum</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Community</span>
+    </a>
+    <a href="{% url 'profile' %}" class="flex flex-col items-center justify-center text-[#8A70FF]/60 hover:text-[#8A70FF] hover:bg-[#8A70FF]/5 active:scale-90 transition-all duration-200 px-4 py-2">
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Profile</span>
+    </a>
+</nav>
+
+<script>
+function toggleDrawer() {
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    if (drawer.classList.contains('translate-x-full')) {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        setTimeout(() => { overlay.classList.remove('opacity-0'); overlay.classList.add('opacity-100'); }, 10);
+    } else {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        setTimeout(() => { overlay.classList.add('hidden'); }, 300);
+    }
+}
+</script>
 </body>
 </html>

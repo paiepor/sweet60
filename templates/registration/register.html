@@ -1,5 +1,4 @@
 {% load static %}
-{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -210,23 +209,6 @@
             </button>
             
             <!-- Divider -->
-            <div class="relative my-8 flex items-center">
-                <div class="flex-grow border-t border-outline-variant"></div>
-                <span class="flex-shrink mx-4 text-on-surface-variant font-label text-sm uppercase tracking-wider">หรือสมัครด้วย</span>
-                <div class="flex-grow border-t border-outline-variant"></div>
-            </div>
-
-            <!-- Social buttons (real integration) -->
-            <div class="grid grid-cols-2 gap-4">
-                <a href="{% provider_login_url 'google' %}" class="flex items-center justify-center gap-3 h-14 border-2 border-outline-variant rounded-lg font-label-lg text-on-surface hover:bg-surface-container transition-colors active:scale-95 bg-white">
-                    <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmMlZYnh2t1LRex_vVBiKIN5m06RKTW1SlhE2JXHDqv4BvArIIn3k_kSfiTQ3V-sRrl_Um2WZBzFRLfBOZx6_ASoKxjAUiZHGseAejN3abbp77eH3_cSRU77TVlf-Z27Ih1P27VYnn1umSUNHmANPTEJcZHNLTsotHonj7cpOWaQ276m6ol5gb5LZeXvYbc4VOg9YOq59SOYaVECv91PA8OuNx_-5hUabfTzGcmC1-1XdUo5p5OjW1lv9DBXIrPFMKfd3Yx3tH_dKi"/>
-                    Google
-                </a>
-                <a href="{% provider_login_url 'facebook' %}" class="flex items-center justify-center gap-3 h-14 border-2 border-outline-variant rounded-lg font-label-lg text-on-surface hover:bg-surface-container transition-colors active:scale-95 bg-white">
-                    <span class="material-symbols-outlined text-[#1877F2]" style="font-variation-settings:'FILL' 1">group</span>
-                    Facebook
-                </a>
-            </div>
 
             <p class="text-center mt-6 font-body-md text-body-md text-on-surface-variant">
                 มีบัญชีอยู่แล้ว?

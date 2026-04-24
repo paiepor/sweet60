@@ -14,8 +14,17 @@ def landing(request):
 
 
 def index(request):
-    events = Event.objects.all().order_by('-start_time')[:3]
-    return render(request, 'index.html', {'events': events})
+    from django.utils import timezone
+    recent_jobs = JobListing.objects.filter(is_active=True).order_by('-id')[:3]
+    upcoming_events = Event.objects.filter(start_time__gte=timezone.now()).order_by('start_time')[:2]
+    context = {
+        'recent_jobs': recent_jobs,
+        'upcoming_events': upcoming_events,
+    }
+    if request.user.is_authenticated:
+        context['app_count'] = Application.objects.filter(applicant=request.user).count()
+        context['msg_count'] = ChatMessage.objects.filter(receiver=request.user).count()
+    return render(request, 'index.html', context)
 
 
 def events_list(request):

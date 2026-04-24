@@ -18,9 +18,46 @@
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen pb-32">
 
+<!-- Drawer -->
+<div id="drawer" class="fixed inset-y-0 right-0 w-64 bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-6 flex flex-col h-full">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="font-headline-md text-primary">เมนู</h2>
+            <button onclick="toggleDrawer()" class="text-outline hover:text-error active:scale-90 transition-transform">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-4">
+            <a href="{% url 'home' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">home</span> หน้าหลัก
+            </a>
+            <a href="{% url 'profile' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">person</span> โปรไฟล์ของฉัน
+            </a>
+            <a href="{% url 'emergency' %}" class="flex items-center gap-3 font-label-bold text-error hover:text-error transition-colors">
+                <span class="material-symbols-outlined">emergency</span> ฉุกเฉิน
+            </a>
+            <hr class="border-outline-variant my-4">
+            {% if user.is_authenticated %}
+            <form action="{% url 'account_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="flex items-center gap-3 font-label-bold text-on-surface-variant hover:text-error transition-colors w-full text-left">
+                    <span class="material-symbols-outlined">logout</span> ออกจากระบบ
+                </button>
+            </form>
+            {% else %}
+            <a href="{% url 'account_login' %}" class="flex items-center gap-3 font-label-bold text-primary hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">login</span> เข้าสู่ระบบ
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div id="drawer-overlay" onclick="toggleDrawer()" class="fixed inset-0 bg-black/50 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
+
 <header class="bg-[#FDFCFE] top-0 border-b-2 border-[#8A70FF]/20 shadow-[4px_4px_0px_0px_rgba(138,112,255,0.1)] flex justify-between items-center px-6 h-20 w-full sticky z-50">
     <div class="flex items-center gap-3">
-        <button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#8A70FF]/10 transition-colors active:scale-95">
+        <button onclick="toggleDrawer()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#8A70FF]/10 transition-colors active:scale-95">
             <span class="material-symbols-outlined text-[#8A70FF] text-3xl">menu</span>
         </button>
         <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#8A70FF]">Sweet Sixty</span>
@@ -125,5 +162,21 @@
     </a>
 </nav>
 
+<script>
+function toggleDrawer() {
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    if (drawer.classList.contains('translate-x-full')) {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        setTimeout(() => { overlay.classList.remove('opacity-0'); overlay.classList.add('opacity-100'); }, 10);
+    } else {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        setTimeout(() => { overlay.classList.add('hidden'); }, 300);
+    }
+}
+</script>
 </body>
 </html>
