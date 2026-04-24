@@ -10,6 +10,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('register/', views.register_view, name='register'),
     path('health/', lambda request: HttpResponse('ok'), name='health'),
+    path('setup-admin/', views.setup_admin, name='setup_admin'),
     path('', views.landing, name='landing'),
     path('home/', views.index, name='home'),
     path('job/<int:job_id>/', views.job_detail, name='job_detail'),

@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -5,6 +6,19 @@ from .models import JobListing, Application, UserProfile, Event, ChatMessage
 from .forms import JobForm, UserUpdateForm, UserRegisterForm
 from django.contrib.auth.models import User
 from django.db.models import Q
+
+
+def setup_admin(request):
+    from django.http import HttpResponse
+    if User.objects.filter(is_superuser=True).exists():
+        return HttpResponse('Admin already exists.')
+    username = os.environ.get('ADMIN_USERNAME', 'admin')
+    password = os.environ.get('ADMIN_PASSWORD')
+    email = os.environ.get('ADMIN_EMAIL', '')
+    if not password:
+        return HttpResponse('ADMIN_PASSWORD not set.')
+    User.objects.create_superuser(username=username, email=email, password=password)
+    return HttpResponse(f'Superuser "{username}" created successfully.')
 
 
 def landing(request):
