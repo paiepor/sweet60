@@ -1,43 +1,130 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เข้าสู่ระบบ - Sweet Sixty</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Kanit', sans-serif; background-color: #E2E8F0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }</style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sweet Sixty - เข้าสู่ระบบ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-container": "#fd56a7", "on-primary": "#ffffff", "tertiary-fixed-dim": "#eec200", "secondary-fixed": "#ffd9e4", "inverse-on-surface": "#eaf1ff", "on-tertiary-fixed": "#231b00", "surface-container-highest": "#d9e3f6", "secondary-fixed-dim": "#ffb0cd", "on-primary-container": "#ede0ff", "on-surface": "#121c2a", "tertiary-fixed": "#ffe083", "surface-variant": "#d9e3f6", "error": "#ba1a1a", "background": "#f8f9ff", "on-error": "#ffffff", "on-secondary-fixed-variant": "#8c0053", "outline-variant": "#ccc3d8", "on-tertiary-container": "#4e3e00", "primary-fixed-dim": "#d2bbff", "on-tertiary": "#ffffff", "on-background": "#121c2a", "tertiary-container": "#cea700", "on-primary-fixed": "#25005a", "inverse-primary": "#d2bbff", "surface-container-low": "#eff4ff", "error-container": "#ffdad6", "surface-tint": "#732ee4", "secondary": "#b4136d", "primary": "#630ed4", "surface-container-lowest": "#ffffff", "surface": "#f8f9ff", "surface-bright": "#f8f9ff", "surface-container-high": "#dee9fc", "outline": "#7b7487", "on-secondary-container": "#600037", "on-primary-fixed-variant": "#5a00c6", "on-secondary-fixed": "#3e0022", "tertiary": "#735c00", "surface-dim": "#d0dbed", "inverse-surface": "#27313f", "on-surface-variant": "#4a4455", "primary-fixed": "#eaddff", "on-tertiary-fixed-variant": "#574500", "on-secondary": "#ffffff", "surface-container": "#e6eeff", "primary-container": "#7c3aed", "on-error-container": "#93000a"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}}}};
+</script>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: max(884px, 100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
 </head>
-<body>
-    <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-sm mx-4">
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-2">ยินดีต้อนรับกลับ</h2>
-        <p class="text-gray-500 mb-8 text-sm">กรุณาเข้าสู่ระบบเพื่อใช้งานต่อ</p>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
 
-        {% if form.errors %}
-        <div class="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-5">
-            ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง
-        </div>
-        {% endif %}
-
-        <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ next }}">
-            <div class="space-y-4">
-                <div>
-                    <label class="text-xs text-gray-500 font-semibold uppercase tracking-wider ml-1 mb-2 block">ชื่อผู้ใช้</label>
-                    <input type="text" name="username" class="w-full p-4 bg-gray-50 rounded-2xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" required autofocus>
-                </div>
-                <div>
-                    <label class="text-xs text-gray-500 font-semibold uppercase tracking-wider ml-1 mb-2 block">รหัสผ่าน</label>
-                    <input type="password" name="password" class="w-full p-4 bg-gray-50 rounded-2xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" required>
-                </div>
-                <button type="submit" class="w-full bg-purple-600 text-white py-4 rounded-[20px] font-semibold text-lg hover:bg-purple-700 transition">เข้าสู่ระบบ</button>
-            </div>
-        </form>
-
-        <p class="text-center text-gray-500 text-sm mt-6">
-            ยังไม่มีบัญชี? <a href="{% url 'register' %}" class="text-purple-600 font-bold hover:underline">สมัครสมาชิก</a>
-        </p>
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#f8f9ff] border-b border-[#dee9fc] shadow-sm">
+    <div class="flex items-center gap-4">
+        <a href="{% url 'landing' %}" class="text-primary transition-all duration-200 active:scale-95">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <h1 class="font-extrabold text-2xl text-primary">Sweet Sixty</h1>
     </div>
+    <div class="flex items-center">
+        <span class="material-symbols-outlined text-primary">notifications</span>
+    </div>
+</header>
+
+<!-- Decorative blobs -->
+<div class="fixed top-20 right-[-10%] w-[400px] h-[400px] bg-secondary-container/10 rounded-full blur-[100px] -z-10"></div>
+<div class="fixed bottom-10 left-[-5%] w-[300px] h-[300px] bg-tertiary-container/10 rounded-full blur-[80px] -z-10"></div>
+
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6">
+    <div class="w-full max-w-[480px]">
+
+        <!-- Hero -->
+        <div class="text-center mb-10">
+            <h2 class="text-on-surface font-headline font-extrabold text-[32px] leading-tight mb-3">ยินดีต้อนรับกลับ</h2>
+            <p class="text-on-surface-variant font-body text-lg">เดินทางต่อกับชุมชน Sweet Sixty ของเรา</p>
+        </div>
+
+        <!-- Login card -->
+        <div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_4px_24px_rgba(115,46,228,0.08)] border border-outline-variant/30">
+
+            {% if form.errors %}
+            <div class="mb-6 flex items-center gap-3 bg-error-container border border-error/20 text-on-error-container rounded-lg px-4 py-3 font-label font-semibold">
+                <span class="material-symbols-outlined text-error" style="font-variation-settings:'FILL' 1">error</span>
+                ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง
+            </div>
+            {% endif %}
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+
+                <!-- Username -->
+                <div class="space-y-2">
+                    <label class="block font-label font-semibold text-on-surface text-base" for="id_username">ชื่อผู้ใช้</label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                        <input class="w-full h-14 pl-12 pr-4 bg-surface-container-low border-2 border-transparent focus:border-primary focus:ring-0 rounded-lg text-on-surface font-body text-lg transition-all placeholder:text-outline/50 outline-none"
+                               id="id_username" name="username" type="text" placeholder="กรอกชื่อผู้ใช้" required autofocus/>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <label class="block font-label font-semibold text-on-surface text-base" for="id_password">รหัสผ่าน</label>
+                        <a class="text-primary font-label text-sm hover:underline" href="#">ลืมรหัสผ่าน?</a>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+                            <span class="material-symbols-outlined">lock</span>
+                        </div>
+                        <input class="w-full h-14 pl-12 pr-12 bg-surface-container-low border-2 border-transparent focus:border-primary focus:ring-0 rounded-lg text-on-surface font-body text-lg transition-all placeholder:text-outline/50 outline-none"
+                               id="id_password" name="password" type="password" placeholder="••••••••" required/>
+                        <button class="absolute inset-y-0 right-0 pr-4 flex items-center text-outline hover:text-on-surface transition-colors"
+                                type="button" onclick="togglePassword()">
+                            <span class="material-symbols-outlined" id="eye-icon">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <button class="w-full h-14 bg-primary text-on-primary rounded-lg font-headline font-bold text-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-95 group" type="submit">
+                    เข้าสู่ระบบ
+                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                </button>
+            </form>
+
+        </div>
+
+        <!-- Footer link -->
+        <div class="mt-8 text-center">
+            <p class="text-on-surface-variant font-body">
+                ยังไม่มีบัญชีใช่ไหม?
+                <a class="text-primary font-bold hover:underline decoration-2 underline-offset-4 ml-1" href="{% url 'register' %}">สร้างบัญชีใหม่
+                </a>
+            </p>
+        </div>
+
+    </div>
+</main>
+
+<footer class="py-8 text-center px-6">
+    <p class="text-outline font-label text-sm">© 2024 Sweet Sixty. เสริมสร้างพลังชีวิตที่สดใส</p>
+</footer>
+
+<script>
+function togglePassword() {
+    const input = document.getElementById('id_password');
+    const icon = document.getElementById('eye-icon');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+    } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+    }
+}
+</script>
 </body>
 </html>

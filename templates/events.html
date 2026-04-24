@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .card-border { border: 2px solid #E0D8FF; }
+    body { min-height: max(884px, 100dvh); }
+</style>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-primary-fixed-variant": "#5a00c6", "inverse-primary": "#d2bbff", "surface-container-high": "#dee9fc", "error-container": "#ffdad6", tertiary: "#735c00", "primary-fixed-dim": "#d2bbff", "on-surface": "#121c2a", primary: "#630ed4", "on-surface-variant": "#4a4455", "secondary-container": "#fd56a7", error: "#ba1a1a", "surface-dim": "#d0dbed", "surface-container": "#e6eeff", "inverse-on-surface": "#eaf1ff", "surface-tint": "#732ee4", "surface-container-low": "#eff4ff", "on-primary": "#ffffff", "primary-fixed": "#eaddff", "on-error": "#ffffff", background: "#f8f9ff", "on-background": "#121c2a", "on-tertiary-fixed": "#231b00", "tertiary-fixed": "#ffe083", "on-tertiary": "#ffffff", surface: "#f8f9ff", secondary: "#b4136d", "tertiary-container": "#cea700", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#8c0053", "secondary-fixed": "#ffd9e4", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#eec200", "on-tertiary-fixed-variant": "#574500", "surface-container-highest": "#d9e3f6", outline: "#7b7487", "primary-container": "#7c3aed", "outline-variant": "#ccc3d8", "on-primary-fixed": "#25005a", "on-primary-container": "#ede0ff", "secondary-fixed-dim": "#ffb0cd", "inverse-surface": "#27313f", "on-secondary-container": "#600037", "surface-container-lowest": "#ffffff", "on-tertiary-container": "#4e3e00", "on-secondary-fixed": "#3e0022", "surface-bright": "#f8f9ff", "surface-variant": "#d9e3f6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {"button-text": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-bold": ["Plus Jakarta Sans"]}, fontSize: {"button-text": ["20px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["20px", {lineHeight: "1.5", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700"}], "label-bold": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "700"}], "headline-xl": ["40px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800"}], "body-md": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "label-lg": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600"}], "label-sm": ["14px", {lineHeight: "1.2", fontWeight: "700"}]}}};</script>
+<title>กิจกรรม - Sweet Sixty</title>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+
+<header class="bg-[#FDFCFE] top-0 border-b-2 border-[#8A70FF]/20 shadow-[4px_4px_0px_0px_rgba(138,112,255,0.1)] flex justify-between items-center px-6 h-20 w-full sticky z-50">
+    <div class="flex items-center gap-3">
+        <a href="{% url 'home' %}" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#8A70FF]/10 transition-colors active:scale-95">
+            <span class="material-symbols-outlined text-[#8A70FF] text-3xl">arrow_back</span>
+        </a>
+        <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#8A70FF]">กิจกรรม</span>
+    </div>
+</header>
+
+<main class="px-6 pt-8 max-w-2xl mx-auto">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface">กิจกรรมที่กำลังมาถึง</h1>
+            <p class="font-body-md text-on-surface-variant">พบปะพูดคุยและทำกิจกรรมร่วมกัน</p>
+        </div>
+    </div>
+
+    <!-- Events listings -->
+    <div class="space-y-4">
+        {% for event in events %}
+        <div class="bg-surface-container-lowest p-6 rounded-[32px] card-border shadow-[8px_8px_0px_0px_rgba(138,112,255,0.05)] hover:shadow-lg transition-all">
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex-1 min-w-0 mr-4">
+                    <h4 class="font-headline-md text-headline-md text-primary mb-1 leading-tight">{{ event.title }}</h4>
+                    <p class="font-body-md text-outline flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span> {{ event.location }}</p>
+                </div>
+                <div class="text-right flex-shrink-0 bg-tertiary-fixed text-on-tertiary-fixed-variant p-3 rounded-2xl">
+                    <p class="font-label-bold">{{ event.start_time|date:"d M" }}</p>
+                    <p class="font-label-bold">{{ event.start_time|time:"H:i" }} น.</p>
+                </div>
+            </div>
+            <p class="font-body-md text-on-surface-variant mb-4">{{ event.description }}</p>
+        </div>
+        {% empty %}
+        <div class="text-center py-16 bg-surface-container-low rounded-[32px] border-2 border-outline-variant">
+            <span class="material-symbols-outlined text-6xl text-outline mb-4 block">event_busy</span>
+            <p class="font-body-lg text-on-surface-variant mb-2">ยังไม่มีกิจกรรมในขณะนี้</p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+</body>
+</html>

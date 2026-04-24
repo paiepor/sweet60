@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-primary-fixed-variant": "#5a00c6", "inverse-primary": "#d2bbff", "surface-container-high": "#dee9fc", "error-container": "#ffdad6", tertiary: "#735c00", "primary-fixed-dim": "#d2bbff", "on-surface": "#121c2a", primary: "#630ed4", "on-surface-variant": "#4a4455", "secondary-container": "#fd56a7", error: "#ba1a1a", "surface-dim": "#d0dbed", "surface-container": "#e6eeff", "inverse-on-surface": "#eaf1ff", "surface-tint": "#732ee4", "surface-container-low": "#eff4ff", "on-primary": "#ffffff", "primary-fixed": "#eaddff", "on-error": "#ffffff", background: "#f8f9ff", "on-background": "#121c2a", "on-tertiary-fixed": "#231b00", "tertiary-fixed": "#ffe083", "on-tertiary": "#ffffff", surface: "#f8f9ff", secondary: "#b4136d", "tertiary-container": "#cea700", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#8c0053", "secondary-fixed": "#ffd9e4", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#eec200", "on-tertiary-fixed-variant": "#574500", "surface-container-highest": "#d9e3f6", outline: "#7b7487", "primary-container": "#7c3aed", "outline-variant": "#ccc3d8", "on-primary-fixed": "#25005a", "on-primary-container": "#ede0ff", "secondary-fixed-dim": "#ffb0cd", "inverse-surface": "#27313f", "on-secondary-container": "#600037", "surface-container-lowest": "#ffffff", "on-tertiary-container": "#4e3e00", "on-secondary-fixed": "#3e0022", "surface-bright": "#f8f9ff", "surface-variant": "#d9e3f6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {unit: "8px", "stack-gap": "20px", "touch-target-min": "56px", "section-margin": "40px", "container-padding": "24px", gutter: "16px", "stack-lg": "32px", "stack-sm": "8px", "stack-md": "16px", "container-margin": "24px"}, fontFamily: {"button-text": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-bold": ["Plus Jakarta Sans"]}, fontSize: {"button-text": ["20px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["20px", {lineHeight: "1.5", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700"}], "label-bold": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "700"}], "headline-xl": ["40px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800"}], "body-md": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "label-lg": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600"}], "label-sm": ["14px", {lineHeight: "1.2", fontWeight: "700"}]}}}};
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .card-border { border: 2px solid #E0D8FF; }
+    body { min-height: max(884px, 100dvh); }
+</style>
+<title>ค้นหางาน - Sweet Sixty</title>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+
+<header class="bg-[#FDFCFE] top-0 border-b-2 border-[#8A70FF]/20 shadow-[4px_4px_0px_0px_rgba(138,112,255,0.1)] flex justify-between items-center px-6 h-20 w-full sticky z-50">
+    <div class="flex items-center gap-3">
+        <button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#8A70FF]/10 transition-colors active:scale-95">
+            <span class="material-symbols-outlined text-[#8A70FF] text-3xl">menu</span>
+        </button>
+        <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#8A70FF]">Sweet Sixty</span>
+    </div>
+    <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#8A70FF]/20 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>
+    </a>
+</header>
+
+<main class="px-6 pt-8 max-w-2xl mx-auto">
+
+    <!-- Title + Post button -->
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface">ค้นหางาน</h1>
+            <p class="font-body-md text-on-surface-variant">งานที่เหมาะกับคุณ</p>
+        </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'create_job' %}" class="bg-primary text-on-primary px-5 py-3 rounded-2xl font-label-bold text-label-bold shadow-[0_4px_15px_rgba(138,112,255,0.4)] active:scale-95 transition-all flex items-center gap-2 flex-shrink-0">
+            <span class="material-symbols-outlined text-base" style="font-variation-settings:'FILL' 1">post_add</span>
+            ลงประกาศ
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Search bar -->
+    <form method="GET" class="mb-8">
+        <div class="relative">
+            <span class="absolute left-5 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-3xl">search</span>
+            <input name="q" value="{{ query|default:'' }}" class="w-full h-16 pl-14 pr-6 rounded-2xl border-2 border-primary-fixed bg-white font-body-lg focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="ค้นหางาน เช่น แม่บ้าน, รักษาความปลอดภัย..." type="text"/>
+        </div>
+    </form>
+
+    <!-- Job count -->
+    <p class="font-label-bold text-label-bold text-on-surface-variant mb-4">
+        พบ {{ jobs|length }} ตำแหน่งงาน{% if query %} สำหรับ "{{ query }}"{% endif %}
+    </p>
+
+    <!-- Job listings -->
+    <div class="space-y-4">
+        {% for job in jobs %}
+        <div class="bg-surface-container-lowest p-6 rounded-[32px] card-border shadow-[8px_8px_0px_0px_rgba(138,112,255,0.05)] hover:shadow-lg transition-all">
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex-1 min-w-0 mr-4">
+                    <h4 class="font-headline-md text-headline-md text-primary mb-1 leading-tight">{{ job.title }}</h4>
+                    <p class="font-body-md text-outline">{{ job.company_name }}</p>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <p class="font-headline-md text-headline-md text-secondary">฿{{ job.salary }}</p>
+                </div>
+            </div>
+            <p class="font-body-md text-on-surface-variant mb-4 line-clamp-2">{{ job.description }}</p>
+            <div class="flex items-center justify-between">
+                <a href="{% url 'job_detail' job.id %}" class="text-primary font-label-bold flex items-center gap-1 hover:underline">
+                    ดูรายละเอียด <span class="material-symbols-outlined text-base">chevron_right</span>
+                </a>
+                {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'apply_job' job.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-gradient-to-r from-primary to-primary-container text-white px-6 py-3 rounded-2xl font-label-bold text-label-bold shadow-[0_4px_15px_rgba(138,112,255,0.4)] active:scale-95 transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined text-base" style="font-variation-settings:'FILL' 1">send</span>
+                        สมัครงาน
+                    </button>
+                </form>
+                {% else %}
+                <a href="{% url 'account_login' %}?next={% url 'jobs_list' %}" class="bg-gradient-to-r from-primary to-primary-container text-white px-6 py-3 rounded-2xl font-label-bold text-label-bold shadow-[0_4px_15px_rgba(138,112,255,0.4)] active:scale-95 transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined text-base" style="font-variation-settings:'FILL' 1">send</span>
+                    สมัครงาน
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center py-16 bg-surface-container-low rounded-[32px] border-2 border-outline-variant">
+            <span class="material-symbols-outlined text-6xl text-outline mb-4 block">work_off</span>
+            <p class="font-body-lg text-on-surface-variant mb-2">ไม่พบงานที่ต้องการ</p>
+            {% if query %}
+            <a href="{% url 'jobs_list' %}" class="text-primary font-label-bold hover:underline">ดูงานทั้งหมด</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 bg-[#FDFCFE] h-24 rounded-t-[32px] border-t-2 border-[#8A70FF]/30 shadow-[0_-8px_20px_rgba(138,112,255,0.15)]">
+    <a href="{% url 'home' %}" class="flex flex-col items-center justify-center text-[#8A70FF]/60 hover:text-[#8A70FF] hover:bg-[#8A70FF]/5 active:scale-90 transition-all duration-200 px-4 py-2">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Home</span>
+    </a>
+    <a href="{% url 'jobs_list' %}" class="flex flex-col items-center justify-center bg-[#8A70FF] text-white rounded-[20px] px-6 py-2 shadow-inner active:scale-90 transition-all duration-200">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">work</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Jobs</span>
+    </a>
+    <a href="{% url 'community' %}" class="flex flex-col items-center justify-center text-[#8A70FF]/60 hover:text-[#8A70FF] hover:bg-[#8A70FF]/5 active:scale-90 transition-all duration-200 px-4 py-2">
+        <span class="material-symbols-outlined">forum</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Community</span>
+    </a>
+    <a href="{% url 'profile' %}" class="flex flex-col items-center justify-center text-[#8A70FF]/60 hover:text-[#8A70FF] hover:bg-[#8A70FF]/5 active:scale-90 transition-all duration-200 px-4 py-2">
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Profile</span>
+    </a>
+</nav>
+
+</body>
+</html>

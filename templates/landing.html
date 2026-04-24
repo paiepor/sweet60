@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sweet Sixty - แอปพลิเคชันเพื่อความสุขของวัยเก๋า</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-fixed": "#ffd9e4", "surface-variant": "#d9e3f6", secondary: "#b4136d", "on-tertiary": "#ffffff", "surface-tint": "#732ee4", "on-secondary-fixed": "#3e0022", "secondary-container": "#fd56a7", "on-tertiary-fixed-variant": "#574500", outline: "#7b7487", "inverse-primary": "#d2bbff", "on-primary-container": "#ede0ff", "surface-container-low": "#eff4ff", "surface-container": "#e6eeff", "tertiary-fixed-dim": "#eec200", "on-primary-fixed": "#25005a", "on-secondary": "#ffffff", tertiary: "#735c00", "on-error": "#ffffff", error: "#ba1a1a", "on-secondary-container": "#600037", "on-secondary-fixed-variant": "#8c0053", "on-primary-fixed-variant": "#5a00c6", "surface-container-lowest": "#ffffff", "on-surface": "#121c2a", "surface-bright": "#f8f9ff", "primary-fixed": "#eaddff", "on-error-container": "#93000a", "outline-variant": "#ccc3d8", background: "#f8f9ff", "primary-fixed-dim": "#d2bbff", "tertiary-fixed": "#ffe083", "on-tertiary-fixed": "#231b00", "surface-container-high": "#dee9fc", "inverse-on-surface": "#eaf1ff", "on-surface-variant": "#4a4455", "surface-container-highest": "#d9e3f6", "on-primary": "#ffffff", "on-background": "#121c2a", "error-container": "#ffdad6", surface: "#f8f9ff", "secondary-fixed-dim": "#ffb0cd", "surface-dim": "#d0dbed", primary: "#630ed4", "on-tertiary-container": "#4e3e00", "inverse-surface": "#27313f", "primary-container": "#7c3aed", "tertiary-container": "#cea700"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"container-margin": "24px", "stack-lg": "32px", unit: "8px", "stack-sm": "8px", "stack-md": "16px", gutter: "16px"}, fontFamily: {"plus-jakarta": ["Plus Jakarta Sans", "sans-serif"], headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}}}};
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .bg-90s-gradient { background: linear-gradient(135deg, #630ed4 0%, #b4136d 100%); }
+    .soft-shadow { box-shadow: 0 12px 40px rgba(99, 14, 212, 0.08); }
+    body { min-height: max(884px, 100dvh); }
+</style>
+</head>
+<body class="bg-background text-on-background font-plus-jakarta antialiased">
+<div class="relative min-h-screen flex flex-col items-center justify-center p-container-margin overflow-hidden">
+
+    <!-- Background decorative shapes -->
+    <div class="absolute top-[-10%] left-[-10%] w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-[-5%] right-[-5%] w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-20 right-10 w-16 h-16 border-4 border-tertiary-container/30 rounded-xl rotate-12"></div>
+    <div class="absolute bottom-40 left-10 w-24 h-8 bg-secondary-container/20 rounded-full -rotate-45"></div>
+
+    <main class="relative z-10 w-full max-w-[480px] flex flex-col items-center">
+
+        <!-- Logo section -->
+        <div class="w-full mb-stack-lg flex flex-col items-center">
+            <div class="relative w-48 h-48 sm:w-64 sm:h-64 mb-6 transition-transform hover:scale-105 duration-300">
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-10 animate-pulse"></div>
+                <img alt="Sweet Sixty Logo" class="w-full h-full object-contain relative z-10"
+                     src="https://lh3.googleusercontent.com/aida/ADBb0ugCOt8F7VqEL-kOE7S4mG7Ysr-s8K9rnwNTzCPHyQUHfNOlXw1uvATfSkG5WKMpt2JF3Rz5FpS4wd3RJADaLpl88vGFGymZcu96_BCyyw9rGfKxmXfje5xJnx1wyak2c73IQBIwVu66wt9Cm6nED4ldZpBwxWZ-21hQ4EhFrMiTh1bT5dTSwuXCvx8lCP2XoixNKPamo_A3GiVCsW8vybi7KRPctiAWrwY0Cdg_0JonQZ_X4Ms4-JVYNCC-DCKzABm3L3rXRYHerQ">
+            </div>
+            <div class="text-center space-y-4">
+                <h1 class="text-[40px] font-extrabold leading-[1.2] tracking-[-0.02em] text-on-surface">
+                    Sweet Sixty
+                </h1>
+                <p class="text-[20px] font-medium leading-[1.5] text-on-surface-variant max-w-[320px] mx-auto">
+                    แอปพลิเคชันเพื่อความสุขของ<span class="text-primary font-bold">วัยเก๋า</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="w-full flex flex-col gap-gutter mt-stack-lg">
+            <a href="{% url 'account_login' %}" class="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-3xl bg-primary px-8 text-[20px] font-bold text-on-primary transition-all active:scale-[0.98] soft-shadow">
+                <div class="absolute inset-0 bg-90s-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span class="relative z-10 flex items-center gap-3">
+                    เข้าสู่ระบบ
+                    <span class="material-symbols-outlined">login</span>
+                </span>
+            </a>
+
+            <a href="{% url 'register' %}" class="flex h-16 w-full items-center justify-center rounded-3xl bg-surface-container-high px-8 text-[20px] font-bold text-primary transition-all hover:bg-surface-container-highest active:scale-[0.98] border-2 border-primary/10">
+                <span class="flex items-center gap-3">
+                    สร้างบัญชีใหม่
+                    <span class="material-symbols-outlined">person_add</span>
+                </span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-12 flex flex-col items-center gap-4">
+            <div class="flex items-center gap-6">
+                <button class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">ภาษาไทย</button>
+                <div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+                <button class="text-sm font-semibold text-outline hover:text-primary transition-colors">English</button>
+            </div>
+            <div class="flex gap-4 mt-4 opacity-60 grayscale hover:grayscale-0 transition-all">
+                <div class="p-2 bg-surface-container rounded-lg">
+                    <span class="material-symbols-outlined text-[24px]">verified_user</span>
+                </div>
+                <div class="p-2 bg-surface-container rounded-lg">
+                    <span class="material-symbols-outlined text-[24px]" style="font-variation-settings:'FILL' 1">favorite</span>
+                </div>
+                <div class="p-2 bg-surface-container rounded-lg">
+                    <span class="material-symbols-outlined text-[24px]">security</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Decorative bottom wave -->
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 opacity-5 pointer-events-none">
+        <svg class="relative block w-[200%] h-[120px]" preserveAspectRatio="none" viewBox="0 0 1200 120">
+            <path class="text-primary" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+        </svg>
+    </div>
+
+</div>
+</body>
+</html>

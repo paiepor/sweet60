@@ -1,26 +1,96 @@
-<body class="bg-gray-100 flex justify-center items-center min-h-screen">
-    <div class="w-[375px] h-[812px] bg-white rounded-[40px] shadow-2xl overflow-hidden relative border-[8px] border-black">
-        
-        <div class="p-6 pt-12 flex items-center border-b">
-            <a href="{% url 'home' %}" class="mr-4">
-                <i class="fa-solid fa-chevron-left text-xl text-gray-600"></i>
-            </a>
-            <h1 class="text-xl font-bold text-gray-800">ลงประกาศงาน</h1>
-        </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-primary-fixed-variant": "#5a00c6", "inverse-primary": "#d2bbff", "surface-container-high": "#dee9fc", "error-container": "#ffdad6", tertiary: "#735c00", "primary-fixed-dim": "#d2bbff", "on-surface": "#121c2a", primary: "#630ed4", "on-surface-variant": "#4a4455", "secondary-container": "#fd56a7", error: "#ba1a1a", "surface-dim": "#d0dbed", "surface-container": "#e6eeff", "inverse-on-surface": "#eaf1ff", "surface-tint": "#732ee4", "surface-container-low": "#eff4ff", "on-primary": "#ffffff", "primary-fixed": "#eaddff", "on-error": "#ffffff", background: "#f8f9ff", "on-background": "#121c2a", "on-tertiary-fixed": "#231b00", "tertiary-fixed": "#ffe083", "on-tertiary": "#ffffff", surface: "#f8f9ff", secondary: "#b4136d", "tertiary-container": "#cea700", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#8c0053", "secondary-fixed": "#ffd9e4", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#eec200", "on-tertiary-fixed-variant": "#574500", "surface-container-highest": "#d9e3f6", outline: "#7b7487", "primary-container": "#7c3aed", "outline-variant": "#ccc3d8", "on-primary-fixed": "#25005a", "on-primary-container": "#ede0ff", "secondary-fixed-dim": "#ffb0cd", "inverse-surface": "#27313f", "on-secondary-container": "#600037", "surface-container-lowest": "#ffffff", "on-tertiary-container": "#4e3e00", "on-secondary-fixed": "#3e0022", "surface-bright": "#f8f9ff", "surface-variant": "#d9e3f6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {unit: "8px", "stack-gap": "20px", "touch-target-min": "56px", "section-margin": "40px", "container-padding": "24px", gutter: "16px", "stack-lg": "32px", "stack-sm": "8px", "stack-md": "16px", "container-margin": "24px"}, fontFamily: {"button-text": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-bold": ["Plus Jakarta Sans"]}, fontSize: {"button-text": ["20px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["20px", {lineHeight: "1.5", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700"}], "label-bold": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "700"}], "headline-xl": ["40px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800"}], "body-md": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "label-lg": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600"}], "label-sm": ["14px", {lineHeight: "1.2", fontWeight: "700"}]}}}};
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+    body { min-height: max(884px, 100dvh); }
+    .form-field input, .form-field textarea, .form-field select {
+        width: 100%; padding: 16px 20px; border-radius: 16px;
+        border: 2px solid #ccc3d8; background: #ffffff;
+        font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px;
+        outline: none; transition: all 0.2s;
+    }
+    .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+        border-color: #630ed4; box-shadow: 0 0 0 4px rgba(99,14,212,0.1);
+    }
+    .form-field textarea { min-height: 120px; resize: vertical; }
+</style>
+<title>ลงประกาศงาน - Sweet Sixty</title>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-36">
 
-        <div class="p-6 overflow-y-auto h-[650px]">
-            <form method="POST" class="space-y-4">
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="flex flex-col">
-                    <label class="text-sm font-semibold text-gray-700 mb-1">{{ field.label }}</label>
-                    {{ field }}
-                </div>
-                {% endfor %}
-                <button type="submit" class="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold mt-6 shadow-lg active:scale-95 transition-all">
-                    ยืนยันลงประกาศ
-                </button>
-            </form>
-        </div>
+<header class="bg-[#FDFCFE] flex justify-between items-center px-6 h-20 w-full top-0 border-b-2 border-[#8A70FF]/20 shadow-[4px_4px_0px_0px_rgba(138,112,255,0.1)] sticky z-50">
+    <div class="flex items-center gap-4">
+        <a href="{% url 'home' %}" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#8A70FF]/10 transition-colors active:scale-95">
+            <span class="material-symbols-outlined text-[#8A70FF]">arrow_back</span>
+        </a>
+        <h1 class="text-[#8A70FF] font-black text-2xl tracking-tighter font-['Plus_Jakarta_Sans']">Sweet Sixty</h1>
     </div>
+    <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#8A70FF]/20 flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>
+    </a>
+</header>
+
+<main class="px-6 py-8 max-w-2xl mx-auto">
+
+    <div class="mb-8">
+        <h2 class="font-headline-xl text-headline-xl text-on-surface mb-2">ลงประกาศงาน</h2>
+        <p class="font-body-md text-on-surface-variant">กรอกข้อมูลงานที่ต้องการรับสมัคร</p>
+    </div>
+
+    <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-field">
+            <label class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-widest text-xs mb-2 block">
+                {{ field.label }}{% if field.field.required %} *{% endif %}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+            <p class="text-error font-label-sm text-label-sm mt-2 flex items-center gap-1">
+                <span class="material-symbols-outlined text-base">error</span>
+                {{ field.errors.0 }}
+            </p>
+            {% endif %}
+            {% if field.help_text %}
+            <p class="text-on-surface-variant font-label-sm text-label-sm mt-1">{{ field.help_text }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="min-h-[64px] w-full bg-primary text-on-primary rounded-2xl flex items-center justify-center gap-3 font-button-text text-button-text shadow-[0_8px_20px_rgba(94,65,208,0.4)] active:scale-[0.98] transition-transform mt-4">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">post_add</span>
+            ยืนยันลงประกาศ
+        </button>
+    </form>
+
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 h-28 flex justify-around items-center px-4 pb-4 bg-white rounded-t-[40px] border-t-2 border-violet-50 shadow-[0_-10px_30px_-5px_rgba(138,112,255,0.1)]">
+    <a href="{% url 'home' %}" class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-violet-500 transition-all active:scale-90">
+        <span class="material-symbols-outlined text-3xl">home</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-wider">Home</span>
+    </a>
+    <a href="{% url 'create_job' %}" class="flex flex-col items-center justify-center bg-violet-600 text-white rounded-[24px] px-6 py-2 shadow-lg shadow-violet-200 transition-all active:scale-90">
+        <span class="material-symbols-outlined text-3xl" style="font-variation-settings:'FILL' 1">work</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-wider">Jobs</span>
+    </a>
+    <a href="{% url 'community' %}" class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-violet-500 transition-all active:scale-90">
+        <span class="material-symbols-outlined text-3xl">forum</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-wider">Community</span>
+    </a>
+    <a href="{% url 'profile' %}" class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-violet-500 transition-all active:scale-90">
+        <span class="material-symbols-outlined text-3xl">person</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-wider">Profile</span>
+    </a>
+</nav>
 </body>
+</html>

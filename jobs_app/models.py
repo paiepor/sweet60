@@ -1,16 +1,39 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# ตารางที่ 1: เก็บข้อมูลประวัติผู้สูงอายุที่มาสมัครงาน
-class ElderlyProfile(models.Model):
-    first_name = models.CharField(max_length=100, verbose_name="ชื่อจริง")
-    last_name = models.CharField(max_length=100, verbose_name="นามสกุล")
-    age = models.IntegerField(verbose_name="อายุ")
-    skills = models.TextField(verbose_name="ทักษะ/ความสามารถ")
-    experience = models.TextField(verbose_name="ประสบการณ์ทำงานที่ผ่านมา")
-    phone_number = models.CharField(max_length=15, verbose_name="เบอร์โทรศัพท์")
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    birthdate = models.DateField(null=True, blank=True, verbose_name="วันเกิด")
+    experience = models.TextField(blank=True, verbose_name="ประสบการณ์ทำงาน")
+    id_card_image = models.ImageField(upload_to='id_cards/', null=True, blank=True, verbose_name="รูปบัตรประชาชน")
+    no_criminal_record = models.BooleanField(default=False, verbose_name="ยืนยันไม่มีประวัติอาชญากรรม")
+    consent_id_upload = models.BooleanField(default=False, verbose_name="ยินยอมอัปโหลดบัตร")
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} (อายุ {self.age} ปี)"
+        return f"โปรไฟล์ของ {self.user.username}"
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=200, verbose_name="ชื่อกิจกรรม")
+    description = models.TextField(verbose_name="รายละเอียดกิจกรรม")
+    start_time = models.DateTimeField(verbose_name="วันและเวลาเริ่มกิจกรรม")
+    end_time = models.DateTimeField(verbose_name="วันและเวลาสิ้นสุดกิจกรรม", null=True, blank=True)
+    location = models.CharField(max_length=255, verbose_name="สถานที่")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+class ChatMessage(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+    content = models.TextField(verbose_name="ข้อความ")
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"From {self.sender.username} to {self.receiver.username}"
 
 # ตารางที่ 2: เก็บข้อมูลงานที่เปิดรับสมัคร
 class JobListing(models.Model):
