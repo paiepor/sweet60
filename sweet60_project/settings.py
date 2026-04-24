@@ -127,7 +127,9 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost').split(',')
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-db405.up.railway.app',
+] + [x for x in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if x]
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/home/'
