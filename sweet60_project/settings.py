@@ -132,6 +132,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://web-production-db405.up.railway.app',
 ] + [x for x in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if x]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/'
