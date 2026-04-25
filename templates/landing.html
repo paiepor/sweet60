@@ -15,12 +15,12 @@
     .material-symbols-outlined {font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
     .bg-90s-gradient { background: linear-gradient(135deg, #af0a78 0%, #744aa2 100%); }
     .soft-shadow { box-shadow: 0 12px 40px rgba(99, 14, 212, 0.08); }
-    body { min-height: max(884px, 100dvh); }
+    /* body { min-height: max(884px, 100dvh); } */
 </style>
 </head>
 <body class="bg-background text-on-background font-plus-jakarta antialiased">
 <!-- Top AppBar Strategy: Transactional Screen (Suppressed Global Nav per Mandate) -->
-<div class="relative min-h-screen flex flex-col items-center justify-center p-container-margin overflow-hidden">
+<div class="relative min-h-dvh flex flex-col items-center justify-center p-container-margin overflow-hidden">
 
     <!-- Background decorative shapes -->
     <div class="absolute top-[-10%] left-[-10%] w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
@@ -53,7 +53,7 @@
         <span>สมัครใช้งานด้วย Google</span>
 </a>
 <!-- Separator -->
-<div class="flex items-center gap-4 py-4">
+<div class="flex items-center gap-4 py-4 w-full">
 <div class="flex-grow h-px bg-outline-variant"></div>
 <span class="text-on-surface-variant font-medium">หรือ</span>
 <div class="flex-grow h-px bg-outline-variant"></div>
@@ -62,19 +62,30 @@
 <a href="{% url 'register' %}" class="bouncy-hover w-full flex items-center justify-center h-16 rounded-full bg-primary text-on-primary font-bold text-lg shadow-[0_8px_24px_rgba(175,10,120,0.3)]">
                     สมัครใช้งานด้วยอีเมล
 </a>
-</div>
+
 <!-- Footer Link -->
 <div class="mt-auto pt-10 text-center">
-    <a href="{% url 'account_login' %}" class="inline-flex items-center gap-2 group" href="#">
+    <a href="{% url 'account_login' %}" class="inline-flex items-center gap-2 group">
         <span class="text-on-surface-variant font-medium">มีบัญชีอยู่แล้ว?</span>
         <span class="text-primary font-extrabold group-hover:underline underline-offset-4 decoration-2">เข้าสู่ระบบ</span>
     </a>
 </div>
-</div>
+
 </main>
+
+<!-- Decorative bottom wave -->
+<div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 opacity-5 pointer-events-none">
+        <svg class="relative block w-[200%] h-[120px]" preserveAspectRatio="none" viewBox="0 0 1200 120">
+            <path class="text-primary" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+        </svg>
+    </div>
+
+</div>
+
 <!-- Content-Focused Canvas Background Strategy -->
 <div class="fixed inset-0 -z-10 bg-pattern opacity-40"></div>
 <div class="fixed top-[10%] right-[5%] w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
 <div class="fixed bottom-[10%] left-[5%] w-80 h-80 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
 <!-- No BottomNavBar on Transactional Screen per Shell Visibility Rule -->
-</body></html>
+</body>
+</html>
