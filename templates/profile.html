@@ -17,15 +17,49 @@
 </head>
 <body class="bg-background text-on-background min-h-screen pb-28">
 
+<!-- Drawer -->
+<div id="drawer" class="fixed inset-y-0 right-0 w-64 bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-6 flex flex-col h-full">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="font-bold text-xl text-primary">เมนู</h2>
+            <button onclick="toggleDrawer()" class="hover:text-error active:scale-90 transition-transform">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-4">
+            <a href="{% url 'home' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">home</span> หน้าหลัก
+            </a>
+            <a href="{% url 'edit_profile' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">settings</span> แก้ไขโปรไฟล์
+            </a>
+            <a href="{% url 'emergency' %}" class="flex items-center gap-3 font-bold text-error hover:text-error transition-colors">
+                <span class="material-symbols-outlined">emergency</span> ฉุกเฉิน
+            </a>
+            <a href="{% url 'help_center' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">help_center</span> ศูนย์ช่วยเหลือ
+            </a>
+            <hr class="border-outline-variant my-4">
+            <form action="{% url 'account_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="flex items-center gap-3 font-bold text-on-surface-variant hover:text-error transition-colors w-full text-left">
+                    <span class="material-symbols-outlined">logout</span> ออกจากระบบ
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="drawer-overlay" onclick="toggleDrawer()" class="fixed inset-0 bg-black/50 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
+
 <!-- Header -->
 <header class="bg-[#fff7fb] flex justify-between items-center w-full px-6 h-16 sticky top-0 z-50 border-b border-[#ddbfca] shadow-[0_4px_16px_rgba(175,10,120,0.1)]">
     <a href="{% url 'home' %}" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 active:scale-95 transition-all text-primary">
         <span class="material-symbols-outlined text-2xl">arrow_back</span>
     </a>
     <h1 class="font-bold text-2xl text-primary">โปรไฟล์</h1>
-    <a href="{% url 'edit_profile' %}" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 active:scale-95 transition-all text-primary">
-        <span class="material-symbols-outlined text-2xl">settings</span>
-    </a>
+    <button onclick="toggleDrawer()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 active:scale-95 transition-all text-primary">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
 </header>
 
 <main class="px-6 pt-8 pb-4 max-w-2xl mx-auto space-y-8">
@@ -181,5 +215,21 @@
     </a>
 </nav>
 
+<script>
+function toggleDrawer() {
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    if (drawer.classList.contains('translate-x-full')) {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        setTimeout(() => { overlay.classList.remove('opacity-0'); overlay.classList.add('opacity-100'); }, 10);
+    } else {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        setTimeout(() => { overlay.classList.add('hidden'); }, 300);
+    }
+}
+</script>
 </body>
 </html>
