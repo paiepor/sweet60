@@ -72,6 +72,26 @@ class CommunityGroup(models.Model):
         return self.name
 
 
+class GroupPost(models.Model):
+    group = models.ForeignKey(CommunityGroup, on_delete=models.CASCADE, related_name='posts')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='group_posts')
+    content = models.TextField(blank=True, verbose_name="เนื้อหา")
+    image = models.ImageField(upload_to='group_posts/', null=True, blank=True, verbose_name="รูปภาพ")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.author.username}: {self.content[:50]}"
+
+
+class GroupPostLike(models.Model):
+    post = models.ForeignKey(GroupPost, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='group_post_likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('post', 'user')
+
+
 class Application(models.Model):
     job = models.ForeignKey(JobListing, on_delete=models.CASCADE, related_name='applications')
     applicant = models.ForeignKey('auth.User', on_delete=models.CASCADE)
