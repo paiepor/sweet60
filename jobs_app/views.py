@@ -148,16 +148,17 @@ def community_page(request):
         chat_users = chat_users.filter(
             Q(username__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query)
         )
-    for u in chat_users:
+    chat_user_list = list(chat_users)
+    avatar_map = {p.user_id: p.avatar_b64 for p in UserProfile.objects.filter(user_id__in=[u.id for u in chat_user_list])}
+    for u in chat_user_list:
         last_msg = ChatMessage.objects.filter(
             Q(sender=request.user, receiver=u) | Q(sender=u, receiver=request.user)
         ).order_by('-timestamp').first()
         u.last_message = last_msg
-    unread_count = ChatMessage.objects.filter(receiver=request.user).exclude(
-        sender__in=[]
-    ).count()
+        u.avatar_b64 = avatar_map.get(u.id, '')
+    unread_count = ChatMessage.objects.filter(receiver=request.user).count()
     return render(request, 'community.html', {
-        'chat_users': chat_users,
+        'chat_users': chat_user_list,
         'query': query,
         'unread_count': unread_count,
     })
@@ -175,8 +176,9 @@ def chat_room(request, user_id):
     messages = ChatMessage.objects.filter(
         Q(sender=request.user, receiver=other_user) | Q(sender=other_user, receiver=request.user)
     ).order_by('timestamp')
-    
-    return render(request, 'chat_room.html', {'other_user': other_user, 'messages': messages})
+    other_profile = UserProfile.objects.filter(user=other_user).first()
+    other_avatar = other_profile.avatar_b64 if other_profile else ''
+    return render(request, 'chat_room.html', {'other_user': other_user, 'messages': messages, 'other_avatar': other_avatar})
 
 
 @login_required
@@ -205,11 +207,14 @@ def group_detail(request, group_id):
                 GroupPost.objects.create(group=group, author=request.user, content=content, image=image)
         return redirect('group_detail', group_id=group_id)
 
-    posts = group.posts.select_related('author').prefetch_related('likes').order_by('-created_at')
+    posts = list(group.posts.select_related('author').prefetch_related('likes').order_by('-created_at'))
     liked_ids = set(GroupPostLike.objects.filter(user=request.user, post__group=group).values_list('post_id', flat=True))
+    author_ids = {post.author_id for post in posts}
+    avatar_map = {p.user_id: p.avatar_b64 for p in UserProfile.objects.filter(user_id__in=author_ids)}
     for post in posts:
         post.liked_by_user = post.id in liked_ids
         post.like_count_val = post.likes.count()
+        post.author_avatar = avatar_map.get(post.author_id, '')
 
     return render(request, 'group_detail.html', {'group': group, 'posts': posts, 'is_member': is_member})
 

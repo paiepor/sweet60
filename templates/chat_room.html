@@ -23,8 +23,8 @@
         <a href="{% url 'community' %}" class="text-primary hover:scale-105 transition-transform active:scale-95">
             <span class="material-symbols-outlined text-3xl">arrow_back</span>
         </a>
-        <div class="w-11 h-11 rounded-full bg-primary-fixed border-2 border-primary/20 flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-primary text-2xl">person</span>
+        <div class="w-11 h-11 rounded-full bg-primary-fixed border-2 border-primary/20 overflow-hidden flex items-center justify-center flex-shrink-0">
+            {% if other_avatar %}<img src="{{ other_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary text-2xl">person</span>{% endif %}
         </div>
         <div>
             <h1 class="font-bold text-lg text-primary leading-tight">{{ other_user.get_full_name|default:other_user.username }}</h1>

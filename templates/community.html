@@ -60,8 +60,8 @@
         </button>
         <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#e040a0]">Sweet Sixty</span>
     </div>
-    <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#e040a0]/20 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
-        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>
+    <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#e040a0]/20 overflow-hidden flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+        {% if current_avatar %}<img src="{{ current_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>{% endif %}
     </a>
 </header>
 
@@ -102,8 +102,8 @@
             {% for chat_user in chat_users %}
             <a href="{% url 'chat_room' chat_user.id %}" class="group flex items-center gap-4 p-4 bg-white rounded-[32px] border-2 border-[#ffd8e8] hover:border-primary transition-all cursor-pointer active:scale-[0.99] h-28 block">
                 <div class="relative flex-shrink-0">
-                    <div class="w-20 h-20 rounded-2xl bg-primary-fixed border-2 border-primary-fixed flex items-center justify-center text-primary">
-                        <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">person</span>
+                    <div class="w-20 h-20 rounded-2xl bg-primary-fixed border-2 border-primary-fixed overflow-hidden flex items-center justify-center text-primary">
+                        {% if chat_user.avatar_b64 %}<img src="{{ chat_user.avatar_b64 }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">person</span>{% endif %}
                     </div>
                 </div>
                 <div class="flex-1 min-w-0">

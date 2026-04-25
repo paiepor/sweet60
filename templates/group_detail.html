@@ -77,8 +77,8 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="flex gap-3">
-                <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0">
-                    <span class="material-symbols-outlined text-primary">person</span>
+                <div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden flex items-center justify-center flex-shrink-0">
+                    {% if current_avatar %}<img src="{{ current_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary">person</span>{% endif %}
                 </div>
                 <div class="flex-1">
                     <textarea name="content" id="post-content" rows="2"
@@ -110,8 +110,8 @@
         {% for post in posts %}
         <article class="bg-white px-4 py-4">
             <div class="flex gap-3">
-                <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0 flex-col">
-                    <span class="material-symbols-outlined text-primary">person</span>
+                <div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden flex items-center justify-center flex-shrink-0">
+                    {% if post.author_avatar %}<img src="{{ post.author_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary">person</span>{% endif %}
                 </div>
                 <div class="flex-1 min-w-0">
                     <div class="flex items-baseline gap-2 flex-wrap">

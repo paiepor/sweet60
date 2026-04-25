@@ -60,8 +60,8 @@
         <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#e040a0]">Sweet Sixty</span>
     </div>
     <div class="flex items-center gap-3">
-        <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#e040a0]/20 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
-            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>
+        <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#e040a0]/20 overflow-hidden flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+            {% if current_avatar %}<img src="{{ current_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>{% endif %}
         </a>
         <button onclick="toggleDrawer()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95">
             <span class="material-symbols-outlined text-[#e040a0] text-3xl">menu</span>
