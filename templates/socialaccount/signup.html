@@ -38,9 +38,10 @@
             </div>
             {% endif %}
 
-            <form method="post" action="{% url 'socialaccount_signup' %}" id="signup-form" enctype="multipart/form-data">
+            <form method="post" action="{% url 'socialaccount_signup' %}" id="signup-form">
                 {% csrf_token %}
                 <input type="hidden" name="avatar_b64" id="avatar_b64_input">
+                <input type="hidden" name="id_card_b64" id="id_card_b64_input">
 
                 <!-- Avatar Upload -->
                 <div class="flex flex-col items-center mb-6">
@@ -106,7 +107,7 @@
                     <p class="font-semibold text-on-surface text-base mb-2">รูปถ่ายหน้าบัตรประชาชน <span class="text-outline font-normal text-sm">(ไม่บังคับ)</span></p>
                     <div class="relative border-2 border-dashed border-primary-fixed rounded-2xl p-6 flex flex-col items-center justify-center bg-surface-container-low aspect-[1.6/1] cursor-pointer hover:bg-primary-fixed/30 transition-colors"
                          onclick="document.getElementById('id_card_upload').click()">
-                        <input id="id_card_upload" name="id_card_image" type="file" accept="image/*" class="hidden" onchange="previewIdCard(event)"/>
+                        <input id="id_card_upload" type="file" accept="image/*" class="hidden" onchange="previewIdCard(event)"/>
                         <div id="id-card-placeholder">
                             <span class="material-symbols-outlined text-primary text-4xl mb-2 block text-center" style="font-variation-settings:'FILL' 1">photo_camera</span>
                             <p class="text-primary font-bold text-sm text-center">กดเพื่อถ่ายภาพหรือเลือกไฟล์</p>
@@ -144,13 +145,27 @@ document.getElementById('avatar-file').addEventListener('change', function(e) {
 function previewIdCard(event) {
     const file = event.target.files[0];
     if (!file) return;
-    const preview = document.getElementById('id-card-preview');
-    const placeholder = document.getElementById('id-card-placeholder');
     const reader = new FileReader();
     reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.classList.remove('hidden');
-        placeholder.classList.add('hidden');
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const maxSize = 1200;
+            let w = img.width, h = img.height;
+            if (w > maxSize || h > maxSize) {
+                if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
+                else { w = Math.round(w * maxSize / h); h = maxSize; }
+            }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            const b64 = canvas.toDataURL('image/jpeg', 0.8);
+            document.getElementById('id_card_b64_input').value = b64;
+            const preview = document.getElementById('id-card-preview');
+            preview.src = b64;
+            preview.classList.remove('hidden');
+            document.getElementById('id-card-placeholder').classList.add('hidden');
+        };
+        img.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
