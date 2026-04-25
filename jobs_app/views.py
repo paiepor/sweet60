@@ -175,7 +175,6 @@ def group_detail(request, group_id):
     return render(request, 'group_detail.html', {'group': group})
 
 
-@login_required
 def explore_groups(request):
     groups = CommunityGroup.objects.filter(is_private=False).order_by('-created_at')
     return render(request, 'explore_groups.html', {'groups': groups})
