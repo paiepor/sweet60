@@ -33,6 +33,9 @@
             <a href="{% url 'profile' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">person</span> โปรไฟล์ของฉัน
             </a>
+            <a href="{% url 'help_center' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">help_center</span> ศูนย์ช่วยเหลือ
+            </a>
             <hr class="border-outline-variant my-4">
             {% if user.is_authenticated %}
             <form action="{% url 'account_logout' %}" method="post">

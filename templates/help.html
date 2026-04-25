@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ศูนย์ช่วยเหลือ - Sweet Sixty</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-tertiary-container": "#fcfcff", "surface-dim": "#efd0f7", "secondary": "#744aa2", "primary-fixed": "#ffd8e8", "on-secondary-container": "#5a3086", "error-container": "#ffdad6", "on-secondary": "#ffffff", "outline-variant": "#ddbfca", "primary-fixed-dim": "#ffafd5", "background": "#fff7fb", "tertiary": "#006388", "tertiary-fixed": "#c5e7ff", "outline": "#8a707b", "tertiary-container": "#007dab", "secondary-fixed-dim": "#dbb8ff", "error": "#ba1a1a", "surface-container": "#fde7ff", "on-background": "#281330", "on-error-container": "#93000a", "surface": "#fff7fb", "on-primary-fixed": "#3d0027", "on-error": "#ffffff", "surface-bright": "#fff7fb", "on-surface": "#281330", "secondary-fixed": "#efdbff", "primary": "#af0a78", "on-primary": "#ffffff", "surface-container-high": "#fae0ff", "primary-container": "#cf3192", "on-primary-fixed-variant": "#8a005e", "secondary-container": "#cda0fe", "surface-variant": "#f8d8ff", "surface-container-highest": "#f8d8ff", "surface-container-low": "#ffefff", "on-surface-variant": "#57414a", "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#5b3188"}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}}}};
+</script>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: max(884px, 100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .bounce-effect:active { transform: scale(0.92); transition: transform 0.1s ease-out; }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-28">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-pink-50 border-b border-pink-100 shadow-[0_4px_16px_rgba(224,64,160,0.12)] flex items-center px-5 h-16">
+    <a href="{% url 'home' %}" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-100 active:scale-95 transition-all text-primary">
+        <span class="material-symbols-outlined text-2xl">arrow_back</span>
+    </a>
+    <h1 class="ml-4 font-bold text-lg text-primary">ศูนย์ช่วยเหลือ</h1>
+</header>
+
+<main class="pt-20 px-5 max-w-lg mx-auto">
+
+    <!-- Hero -->
+    <section class="mb-10 text-center">
+        <div class="relative inline-block mb-5">
+            <div class="absolute inset-0 bg-secondary-container opacity-30 blur-2xl rounded-full scale-150"></div>
+            <div class="relative z-10 w-28 h-28 mx-auto bg-primary-fixed rounded-full flex items-center justify-center shadow-xl">
+                <span class="material-symbols-outlined text-primary" style="font-size:56px; font-variation-settings:'FILL' 1">support_agent</span>
+            </div>
+        </div>
+        <h2 class="text-3xl font-extrabold text-primary mb-2 leading-tight">
+            สวัสดีคุณ {{ user.get_full_name|default:user.username }}
+        </h2>
+        <p class="text-lg font-medium text-on-surface-variant">เราพร้อมช่วยเหลือคุณเสมอค่ะ</p>
+    </section>
+
+    <!-- Chat CTA -->
+    <section class="mb-10">
+        <a href="{% url 'community' %}" class="w-full bg-primary text-on-primary py-5 px-8 rounded-full shadow-[0_8px_24px_rgba(175,10,120,0.3)] flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all duration-200 bounce-effect">
+            <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1">chat</span>
+            <span class="text-xl font-bold tracking-wide">แชทกับเรา</span>
+        </a>
+        <p class="text-center mt-3 text-on-surface-variant/70 text-sm">แจ้งปัญหาหรือสอบถามผ่านระบบแชทได้เลย</p>
+    </section>
+
+    <!-- FAQ Cards -->
+    <section class="space-y-4 mb-8">
+
+        <!-- วิธีใช้งาน -->
+        <div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_4px_20px_rgba(224,64,160,0.07)] border border-outline-variant/30 flex items-center justify-between hover:scale-[1.01] transition-transform active:scale-[0.98] bounce-effect cursor-pointer">
+            <div class="flex items-center gap-4">
+                <div class="w-13 h-13 w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings:'FILL' 1">quiz</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-on-surface">คำถามที่พบบ่อย</h3>
+                    <p class="text-on-surface-variant text-sm">วิธีใช้งานเบื้องต้น</p>
+                </div>
+            </div>
+            <span class="material-symbols-outlined text-outline">chevron_right</span>
+        </div>
+
+        <!-- ความปลอดภัยและการตั้งค่า -->
+        <div class="grid grid-cols-2 gap-4">
+            <a href="{% url 'edit_profile' %}" class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_4px_20px_rgba(224,64,160,0.07)] border border-outline-variant/30 flex flex-col items-center gap-3 text-center hover:scale-[1.02] transition-transform active:scale-[0.98] bounce-effect">
+                <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-tertiary text-2xl" style="font-variation-settings:'FILL' 1">security</span>
+                </div>
+                <span class="font-bold text-on-surface text-sm">ความปลอดภัย</span>
+            </a>
+            <a href="{% url 'edit_profile' %}" class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_4px_20px_rgba(224,64,160,0.07)] border border-outline-variant/30 flex flex-col items-center gap-3 text-center hover:scale-[1.02] transition-transform active:scale-[0.98] bounce-effect">
+                <div class="w-12 h-12 bg-surface-dim rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-on-surface-variant text-2xl" style="font-variation-settings:'FILL' 1">settings</span>
+                </div>
+                <span class="font-bold text-on-surface text-sm">การตั้งค่า</span>
+            </a>
+        </div>
+
+        <!-- ฉุกเฉิน -->
+        <a href="{% url 'emergency' %}" class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_4px_20px_rgba(224,64,160,0.07)] border border-outline-variant/30 flex items-center justify-between hover:scale-[1.01] transition-transform active:scale-[0.98] bounce-effect">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-error text-2xl" style="font-variation-settings:'FILL' 1">emergency</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-on-surface">เหตุฉุกเฉิน</h3>
+                    <p class="text-on-surface-variant text-sm">สายด่วนและความช่วยเหลือเร่งด่วน</p>
+                </div>
+            </div>
+            <span class="material-symbols-outlined text-outline">chevron_right</span>
+        </a>
+
+    </section>
+
+    <!-- Tip card -->
+    <section class="mb-6 bg-gradient-to-br from-pink-100 to-white p-5 rounded-2xl border border-pink-200">
+        <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary flex-shrink-0" style="font-variation-settings:'FILL' 1">lightbulb</span>
+            <div>
+                <h4 class="font-bold text-primary">รู้หรือไม่?</h4>
+                <p class="text-on-surface-variant text-sm mt-1 leading-relaxed">คุณสามารถขยายตัวอักษรให้ใหญ่ขึ้นได้ที่เมนู "การตั้งค่า" ของโทรศัพท์ค่ะ</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 h-24 bg-white border-t-2 border-[#e040a0]/10 shadow-[0_-8px_24px_rgba(224,64,160,0.1)] rounded-t-[32px]">
+    <a href="{% url 'home' %}" class="flex flex-col items-center justify-center text-[#7c52aa] px-4 py-2 hover:bg-[#e040a0]/10 rounded-full transition-colors active:scale-90 duration-200">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Home</span>
+    </a>
+    <a href="{% url 'jobs_list' %}" class="flex flex-col items-center justify-center text-[#7c52aa] px-4 py-2 hover:bg-[#e040a0]/10 rounded-full transition-colors active:scale-90 duration-200">
+        <span class="material-symbols-outlined">work</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Jobs</span>
+    </a>
+    <a href="{% url 'community' %}" class="flex flex-col items-center justify-center text-[#7c52aa] px-4 py-2 hover:bg-[#e040a0]/10 rounded-full transition-colors active:scale-90 duration-200">
+        <span class="material-symbols-outlined">forum</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Community</span>
+    </a>
+    <a href="{% url 'profile' %}" class="flex flex-col items-center justify-center text-[#7c52aa] px-4 py-2 hover:bg-[#e040a0]/10 rounded-full transition-colors active:scale-90 duration-200">
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Profile</span>
+    </a>
+</nav>
+
+</body>
+</html>

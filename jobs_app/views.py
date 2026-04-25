@@ -244,6 +244,11 @@ def create_group(request):
 
 
 @login_required
+def help_center(request):
+    return render(request, 'help.html')
+
+
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = UserUpdateForm(request.POST, instance=request.user)

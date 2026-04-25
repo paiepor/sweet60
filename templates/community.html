@@ -37,6 +37,9 @@
             <a href="{% url 'emergency' %}" class="flex items-center gap-3 font-label-bold text-error hover:text-error transition-colors">
                 <span class="material-symbols-outlined">emergency</span> ฉุกเฉิน
             </a>
+            <a href="{% url 'help_center' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">help_center</span> ศูนย์ช่วยเหลือ
+            </a>
             <hr class="border-outline-variant my-4">
             <form action="{% url 'account_logout' %}" method="post">
                 {% csrf_token %}
