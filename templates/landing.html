@@ -96,21 +96,17 @@ function openGooglePopup(event) {
     const top = Math.round((screen.height - height) / 2);
     const popup = window.open(url, 'google-login', `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no`);
     if (!popup) { window.location.href = url; return; }
-    let wentCrossOrigin = false;
     const check = setInterval(() => {
         if (popup.closed) { clearInterval(check); return; }
         try {
-            const origin = new URL(popup.location.href).origin;
-            if (!wentCrossOrigin) return;
-            if (origin === window.location.origin) {
+            const href = popup.location.href;
+            const origin = new URL(href).origin;
+            if (origin === window.location.origin && href !== url && !href.includes('/callback')) {
                 clearInterval(check);
-                const dest = popup.location.href;
                 popup.close();
-                window.location.href = dest;
+                window.location.href = href;
             }
-        } catch(e) {
-            wentCrossOrigin = true;
-        }
+        } catch(e) { /* cross-origin */ }
     }, 500);
 }
 </script>
