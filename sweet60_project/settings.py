@@ -155,6 +155,6 @@ ACCOUNT_SIGNUP_FIELDS = ['username*', 'password1*', 'password2*']
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': ['email', 'profile'],
-        'AUTH_PARAMS': {'access_type': 'online'},
+        'AUTH_PARAMS': {'access_type': 'online', 'prompt': 'select_account'},
     }
 }
