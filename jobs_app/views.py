@@ -6,6 +6,18 @@ from .models import JobListing, Application, UserProfile, Event, ChatMessage, Co
 from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm
 from django.contrib.auth.models import User
 from django.db.models import Q
+from allauth.socialaccount.views import SignupView as SocialSignupView
+
+
+class SocialSignupWithAvatarView(SocialSignupView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        avatar_b64 = self.request.POST.get('avatar_b64', '')
+        if avatar_b64 and self.request.user.is_authenticated:
+            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+            profile.avatar_b64 = avatar_b64
+            profile.save()
+        return response
 
 
 def setup_admin(request):
