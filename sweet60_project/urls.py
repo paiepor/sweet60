@@ -28,6 +28,7 @@ urlpatterns = [
     path('community/', views.community_page, name='community'),
     path('groups/', views.my_groups, name='my_groups'),
     path('groups/explore/', views.explore_groups, name='explore_groups'),
+    path('groups/explore2/', views.explore_groups2, name='explore_groups2'),
     path('groups/create/', views.create_group, name='create_group'),
     path('groups/<int:group_id>/', views.group_detail, name='group_detail'),
     path('groups/<int:group_id>/join/', views.join_group, name='join_group'),

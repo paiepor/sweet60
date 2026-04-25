@@ -242,6 +242,9 @@ def explore_groups(request):
     groups = CommunityGroup.objects.filter(is_private=False).order_by('-created_at')
     return render(request, 'explore_groups.html', {'groups': groups})
 
+def explore_groups2(request):
+    groups = CommunityGroup.objects.filter(is_private=False).order_by('-created_at')
+    return render(request, 'explore_groups2.html', {'groups': groups})
 
 @login_required
 def create_group(request):
