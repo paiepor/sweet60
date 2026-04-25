@@ -8,7 +8,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-container": "#fd56a7", "on-primary": "#ffffff", "tertiary-fixed-dim": "#eec200", "secondary-fixed": "#ffd9e4", "inverse-on-surface": "#eaf1ff", "on-tertiary-fixed": "#231b00", "surface-container-highest": "#d9e3f6", "secondary-fixed-dim": "#ffb0cd", "on-primary-container": "#ede0ff", "on-surface": "#121c2a", "tertiary-fixed": "#ffe083", "surface-variant": "#d9e3f6", "error": "#ba1a1a", "background": "#f8f9ff", "on-error": "#ffffff", "on-secondary-fixed-variant": "#8c0053", "outline-variant": "#ccc3d8", "on-tertiary-container": "#4e3e00", "primary-fixed-dim": "#d2bbff", "on-tertiary": "#ffffff", "on-background": "#121c2a", "tertiary-container": "#cea700", "on-primary-fixed": "#25005a", "inverse-primary": "#d2bbff", "surface-container-low": "#eff4ff", "error-container": "#ffdad6", "surface-tint": "#732ee4", "secondary": "#b4136d", "primary": "#630ed4", "surface-container-lowest": "#ffffff", "surface": "#f8f9ff", "surface-bright": "#f8f9ff", "surface-container-high": "#dee9fc", "outline": "#7b7487", "on-secondary-container": "#600037", "on-primary-fixed-variant": "#5a00c6", "on-secondary-fixed": "#3e0022", "tertiary": "#735c00", "surface-dim": "#d0dbed", "inverse-surface": "#27313f", "on-surface-variant": "#4a4455", "primary-fixed": "#eaddff", "on-tertiary-fixed-variant": "#574500", "on-secondary": "#ffffff", "surface-container": "#e6eeff", "primary-container": "#7c3aed", "on-error-container": "#93000a"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}}}};
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#ffefff", surface: "#fff7fb", "secondary-container": "#cda0fe", "on-primary-fixed-variant": "#8a005e", "on-primary-container": "#fffbff", outline: "#8a707b", "primary-fixed-dim": "#ffafd5", "surface-dim": "#efd0f7", primary: "#af0a78", "on-surface-variant": "#57414a", "on-secondary-fixed": "#2b0052", secondary: "#744aa2", "surface-variant": "#f8d8ff", "on-primary-fixed": "#3d0027", "tertiary-container": "#007dab", "on-background": "#281330", "on-surface": "#281330", "inverse-on-surface": "#feebff", "primary-container": "#cf3192", error: "#ba1a1a", "tertiary-fixed": "#c5e7ff", "surface-bright": "#fff7fb", "secondary-fixed-dim": "#dbb8ff", "error-container": "#ffdad6", "on-tertiary-fixed": "#001e2d", "on-secondary-fixed-variant": "#5b3188", "secondary-fixed": "#efdbff", "on-secondary-container": "#5a3086", "primary-fixed": "#ffd8e8", "on-secondary": "#ffffff", "on-error-container": "#93000a", "surface-container-highest": "#f8d8ff", "on-tertiary-container": "#fcfcff", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "inverse-surface": "#3e2846", "inverse-primary": "#ffafd5", background: "#fff7fb", "on-tertiary-fixed-variant": "#004c6a", "surface-tint": "#b2107b", tertiary: "#006388", "tertiary-fixed-dim": "#7ed0ff", "surface-container": "#fde7ff", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "surface-container-high": "#fae0ff", "outline-variant": "#ddbfca"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}}}};
 </script>
 <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: max(884px, 100dvh); }
@@ -18,36 +18,33 @@
 <body class="bg-background text-on-background min-h-screen flex flex-col">
 
 <!-- Header -->
-<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#f8f9ff] border-b border-[#dee9fc] shadow-sm">
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20 bg-[#fef7ff] border-b-2 border-[#e040a0]/10 shadow-[0_4px_16px_rgba(224,64,160,0.15)]">
     <div class="flex items-center gap-4">
-        <a href="{% url 'landing' %}" class="text-primary transition-all duration-200 active:scale-95">
+        <a href="{% url 'landing' %}" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95 text-[#e040a0]">
             <span class="material-symbols-outlined">arrow_back</span>
         </a>
-        <h1 class="font-extrabold text-2xl text-primary">Sweet Sixty</h1>
-    </div>
-    <div class="flex items-center">
-        <span class="material-symbols-outlined text-primary">notifications</span>
+        <h1 class="font-extrabold text-2xl text-[#e040a0]">Sweet Sixty</h1>
     </div>
 </header>
 
 <!-- Decorative blobs -->
-<div class="fixed top-20 right-[-10%] w-[400px] h-[400px] bg-secondary-container/10 rounded-full blur-[100px] -z-10"></div>
-<div class="fixed bottom-10 left-[-5%] w-[300px] h-[300px] bg-tertiary-container/10 rounded-full blur-[80px] -z-10"></div>
+<div class="fixed top-20 right-[-10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -z-10"></div>
+<div class="fixed bottom-10 left-[-5%] w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] -z-10"></div>
 
-<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6">
+<main class="flex-grow flex items-center justify-center pt-28 pb-12 px-6">
     <div class="w-full max-w-[480px]">
 
         <!-- Hero -->
         <div class="text-center mb-10">
-            <h2 class="text-on-surface font-headline font-extrabold text-[32px] leading-tight mb-3">ยินดีต้อนรับกลับ</h2>
-            <p class="text-on-surface-variant font-body text-lg">เดินทางต่อกับชุมชน Sweet Sixty ของเรา</p>
+            <h2 class="text-on-surface font-extrabold text-[32px] leading-tight mb-3">ยินดีต้อนรับกลับ</h2>
+            <p class="text-on-surface-variant text-lg">เดินทางต่อกับชุมชน Sweet Sixty ของเรา</p>
         </div>
 
         <!-- Login card -->
-        <div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_4px_24px_rgba(115,46,228,0.08)] border border-outline-variant/30">
+        <div class="bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(175,10,120,0.08)] border border-outline-variant/30">
 
             {% if form.errors %}
-            <div class="mb-6 flex items-center gap-3 bg-error-container border border-error/20 text-on-error-container rounded-lg px-4 py-3 font-label font-semibold">
+            <div class="mb-6 flex items-center gap-3 bg-error-container border border-error/20 text-on-error-container rounded-xl px-4 py-3 font-semibold">
                 <span class="material-symbols-outlined text-error" style="font-variation-settings:'FILL' 1">error</span>
                 ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง
             </div>
@@ -59,27 +56,24 @@
 
                 <!-- Username -->
                 <div class="space-y-2">
-                    <label class="block font-label font-semibold text-on-surface text-base" for="id_username">ชื่อผู้ใช้</label>
+                    <label class="block font-semibold text-on-surface text-base" for="id_username">ชื่อผู้ใช้</label>
                     <div class="relative group">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
                             <span class="material-symbols-outlined">person</span>
                         </div>
-                        <input class="w-full h-14 pl-12 pr-4 bg-surface-container-low border-2 border-transparent focus:border-primary focus:ring-0 rounded-lg text-on-surface font-body text-lg transition-all placeholder:text-outline/50 outline-none"
+                        <input class="w-full h-14 pl-12 pr-4 bg-surface-container-low border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl text-on-surface text-lg transition-all placeholder:text-outline/50 outline-none"
                                id="id_username" name="login" type="text" placeholder="กรอกชื่อผู้ใช้" required autofocus/>
                     </div>
                 </div>
 
                 <!-- Password -->
                 <div class="space-y-2">
-                    <div class="flex justify-between items-center">
-                        <label class="block font-label font-semibold text-on-surface text-base" for="id_password">รหัสผ่าน</label>
-                        <a class="text-primary font-label text-sm hover:underline" href="#">ลืมรหัสผ่าน?</a>
-                    </div>
+                    <label class="block font-semibold text-on-surface text-base" for="id_password">รหัสผ่าน</label>
                     <div class="relative group">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
                             <span class="material-symbols-outlined">lock</span>
                         </div>
-                        <input class="w-full h-14 pl-12 pr-12 bg-surface-container-low border-2 border-transparent focus:border-primary focus:ring-0 rounded-lg text-on-surface font-body text-lg transition-all placeholder:text-outline/50 outline-none"
+                        <input class="w-full h-14 pl-12 pr-12 bg-surface-container-low border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl text-on-surface text-lg transition-all placeholder:text-outline/50 outline-none"
                                id="id_password" name="password" type="password" placeholder="••••••••" required/>
                         <button class="absolute inset-y-0 right-0 pr-4 flex items-center text-outline hover:text-on-surface transition-colors"
                                 type="button" onclick="togglePassword()">
@@ -89,33 +83,32 @@
                 </div>
 
                 <!-- Submit -->
-                <button class="w-full h-14 bg-primary text-on-primary rounded-lg font-headline font-bold text-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-95 group" type="submit">
+                <button class="w-full h-14 bg-primary text-white rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/30 hover:opacity-90 transition-all active:scale-95" type="submit">
                     เข้าสู่ระบบ
-                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </form>
 
             <!-- Divider -->
             <div class="flex items-center gap-4 mt-6">
                 <div class="flex-1 h-px bg-outline-variant"></div>
-                <span class="text-outline text-sm font-label">หรือ</span>
+                <span class="text-outline text-sm">หรือ</span>
                 <div class="flex-1 h-px bg-outline-variant"></div>
             </div>
 
             <!-- Google Login -->
-            <a href="{% url 'google_login' %}" class="mt-4 w-full h-14 bg-white border-2 border-outline-variant rounded-lg font-headline font-bold text-base flex items-center justify-center gap-3 hover:bg-surface-container-low transition-all active:scale-95">
+            <a href="{% url 'google_login' %}" class="mt-4 w-full h-14 bg-white border-2 border-outline-variant rounded-xl font-bold text-base flex items-center justify-center gap-3 hover:bg-surface-container-low transition-all active:scale-95">
                 <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
                 เข้าสู่ระบบด้วย Google
-            </a> 
+            </a>
 
         </div>
 
         <!-- Footer link -->
         <div class="mt-8 text-center">
-            <p class="text-on-surface-variant font-body">
+            <p class="text-on-surface-variant">
                 ยังไม่มีบัญชีใช่ไหม?
-                <a class="text-primary font-bold hover:underline decoration-2 underline-offset-4 ml-1" href="{% url 'register' %}">สร้างบัญชีใหม่
-                </a>
+                <a class="text-primary font-bold hover:underline decoration-2 underline-offset-4 ml-1" href="{% url 'register' %}">สร้างบัญชีใหม่</a>
             </p>
         </div>
 
@@ -123,7 +116,7 @@
 </main>
 
 <footer class="py-8 text-center px-6">
-    <p class="text-outline font-label text-sm">© 2024 Sweet Sixty. เสริมสร้างพลังชีวิตที่สดใส</p>
+    <p class="text-outline text-sm">© 2024 Sweet Sixty. เสริมสร้างพลังชีวิตที่สดใส</p>
 </footer>
 
 <script>
