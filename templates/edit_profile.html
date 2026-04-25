@@ -44,9 +44,8 @@
     <div class="flex flex-col items-center mb-8">
         <label for="avatar-upload" class="relative cursor-pointer group mb-4">
             <div class="w-28 h-28 rounded-full border-4 border-primary-fixed shadow-[0_8px_30px_rgba(224,64,160,0.2)] bg-primary-fixed overflow-hidden flex items-center justify-center">
-                {% if profile.avatar %}
-                <img id="avatar-preview" src="{{ profile.avatar.url }}" class="w-full h-full object-cover" alt=""
-                     onerror="this.style.display='none'; document.getElementById('avatar-icon').style.display='block'"/>
+                {% if profile.avatar_b64 %}
+                <img id="avatar-preview" src="{{ profile.avatar_b64 }}" class="w-full h-full object-cover" alt=""/>
                 <span id="avatar-icon" class="material-symbols-outlined text-primary hidden" style="font-size:60px; font-variation-settings:'FILL' 1">person</span>
                 {% else %}
                 <img id="avatar-preview" src="" class="w-full h-full object-cover hidden" alt=""/>
@@ -59,7 +58,7 @@
         </label>
         <h2 class="font-headline-xl text-headline-xl text-on-surface mb-1">แก้ไขข้อมูลส่วนตัว</h2>
         <p class="font-body-md text-on-surface-variant">แตะที่รูปเพื่อเปลี่ยนรูปโปรไฟล์</p>
-        {% if profile.avatar %}
+        {% if profile.avatar_b64 %}
         <form method="post" action="{% url 'clear_avatar' %}" class="mt-2">
             {% csrf_token %}
             <button type="submit" class="text-sm text-error font-bold flex items-center gap-1 hover:underline">

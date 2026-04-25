@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .models import JobListing, Application, UserProfile, Event, ChatMessage, CommunityGroup, GroupPost, GroupPostLike
-from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm, ProfileUpdateForm
+from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -257,7 +257,7 @@ def create_group(request):
 def clear_avatar(request):
     if request.method == 'POST':
         profile, _ = UserProfile.objects.get_or_create(user=request.user)
-        profile.avatar = None
+        profile.avatar_b64 = ''
         profile.save()
     return redirect('edit_profile')
 
@@ -293,15 +293,24 @@ def support_chat(request):
 
 @login_required
 def edit_profile(request):
+    import base64, io
+    from PIL import Image
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid() and profile_form.is_valid():
+        if form.is_valid():
             form.save()
-            profile_form.save()
+            avatar_file = request.FILES.get('avatar')
+            if avatar_file:
+                img = Image.open(avatar_file)
+                img.thumbnail((300, 300))
+                if img.mode in ('RGBA', 'P', 'LA'):
+                    img = img.convert('RGB')
+                buf = io.BytesIO()
+                img.save(buf, format='JPEG', quality=82)
+                profile.avatar_b64 = 'data:image/jpeg;base64,' + base64.b64encode(buf.getvalue()).decode()
+                profile.save()
             return redirect('profile')
     else:
         form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=profile)
-    return render(request, 'edit_profile.html', {'form': form, 'profile_form': profile_form, 'profile': profile})
+    return render(request, 'edit_profile.html', {'form': form, 'profile': profile})

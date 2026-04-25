@@ -6,7 +6,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     birthdate = models.DateField(null=True, blank=True, verbose_name="วันเกิด")
     experience = models.TextField(blank=True, verbose_name="ประสบการณ์ทำงาน")
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name="รูปโปรไฟล์")
+    avatar_b64 = models.TextField(blank=True, default='', verbose_name="รูปโปรไฟล์")
     id_card_image = models.ImageField(upload_to='id_cards/', null=True, blank=True, verbose_name="รูปบัตรประชาชน")
     no_criminal_record = models.BooleanField(default=False, verbose_name="ยืนยันไม่มีประวัติอาชญากรรม")
     consent_id_upload = models.BooleanField(default=False, verbose_name="ยินยอมอัปโหลดบัตร")
