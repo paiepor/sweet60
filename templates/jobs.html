@@ -22,7 +22,7 @@
 <div id="drawer" class="fixed inset-y-0 right-0 w-64 bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-300 ease-in-out">
     <div class="p-6 flex flex-col h-full">
         <div class="flex justify-between items-center mb-8">
-            <h2 class="font-headline-md text-primary">เมนู</h2>
+            <h2 class="font-bold text-xl text-primary">เมนู</h2>
             <button onclick="toggleDrawer()" class="text-outline hover:text-error active:scale-90 transition-transform">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -60,14 +60,16 @@
 
 <header class="bg-[#fef7ff] top-0 border-b-2 border-[#e040a0]/10 shadow-[0_4px_16px_rgba(224,64,160,0.15)] flex justify-between items-center px-6 h-20 w-full sticky z-50">
     <div class="flex items-center gap-3">
-        <button onclick="toggleDrawer()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95">
-            <span class="material-symbols-outlined text-[#e040a0] text-3xl">menu</span>
-        </button>
         <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#e040a0]">Sweet Sixty</span>
     </div>
-    <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#e040a0]/20 overflow-hidden flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
-        {% if current_avatar %}<img src="{{ current_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>{% endif %}
-    </a>
+    <div class="flex items-center gap-3">
+        <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#e040a0]/20 overflow-hidden flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+            {% if current_avatar %}<img src="{{ current_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>{% endif %}
+        </a>
+        <button onclick="toggleDrawer()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95 duration-150">
+            <span class="material-symbols-outlined text-[#e040a0] text-3xl">menu</span>
+        </button>
+    </div>
 </header>
 
 <main class="px-6 pt-8 max-w-2xl mx-auto">

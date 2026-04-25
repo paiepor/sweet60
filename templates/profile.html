@@ -27,22 +27,22 @@
             </button>
         </div>
         <div class="flex flex-col gap-4">
-            <a href="{% url 'home' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
+            <a href="{% url 'home' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">home</span> หน้าหลัก
             </a>
-            <a href="{% url 'edit_profile' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
+            <a href="{% url 'edit_profile' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">settings</span> แก้ไขโปรไฟล์
             </a>
-            <a href="{% url 'emergency' %}" class="flex items-center gap-3 font-bold text-error hover:text-error transition-colors">
+            <a href="{% url 'emergency' %}" class="flex items-center gap-3 font-label-bold text-error hover:text-error transition-colors">
                 <span class="material-symbols-outlined">emergency</span> ฉุกเฉิน
             </a>
-            <a href="{% url 'help_center' %}" class="flex items-center gap-3 font-bold text-on-surface hover:text-primary transition-colors">
+            <a href="{% url 'help_center' %}" class="flex items-center gap-3 font-label-bold text-on-surface hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">help_center</span> ศูนย์ช่วยเหลือ
             </a>
             <hr class="border-outline-variant my-4">
             <form action="{% url 'account_logout' %}" method="post">
                 {% csrf_token %}
-                <button type="submit" class="flex items-center gap-3 font-bold text-on-surface-variant hover:text-error transition-colors w-full text-left">
+                <button type="submit" class="flex items-center gap-3 font-label-bold text-on-surface-variant hover:text-error transition-colors w-full text-left">
                     <span class="material-symbols-outlined">logout</span> ออกจากระบบ
                 </button>
             </form>
@@ -53,10 +53,14 @@
 
 <!-- Header -->
 <header class="bg-[#fff7fb] flex justify-between items-center w-full px-6 h-16 sticky top-0 z-50 border-b border-[#ddbfca] shadow-[0_4px_16px_rgba(175,10,120,0.1)]">
-    <a onclick="history.back()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 active:scale-95 transition-all text-primary">
+    
+    <div class="flex items-center gap-3">
+        <a onclick="history.back()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 active:scale-95 transition-all text-primary">
         <span class="material-symbols-outlined text-2xl">arrow_back</span>
     </a>
-    <h1 class="font-bold text-2xl text-primary">โปรไฟล์</h1>
+        <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-[#e040a0]">Sweet Sixty</span>
+    </div>
+    <h1 class="font-['Plus_Jakarta_Sans'] font-bold text-2xl text-primary absolute left-1/2 -translate-x-1/2">โปรไฟล์</h1>
     <button onclick="toggleDrawer()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 active:scale-95 transition-all text-primary">
         <span class="material-symbols-outlined text-2xl">menu</span>
     </button>
