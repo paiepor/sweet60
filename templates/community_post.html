@@ -18,7 +18,7 @@
 
 <header class="fixed top-0 left-0 w-full z-50 flex items-center px-6 h-20 bg-white/90 backdrop-blur-md rounded-b-3xl border-b-2 border-violet-100 shadow-[0_4px_20px_-2px_rgba(138,112,255,0.15)]">
     <div class="flex items-center gap-4">
-        <a href="{% url 'community' %}" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-violet-50 transition-colors active:scale-95 text-violet-500">
+        <a onclick="history.back()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-violet-50 transition-colors active:scale-95 text-violet-500">
             <span class="material-symbols-outlined" style="font-size:32px">arrow_back</span>
         </a>
         <h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-violet-500 truncate w-48">{{ post.title }}</h1>
