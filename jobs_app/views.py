@@ -75,6 +75,7 @@ def register_view(request):
             user.last_name = parts[1] if len(parts) > 1 else ''
             user.email = form.cleaned_data.get('email', '')
             user.save()
+            avatar_b64 = request.POST.get('avatar_b64', '')
             UserProfile.objects.create(
                 user=user,
                 birthdate=form.cleaned_data.get('birthdate'),
@@ -82,6 +83,7 @@ def register_view(request):
                 id_card_image=form.cleaned_data.get('id_card_image'),
                 no_criminal_record='no_criminal_record' in request.POST,
                 consent_id_upload='consent_id_upload' in request.POST,
+                avatar_b64=avatar_b64,
             )
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')

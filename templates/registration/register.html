@@ -58,6 +58,22 @@
 
     <form method="post" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
+        <input type="hidden" name="avatar_b64" id="avatar_b64"/>
+
+        <!-- รูปโปรไฟล์ -->
+        <div class="flex flex-col items-center gap-3">
+            <div class="relative cursor-pointer group" onclick="document.getElementById('avatar_input').click()">
+                <div id="avatar-circle" class="w-28 h-28 rounded-full bg-primary-fixed border-4 border-primary/20 flex items-center justify-center overflow-hidden shadow-lg">
+                    <span class="material-symbols-outlined text-primary text-5xl" id="avatar-placeholder" style="font-variation-settings:'FILL' 1">person</span>
+                    <img id="avatar-preview" src="" alt="" class="hidden w-full h-full object-cover"/>
+                </div>
+                <div class="absolute bottom-0 right-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-md group-hover:bg-primary/80 transition-colors">
+                    <span class="material-symbols-outlined text-white text-base">photo_camera</span>
+                </div>
+            </div>
+            <input id="avatar_input" type="file" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)"/>
+            <p class="text-on-surface-variant text-sm">กดเพื่อเพิ่มรูปโปรไฟล์ <span class="text-outline">(ไม่บังคับ)</span></p>
+        </div>
 
         <!-- ข้อมูลส่วนตัว -->
         <div class="bg-white p-6 rounded-2xl shadow-[0_4px_16px_rgba(224,64,160,0.08)] border border-outline-variant/30">
@@ -214,6 +230,21 @@ function togglePass(inputId, iconId) {
         input.type = 'password';
         icon.textContent = 'visibility';
     }
+}
+
+function handleAvatarUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('avatar_b64').value = e.target.result;
+        const preview = document.getElementById('avatar-preview');
+        const placeholder = document.getElementById('avatar-placeholder');
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+    };
+    reader.readAsDataURL(file);
 }
 
 function previewIdCard(event) {

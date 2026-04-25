@@ -136,8 +136,9 @@ function openGooglePopup(event) {
             if (!wentCrossOrigin) return;
             if (origin === window.location.origin) {
                 clearInterval(check);
+                const dest = popup.location.href;
                 popup.close();
-                window.location.href = '/home/';
+                window.location.href = dest;
             }
         } catch(e) {
             wentCrossOrigin = true;
