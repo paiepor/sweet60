@@ -2,7 +2,7 @@ import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .models import JobListing, Application, UserProfile, Event, ChatMessage, CommunityGroup
+from .models import JobListing, Application, UserProfile, Event, ChatMessage, CommunityGroup, GroupPost, GroupPostLike
 from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -172,7 +172,42 @@ def my_groups(request):
 @login_required
 def group_detail(request, group_id):
     group = get_object_or_404(CommunityGroup, id=group_id)
-    return render(request, 'group_detail.html', {'group': group})
+    is_member = group.members.filter(id=request.user.id).exists()
+
+    if request.method == 'POST':
+        if is_member:
+            content = request.POST.get('content', '').strip()
+            image = request.FILES.get('image')
+            if content or image:
+                GroupPost.objects.create(group=group, author=request.user, content=content, image=image)
+        return redirect('group_detail', group_id=group_id)
+
+    posts = group.posts.select_related('author').prefetch_related('likes').order_by('-created_at')
+    liked_ids = set(GroupPostLike.objects.filter(user=request.user, post__group=group).values_list('post_id', flat=True))
+    for post in posts:
+        post.liked_by_user = post.id in liked_ids
+        post.like_count_val = post.likes.count()
+
+    return render(request, 'group_detail.html', {'group': group, 'posts': posts, 'is_member': is_member})
+
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(GroupPost, id=post_id)
+    like, created = GroupPostLike.objects.get_or_create(post=post, user=request.user)
+    if not created:
+        like.delete()
+    return redirect('group_detail', group_id=post.group.id)
+
+
+@login_required
+def join_group(request, group_id):
+    group = get_object_or_404(CommunityGroup, id=group_id)
+    if group.members.filter(id=request.user.id).exists():
+        group.members.remove(request.user)
+    else:
+        group.members.add(request.user)
+    return redirect('group_detail', group_id=group_id)
 
 
 def explore_groups(request):
