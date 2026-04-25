@@ -2,22 +2,24 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Sweet Sixty - แอปพลิเคชันเพื่อความสุขของวัยเก๋า</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sweet Sixty - แอปพลิเคชันเพื่อความสุขของคนวัยเก๋า</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#ffefff", surface: "#fff7fb", "secondary-container": "#cda0fe", "on-primary-fixed-variant": "#8a005e", "on-primary-container": "#fffbff", outline: "#8a707b", "primary-fixed-dim": "#ffafd5", "surface-dim": "#efd0f7", primary: "#af0a78", "on-surface-variant": "#57414a", "on-secondary-fixed": "#2b0052", secondary: "#744aa2", "surface-variant": "#f8d8ff", "on-primary-fixed": "#3d0027", "tertiary-container": "#007dab", "on-background": "#281330", "on-surface": "#281330", "inverse-on-surface": "#feebff", "primary-container": "#cf3192", error: "#ba1a1a", "tertiary-fixed": "#c5e7ff", "surface-bright": "#fff7fb", "secondary-fixed-dim": "#dbb8ff", "error-container": "#ffdad6", "on-tertiary-fixed": "#001e2d", "on-secondary-fixed-variant": "#5b3188", "secondary-fixed": "#efdbff", "on-secondary-container": "#5a3086", "primary-fixed": "#ffd8e8", "on-secondary": "#ffffff", "on-error-container": "#93000a", "surface-container-highest": "#f8d8ff", "on-tertiary-container": "#fcfcff", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "inverse-surface": "#3e2846", "inverse-primary": "#ffafd5", background: "#fff7fb", "on-tertiary-fixed-variant": "#004c6a", "surface-tint": "#b2107b", tertiary: "#006388", "tertiary-fixed-dim": "#7ed0ff", "surface-container": "#fde7ff", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "surface-container-high": "#fae0ff", "outline-variant": "#ddbfca"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}, spacing: {"container-margin": "24px", "stack-lg": "32px", unit: "8px", "stack-sm": "8px", "stack-md": "16px", gutter: "16px"}, fontFamily: {"plus-jakarta": ["Plus Jakarta Sans", "sans-serif"], headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}}}};
 </script>
 <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .material-symbols-outlined {font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
     .bg-90s-gradient { background: linear-gradient(135deg, #af0a78 0%, #744aa2 100%); }
     .soft-shadow { box-shadow: 0 12px 40px rgba(99, 14, 212, 0.08); }
     body { min-height: max(884px, 100dvh); }
 </style>
 </head>
 <body class="bg-background text-on-background font-plus-jakarta antialiased">
+<!-- Top AppBar Strategy: Transactional Screen (Suppressed Global Nav per Mandate) -->
 <div class="relative min-h-screen flex flex-col items-center justify-center p-container-margin overflow-hidden">
 
     <!-- Background decorative shapes -->
@@ -28,70 +30,51 @@
 
     <main class="relative z-10 w-full max-w-[480px] flex flex-col items-center">
 
-        <!-- Logo section -->
+        <!-- Hero Visual Section -->
         <div class="w-full mb-stack-lg flex flex-col items-center">
             <div class="relative w-48 h-48 sm:w-64 sm:h-64 mb-6 transition-transform hover:scale-105 duration-300">
                 <div class="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-10 animate-pulse"></div>
-                <img alt="Sweet Sixty Logo" class="w-full h-full object-contain relative z-10"
-                     src="https://lh3.googleusercontent.com/aida/ADBb0ugCOt8F7VqEL-kOE7S4mG7Ysr-s8K9rnwNTzCPHyQUHfNOlXw1uvATfSkG5WKMpt2JF3Rz5FpS4wd3RJADaLpl88vGFGymZcu96_BCyyw9rGfKxmXfje5xJnx1wyak2c73IQBIwVu66wt9Cm6nED4ldZpBwxWZ-21hQ4EhFrMiTh1bT5dTSwuXCvx8lCP2XoixNKPamo_A3GiVCsW8vybi7KRPctiAWrwY0Cdg_0JonQZ_X4Ms4-JVYNCC-DCKzABm3L3rXRYHerQ">
+                <img alt="Sweet Sixty Logo" class="w-full h-full object-contain relative z-10" src="https://lh3.googleusercontent.com/aida/ADBb0ugRN7I9iRDZAmmPtC8M3S1Oh0FGmWa6vB_vy9GmsfzkKPO-EUXGo9D3CxhkoYtMX3dSj1acfD8ZjIlAL0yvAEauaz36nnQ2vTDX6-8rXHrm9dRGUtIEiE55OF6TxDrCQxkyHMDvI_74Ets7s2zyGqlHhfOU24HpUtiZS48B9MjF-T6zjkbxN5cWsje_T7Glm2P05UNGM2OtcH2OfsKsRpXmfjHlNtbKW20hhILPygAnScbIKcOWsNOK8EgGiRrUNT7cN2ISfgKkOcE"/>
             </div>
-            <div class="text-center space-y-4">
-                <h1 class="text-[40px] font-extrabold leading-[1.2] tracking-[-0.02em] text-on-surface">
-                    Sweet Sixty
-                </h1>
-                <p class="text-[20px] font-medium leading-[1.5] text-on-surface-variant max-w-[320px] mx-auto">
-                    แอปพลิเคชันเพื่อความสุขของ<span class="text-primary font-bold">วัยเก๋า</span>
-                </p>
+            <div class="flex-grow flex flex-col text-center space-y-4">
+                <h1 class="font-headline text-3xl font-bold mb-2 tracking-tight text-primary">Sweet Sixty</h1>
+                <p class="text-on-surface-variant text-lg mb-8 leading-relaxed">แอปพลิเคชันเพื่อความสุขของ<span class="text-primary font-bold">วัยเก๋า</span></p>
             </div>
         </div>
 
-        <!-- Action buttons -->
-        <div class="w-full flex flex-col gap-gutter mt-stack-lg">
-            <a href="{% url 'account_login' %}" class="group relative flex h-16 w-full items-center justify-center overflow-hidden rounded-3xl bg-primary px-8 text-[20px] font-bold text-on-primary transition-all active:scale-[0.98] soft-shadow">
-                <div class="absolute inset-0 bg-90s-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span class="relative z-10 flex items-center gap-3">
-                    เข้าสู่ระบบ
-                    <span class="material-symbols-outlined">login</span>
-                </span>
-            </a>
-
-            <a href="{% url 'register' %}" class="flex h-16 w-full items-center justify-center rounded-3xl bg-surface-container-high px-8 text-[20px] font-bold text-primary transition-all hover:bg-surface-container-highest active:scale-[0.98] border-2 border-primary/10">
-                <span class="flex items-center gap-3">
-                    สร้างบัญชีใหม่
-                    <span class="material-symbols-outlined">person_add</span>
-                </span>
-            </a>
-        </div>
-
-        <!-- Footer -->
-        <div class="mt-12 flex flex-col items-center gap-4">
-            <div class="flex items-center gap-6">
-                <button class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">ภาษาไทย</button>
-                <div class="w-1 h-1 rounded-full bg-outline-variant"></div>
-                <button class="text-sm font-semibold text-outline hover:text-primary transition-colors">English</button>
-            </div>
-            <div class="flex gap-4 mt-4 opacity-60 grayscale hover:grayscale-0 transition-all">
-                <div class="p-2 bg-surface-container rounded-lg">
-                    <span class="material-symbols-outlined text-[24px]">verified_user</span>
-                </div>
-                <div class="p-2 bg-surface-container rounded-lg">
-                    <span class="material-symbols-outlined text-[24px]" style="font-variation-settings:'FILL' 1">favorite</span>
-                </div>
-                <div class="p-2 bg-surface-container rounded-lg">
-                    <span class="material-symbols-outlined text-[24px]">security</span>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Decorative bottom wave -->
-    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 opacity-5 pointer-events-none">
-        <svg class="relative block w-[200%] h-[120px]" preserveAspectRatio="none" viewBox="0 0 1200 120">
-            <path class="text-primary" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
-        </svg>
-    </div>
-
+<!-- Google Action -->
+<a href="{% url 'google_login' %}" class="bouncy-hover w-full flex items-center justify-center gap-4 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest text-on-surface font-bold text-lg shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+    <svg class="w-6 h-6" viewbox="0 0 24 24">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+    </svg>
+        <span>สมัครใช้งานด้วย Google</span>
+</a>
+<!-- Separator -->
+<div class="flex items-center gap-4 py-4">
+<div class="flex-grow h-px bg-outline-variant"></div>
+<span class="text-on-surface-variant font-medium">หรือ</span>
+<div class="flex-grow h-px bg-outline-variant"></div>
 </div>
-</body>
-</html>
+<!-- Email Action -->
+<a href="{% url 'register' %}" class="bouncy-hover w-full flex items-center justify-center h-16 rounded-full bg-primary text-on-primary font-bold text-lg shadow-[0_8px_24px_rgba(175,10,120,0.3)]">
+                    สมัครใช้งานด้วยอีเมล
+</a>
+</div>
+<!-- Footer Link -->
+<div class="mt-auto pt-10 text-center">
+    <a href="{% url 'account_login' %}" class="inline-flex items-center gap-2 group" href="#">
+        <span class="text-on-surface-variant font-medium">มีบัญชีอยู่แล้ว?</span>
+        <span class="text-primary font-extrabold group-hover:underline underline-offset-4 decoration-2">เข้าสู่ระบบ</span>
+    </a>
+</div>
+</div>
+</main>
+<!-- Content-Focused Canvas Background Strategy -->
+<div class="fixed inset-0 -z-10 bg-pattern opacity-40"></div>
+<div class="fixed top-[10%] right-[5%] w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<div class="fixed bottom-[10%] left-[5%] w-80 h-80 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
+<!-- No BottomNavBar on Transactional Screen per Shell Visibility Rule -->
+</body></html>
