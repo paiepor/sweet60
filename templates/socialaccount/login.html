@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sweet Sixty - เข้าสู่ระบบด้วย Google</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#ffefff", surface: "#fff7fb", outline: "#8a707b", primary: "#af0a78", "on-surface-variant": "#57414a", secondary: "#744aa2", "on-background": "#281330", "on-surface": "#281330", "primary-fixed": "#ffd8e8", "on-primary": "#ffffff", background: "#fff7fb", "surface-container": "#fde7ff", "outline-variant": "#ddbfca", "on-secondary": "#ffffff"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}}}};
+</script>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: max(884px, 100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20 bg-[#fef7ff] border-b-2 border-[#e040a0]/10 shadow-[0_4px_16px_rgba(224,64,160,0.15)]">
+    <div class="flex items-center gap-4">
+        <a href="{% url 'landing' %}" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95 text-[#e040a0]">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <h1 class="font-extrabold text-2xl text-[#e040a0]">Sweet Sixty</h1>
+    </div>
+</header>
+
+<main class="flex-grow flex items-center justify-center pt-28 pb-12 px-6">
+    <div class="w-full max-w-[400px]">
+
+        <!-- Google icon -->
+        <div class="flex justify-center mb-8">
+            <div class="w-20 h-20 rounded-full bg-primary-fixed flex items-center justify-center shadow-lg shadow-primary/20">
+                <svg width="40" height="40" viewBox="0 0 48 48">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="text-center mb-8">
+            <h2 class="font-extrabold text-2xl text-on-surface mb-2">เข้าสู่ระบบด้วย Google</h2>
+            <p class="text-on-surface-variant">กำลังจะเชื่อมต่อบัญชี Google ของคุณกับ Sweet Sixty</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(175,10,120,0.08)] border border-outline-variant/30">
+            {% if messages %}
+            <div class="mb-6 space-y-2">
+                {% for message in messages %}
+                <p class="text-on-surface-variant text-sm flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-base" style="font-variation-settings:'FILL' 1">info</span>
+                    {{ message }}
+                </p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <p class="text-on-surface-variant text-center mb-6">กดปุ่มด้านล่างเพื่อยืนยันการเข้าสู่ระบบ</p>
+
+            <form method="post" action="{% url 'google_login' %}">
+                {% csrf_token %}
+                <button type="submit" class="w-full h-14 bg-primary text-white rounded-full font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-primary/30 hover:opacity-90 active:scale-95 transition-all">
+                    <svg width="20" height="20" viewBox="0 0 48 48">
+                        <path fill="#fff" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#fff" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#fff" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#fff" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    ยืนยัน เข้าสู่ระบบด้วย Google
+                </button>
+            </form>
+
+            <a href="{% url 'account_login' %}" class="mt-4 w-full h-12 border-2 border-outline-variant text-on-surface-variant rounded-full font-semibold flex items-center justify-center hover:border-primary hover:text-primary transition-all active:scale-95">
+                ยกเลิก
+            </a>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>
