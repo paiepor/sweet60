@@ -14,4 +14,4 @@ RUN SECRET_KEY=dummy-build-only python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["gunicorn", "sweet60_project.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn sweet60_project.wsgi:application --bind 0.0.0.0:8000"]
