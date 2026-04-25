@@ -68,7 +68,11 @@
     <section class="flex flex-col items-center">
         <div class="relative">
             <div class="w-28 h-28 rounded-full border-4 border-white shadow-lg overflow-hidden bg-primary-fixed flex items-center justify-center">
+                {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" class="w-full h-full object-cover" alt="avatar"/>
+                {% else %}
                 <span class="material-symbols-outlined text-primary" style="font-size:64px; font-variation-settings:'FILL' 1">person</span>
+                {% endif %}
             </div>
             <a href="{% url 'edit_profile' %}" class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-md active:scale-90 transition-transform border-2 border-white">
                 <span class="material-symbols-outlined text-sm">edit</span>
@@ -132,10 +136,19 @@
                         <span class="bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold">ปิดรับ</span>
                         {% endif %}
                     </div>
-                    <a href="{% url 'edit_job' job.id %}" class="flex items-center gap-1 text-sm font-bold text-primary hover:underline active:scale-95 transition-transform">
-                        <span class="material-symbols-outlined text-base">edit</span>
-                        แก้ไข
-                    </a>
+                    <div class="flex items-center gap-3">
+                        <a href="{% url 'edit_job' job.id %}" class="flex items-center gap-1 text-sm font-bold text-primary hover:underline active:scale-95 transition-transform">
+                            <span class="material-symbols-outlined text-base">edit</span>
+                            แก้ไข
+                        </a>
+                        <form method="post" action="{% url 'delete_job' job.id %}" onsubmit="return confirm('ลบโพสต์งานนี้?')">
+                            {% csrf_token %}
+                            <button type="submit" class="flex items-center gap-1 text-sm font-bold text-error hover:underline active:scale-95 transition-transform">
+                                <span class="material-symbols-outlined text-base">delete</span>
+                                ลบ
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             {% empty %}

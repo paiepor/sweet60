@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import JobListing, CommunityGroup
+from .models import JobListing, CommunityGroup, UserProfile
 
 
 class JobForm(forms.ModelForm):
@@ -58,3 +58,9 @@ class UserUpdateForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'w-full p-4 bg-gray-50 rounded-2xl border-none text-sm'}),
             'last_name': forms.TextInput(attrs={'class': 'w-full p-4 bg-gray-50 rounded-2xl border-none text-sm'}),
         }
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['avatar']

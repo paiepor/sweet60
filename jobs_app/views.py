@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .models import JobListing, Application, UserProfile, Event, ChatMessage, CommunityGroup, GroupPost, GroupPostLike
-from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm
+from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm, ProfileUpdateForm
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -38,6 +38,7 @@ def index(request):
     if request.user.is_authenticated:
         context['app_count'] = Application.objects.filter(applicant=request.user).count()
         context['msg_count'] = ChatMessage.objects.filter(receiver=request.user).count()
+        context['unread_count'] = context['msg_count']
     return render(request, 'index.html', context)
 
 
@@ -115,9 +116,11 @@ def apply_job(request, job_id):
 def profile_page(request):
     my_posts = JobListing.objects.filter(author=request.user).order_by('-id')
     my_apps = Application.objects.filter(applicant=request.user).select_related('job').order_by('-applied_at')
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
     return render(request, 'profile.html', {
         'my_posts': my_posts,
-        'my_apps': my_apps
+        'my_apps': my_apps,
+        'profile': profile,
     })
 
 
@@ -136,21 +139,28 @@ def edit_job(request, job_id):
 
 @login_required
 def community_page(request):
-    # Retrieve users the current user has chatted with
+    query = request.GET.get('q', '').strip()
     sent_to = ChatMessage.objects.filter(sender=request.user).values_list('receiver', flat=True)
     received_from = ChatMessage.objects.filter(receiver=request.user).values_list('sender', flat=True)
     chat_user_ids = set(list(sent_to) + list(received_from))
-    
     chat_users = User.objects.filter(id__in=chat_user_ids)
-    
-    # Optional: Attach last message for preview
+    if query:
+        chat_users = chat_users.filter(
+            Q(username__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query)
+        )
     for u in chat_users:
         last_msg = ChatMessage.objects.filter(
             Q(sender=request.user, receiver=u) | Q(sender=u, receiver=request.user)
         ).order_by('-timestamp').first()
         u.last_message = last_msg
-
-    return render(request, 'community.html', {'chat_users': chat_users})
+    unread_count = ChatMessage.objects.filter(receiver=request.user).exclude(
+        sender__in=[]
+    ).count()
+    return render(request, 'community.html', {
+        'chat_users': chat_users,
+        'query': query,
+        'unread_count': unread_count,
+    })
 
 
 @login_required
@@ -244,6 +254,25 @@ def create_group(request):
 
 
 @login_required
+def delete_job(request, job_id):
+    if request.method == 'POST':
+        job = get_object_or_404(JobListing, id=job_id, author=request.user)
+        job.delete()
+    return redirect('profile')
+
+
+@login_required
+def delete_group_post(request, post_id):
+    if request.method == 'POST':
+        post = get_object_or_404(GroupPost, id=post_id)
+        group_id = post.group.id
+        if post.author == request.user or post.group.creator == request.user:
+            post.delete()
+        return redirect('group_detail', group_id=group_id)
+    return redirect('community')
+
+
+@login_required
 def help_center(request):
     return render(request, 'help.html')
 
@@ -255,11 +284,15 @@ def support_chat(request):
 
 @login_required
 def edit_profile(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         form = UserUpdateForm(request.POST, instance=request.user)
-        if form.is_valid():
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid() and profile_form.is_valid():
             form.save()
+            profile_form.save()
             return redirect('profile')
     else:
         form = UserUpdateForm(instance=request.user)
-    return render(request, 'edit_profile.html', {'form': form})
+        profile_form = ProfileUpdateForm(instance=profile)
+    return render(request, 'edit_profile.html', {'form': form, 'profile_form': profile_form, 'profile': profile})

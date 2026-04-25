@@ -174,7 +174,12 @@
         <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Jobs</span>
     </a>
     <a href="{% url 'community' %}" class="flex flex-col items-center justify-center text-[#7c52aa] px-4 py-2 hover:bg-[#e040a0]/10 rounded-full transition-colors active:scale-90 duration-200">
-        <span class="material-symbols-outlined">forum</span>
+        <div class="relative">
+            <span class="material-symbols-outlined">forum</span>
+            {% if unread_count %}
+            <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-error rounded-full border border-white"></span>
+            {% endif %}
+        </div>
         <span class="font-['Plus_Jakarta_Sans'] font-bold text-[14px] uppercase tracking-wide">Community</span>
     </a>
     <a href="{% url 'profile' %}" class="flex flex-col items-center justify-center text-[#7c52aa] px-4 py-2 hover:bg-[#e040a0]/10 rounded-full transition-colors active:scale-90 duration-200">
