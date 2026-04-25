@@ -7,7 +7,6 @@ from jobs_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/3rdparty/signup/', views.SocialSignupWithAvatarView.as_view(), name='socialaccount_signup'),
     path('accounts/', include('allauth.urls')),
     path('register/', views.register_view, name='register'),
     path('health/', lambda request: HttpResponse('ok'), name='health'),
