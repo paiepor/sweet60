@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>แก้ไขงาน - Sweet Sixty</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#ffefff", surface: "#fff7fb", outline: "#8a707b", primary: "#af0a78", "on-surface-variant": "#57414a", secondary: "#744aa2", "on-background": "#281330", "on-surface": "#281330", "primary-fixed": "#ffd8e8", "on-primary": "#ffffff", background: "#fff7fb", "surface-container": "#fde7ff", "outline-variant": "#ddbfca", error: "#ba1a1a", "error-container": "#ffdad6", "on-error-container": "#93000a"}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}}}};</script>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: max(884px, 100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .form-field input, .form-field textarea, .form-field select {
+        width: 100%; padding: 14px 18px; border-radius: 14px;
+        border: 2px solid #ddbfca; background: #ffffff;
+        font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px;
+        outline: none; transition: all 0.2s;
+    }
+    .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+        border-color: #af0a78; box-shadow: 0 0 0 4px rgba(175,10,120,0.1);
+    }
+    .form-field textarea { min-height: 110px; resize: vertical; }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-10">
+
+<header class="bg-[#fff7fb] flex items-center gap-4 px-5 h-16 w-full sticky top-0 z-50 border-b border-[#ddbfca] shadow-[0_4px_16px_rgba(175,10,120,0.08)]">
+    <a href="{% url 'profile' %}" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 active:scale-95 transition-all text-primary">
+        <span class="material-symbols-outlined">arrow_back</span>
+    </a>
+    <h1 class="font-bold text-xl text-primary">แก้ไขประกาศงาน</h1>
+</header>
+
+<main class="px-6 py-8 max-w-2xl mx-auto">
+
+    <div class="mb-6">
+        <h2 class="font-extrabold text-2xl text-on-surface">{{ job.title }}</h2>
+        <p class="text-on-surface-variant text-sm mt-1">แก้ไขข้อมูลด้านล่างแล้วกดบันทึก</p>
+    </div>
+
+    <form method="POST" class="space-y-5">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-field">
+            <label class="block font-bold text-xs text-on-surface-variant uppercase tracking-widest mb-2">
+                {{ field.label }}{% if field.field.required %} *{% endif %}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+            <p class="text-error text-sm mt-1 flex items-center gap-1">
+                <span class="material-symbols-outlined text-base">error</span>
+                {{ field.errors.0 }}
+            </p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="w-full h-14 bg-primary text-on-primary rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(175,10,120,0.3)] hover:opacity-90 active:scale-95 transition-all mt-4">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">save</span>
+            บันทึกการแก้ไข
+        </button>
+    </form>
+
+</main>
+</body>
+</html>

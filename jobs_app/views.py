@@ -113,12 +113,25 @@ def apply_job(request, job_id):
 
 @login_required
 def profile_page(request):
-    my_posts = JobListing.objects.filter(author=request.user)
-    my_apps = Application.objects.filter(applicant=request.user)
+    my_posts = JobListing.objects.filter(author=request.user).order_by('-id')
+    my_apps = Application.objects.filter(applicant=request.user).select_related('job').order_by('-applied_at')
     return render(request, 'profile.html', {
         'my_posts': my_posts,
         'my_apps': my_apps
     })
+
+
+@login_required
+def edit_job(request, job_id):
+    job = get_object_or_404(JobListing, id=job_id, author=request.user)
+    if request.method == 'POST':
+        form = JobForm(request.POST, instance=job)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = JobForm(instance=job)
+    return render(request, 'edit_job.html', {'form': form, 'job': job})
 
 
 @login_required
