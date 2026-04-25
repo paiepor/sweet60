@@ -43,7 +43,7 @@
         </div>
 
 <!-- Google Action -->
-<a href="{% url 'google_login' %}" class="bouncy-hover w-full flex items-center justify-center gap-4 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest text-on-surface font-bold text-lg shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<a href="{% url 'google_login' %}" onclick="openGooglePopup(event)" class="bouncy-hover w-full flex items-center justify-center gap-4 h-16 rounded-full border-2 border-outline-variant bg-surface-container-lowest text-on-surface font-bold text-lg shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
     <svg class="w-6 h-6" viewbox="0 0 24 24">
         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
         <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
@@ -87,5 +87,26 @@
 <div class="fixed top-[10%] right-[5%] w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
 <div class="fixed bottom-[10%] left-[5%] w-80 h-80 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
 <!-- No BottomNavBar on Transactional Screen per Shell Visibility Rule -->
+<script>
+function openGooglePopup(event) {
+    event.preventDefault();
+    const url = event.currentTarget.href;
+    const width = 500, height = 620;
+    const left = Math.round((screen.width - width) / 2);
+    const top = Math.round((screen.height - height) / 2);
+    const popup = window.open(url, 'google-login', `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no`);
+    if (!popup) { window.location.href = url; return; }
+    const check = setInterval(() => {
+        if (popup.closed) { clearInterval(check); return; }
+        try {
+            if (new URL(popup.location.href).origin === window.location.origin) {
+                clearInterval(check);
+                popup.close();
+                window.location.href = '/home/';
+            }
+        } catch(e) {}
+    }, 500);
+}
+</script>
 </body>
 </html>
