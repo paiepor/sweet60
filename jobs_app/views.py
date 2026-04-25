@@ -254,6 +254,15 @@ def create_group(request):
 
 
 @login_required
+def clear_avatar(request):
+    if request.method == 'POST':
+        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        profile.avatar = None
+        profile.save()
+    return redirect('edit_profile')
+
+
+@login_required
 def delete_job(request, job_id):
     if request.method == 'POST':
         job = get_object_or_404(JobListing, id=job_id, author=request.user)

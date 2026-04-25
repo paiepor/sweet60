@@ -20,6 +20,7 @@ urlpatterns = [
     path('apply/<int:job_id>/', views.apply_job, name='apply_job'),
     path('profile/', views.profile_page, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/clear-avatar/', views.clear_avatar, name='clear_avatar'),
     path('events/', views.events_list, name='events_list'),
     path('emergency/', views.emergency_page, name='emergency'),
     path('help/', views.help_center, name='help_center'),

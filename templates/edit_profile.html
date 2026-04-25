@@ -42,12 +42,14 @@
 
     <!-- Avatar display -->
     <div class="flex flex-col items-center mb-8">
-        <label for="id_avatar" class="relative cursor-pointer group mb-4">
+        <label for="avatar-upload" class="relative cursor-pointer group mb-4">
             <div class="w-28 h-28 rounded-full border-4 border-primary-fixed shadow-[0_8px_30px_rgba(224,64,160,0.2)] bg-primary-fixed overflow-hidden flex items-center justify-center">
                 {% if profile.avatar %}
-                <img id="avatar-preview" src="{{ profile.avatar.url }}" class="w-full h-full object-cover" alt="avatar"/>
+                <img id="avatar-preview" src="{{ profile.avatar.url }}" class="w-full h-full object-cover" alt=""
+                     onerror="this.style.display='none'; document.getElementById('avatar-icon').style.display='block'"/>
+                <span id="avatar-icon" class="material-symbols-outlined text-primary hidden" style="font-size:60px; font-variation-settings:'FILL' 1">person</span>
                 {% else %}
-                <img id="avatar-preview" src="" class="w-full h-full object-cover hidden" alt="avatar"/>
+                <img id="avatar-preview" src="" class="w-full h-full object-cover hidden" alt=""/>
                 <span id="avatar-icon" class="material-symbols-outlined text-primary" style="font-size:60px; font-variation-settings:'FILL' 1">person</span>
                 {% endif %}
             </div>
@@ -57,14 +59,19 @@
         </label>
         <h2 class="font-headline-xl text-headline-xl text-on-surface mb-1">แก้ไขข้อมูลส่วนตัว</h2>
         <p class="font-body-md text-on-surface-variant">แตะที่รูปเพื่อเปลี่ยนรูปโปรไฟล์</p>
+        {% if profile.avatar %}
+        <form method="post" action="{% url 'clear_avatar' %}" class="mt-2">
+            {% csrf_token %}
+            <button type="submit" class="text-sm text-error font-bold flex items-center gap-1 hover:underline">
+                <span class="material-symbols-outlined text-base">delete</span> ลบรูปโปรไฟล์
+            </button>
+        </form>
+        {% endif %}
     </div>
 
     <form method="POST" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
-        <!-- Hidden avatar field from profile_form -->
-        <div class="hidden">{{ profile_form }}</div>
-        <!-- Visible avatar input linked to the label above -->
-        <input type="file" id="id_avatar" name="avatar" accept="image/*" class="hidden" onchange="previewAvatar(this)"/>
+        <input type="file" id="avatar-upload" name="avatar" accept="image/*" class="hidden" onchange="previewAvatar(this)"/>
         {% for field in form %}
         <div class="form-field">
             <label class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-widest text-xs mb-2 block">
