@@ -4,78 +4,202 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<title>Sweet Sixty - แชทกับ {{ other_user.get_full_name|default:other_user.username }}</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-fixed-dim": "#d2bbff", primary: "#630ed4", "outline-variant": "#ccc3d8", "on-surface-variant": "#4a4455", "on-background": "#121c2a", surface: "#f8f9ff", "on-tertiary": "#ffffff", "surface-tint": "#732ee4", "secondary-fixed": "#ffd9e4", "primary-fixed": "#eaddff", "on-secondary": "#ffffff", tertiary: "#735c00", "on-tertiary-fixed-variant": "#574500", "inverse-primary": "#d2bbff", "on-secondary-container": "#600037", "secondary-container": "#fd56a7", "on-surface": "#121c2a", "surface-container-highest": "#d9e3f6", "on-primary-fixed-variant": "#5a00c6", "on-error-container": "#93000a", "on-primary-container": "#ede0ff", "surface-container-high": "#dee9fc", "surface-container-low": "#eff4ff", "surface-container-lowest": "#ffffff", error: "#ba1a1a", "on-primary": "#ffffff", "on-secondary-fixed": "#3e0022", "on-primary-fixed": "#25005a", "on-secondary-fixed-variant": "#8c0053", outline: "#7b7487", "inverse-surface": "#27313f", "inverse-on-surface": "#eaf1ff", "on-tertiary-container": "#4e3e00", "tertiary-fixed-dim": "#eec200", "surface-variant": "#d9e3f6", "surface-dim": "#d0dbed", "error-container": "#ffdad6", "surface-container": "#e6eeff", "primary-container": "#7c3aed", background: "#f8f9ff", "surface-bright": "#f8f9ff", "on-tertiary-fixed": "#231b00", "secondary-fixed-dim": "#ffb0cd", "on-error": "#ffffff", secondary: "#b4136d"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {"label-bold": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "button-text": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"]}, fontSize: {"label-bold": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "700"}], "headline-xl": ["40px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800"}], "button-text": ["20px", {lineHeight: "1.2", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "700"}], "headline-lg": ["32px", {lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700"}], "body-md": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "body-lg": ["20px", {lineHeight: "1.5", fontWeight: "500"}], "label-lg": ["16px", {lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600"}], "label-sm": ["14px", {lineHeight: "1.2", fontWeight: "700"}]}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#ffefff", surface: "#fff7fb", outline: "#8a707b", primary: "#af0a78", "on-surface-variant": "#57414a", secondary: "#744aa2", "on-background": "#281330", "on-surface": "#281330", "primary-fixed": "#ffd8e8", "on-primary": "#ffffff", background: "#fff7fb", "surface-container": "#fde7ff", "surface-container-lowest": "#ffffff", "outline-variant": "#ddbfca", "surface-variant": "#f8d8ff"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}}}};</script>
 <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    body { min-height: max(884px, 100dvh); }
-    /* Hide scrollbar for cleaner look */
-    ::-webkit-scrollbar { width: 0px; background: transparent; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; display: inline-block; vertical-align: middle; }
+    ::-webkit-scrollbar { width: 0; background: transparent; }
 </style>
-<title>แชทกับ {{ other_user.first_name|default:other_user.username }}</title>
 </head>
-<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col h-screen overflow-hidden">
+<body class="bg-background text-on-background min-h-screen flex flex-col h-screen overflow-hidden">
 
-<header class="flex-none w-full z-50 flex items-center px-4 h-20 bg-[#fef7ff] border-b-2 border-[#e040a0]/10 shadow-[0_4px_16px_rgba(224,64,160,0.15)]">
-    <div class="flex items-center gap-4 w-full">
-        <a href="{% url 'community' %}" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95 text-[#e040a0]">
-            <span class="material-symbols-outlined" style="font-size:32px">arrow_back</span>
+<!-- Header -->
+<header class="bg-[#fff7fb] flex justify-between items-center px-5 py-3 w-full fixed top-0 z-50 border-b border-[#f8d8ff] shadow-[0_4px_12px_rgba(224,64,160,0.08)]">
+    <div class="flex items-center gap-3">
+        <a href="{% url 'community' %}" class="text-primary hover:scale-105 transition-transform active:scale-95">
+            <span class="material-symbols-outlined text-3xl">arrow_back</span>
         </a>
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
-                <span class="material-symbols-outlined">person</span>
-            </div>
-            <h1 class="font-headline-md text-primary truncate">{{ other_user.first_name|default:other_user.username }}</h1>
+        <div class="w-11 h-11 rounded-full bg-primary-fixed border-2 border-primary/20 flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-primary text-2xl">person</span>
+        </div>
+        <div>
+            <h1 class="font-bold text-lg text-primary leading-tight">{{ other_user.get_full_name|default:other_user.username }}</h1>
+            <span class="text-xs text-on-surface-variant flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span> กำลังใช้งาน
+            </span>
         </div>
     </div>
 </header>
 
-<main class="flex-1 overflow-y-auto px-4 py-6 space-y-4 max-w-2xl mx-auto w-full flex flex-col" id="chat-container">
+<!-- Chat area -->
+<main class="flex-grow pt-20 pb-28 px-4 max-w-2xl mx-auto w-full flex flex-col gap-5 overflow-y-auto" id="chat-container">
+
+    {% if messages %}
+    <!-- Date divider -->
+    <div class="flex justify-center my-2">
+        <span class="bg-surface-container text-on-surface-variant px-4 py-1 rounded-full text-sm font-medium">วันนี้</span>
+    </div>
+    {% endif %}
+
     {% for msg in messages %}
-        {% if msg.sender == request.user %}
-        <!-- My message (Right) -->
-        <div class="flex justify-end">
-            <div class="bg-primary text-white p-4 rounded-3xl rounded-tr-sm max-w-[80%] shadow-md">
-                <p class="font-body-md whitespace-pre-wrap">{{ msg.content }}</p>
-                <p class="text-xs text-white/70 text-right mt-1">{{ msg.timestamp|time:"H:i" }}</p>
+    {% if msg.sender == request.user %}
+    <!-- Outgoing -->
+    <div class="flex items-end gap-3 self-end max-w-[85%]">
+        <div class="flex flex-col gap-1 items-end">
+            <div class="bg-primary text-on-primary rounded-2xl rounded-br-none px-5 py-3.5 shadow-[0_4px_12px_rgba(175,10,120,0.2)]">
+                <p class="text-base leading-relaxed whitespace-pre-wrap">{{ msg.content }}</p>
+            </div>
+            <div class="flex items-center gap-1 mr-1">
+                <span class="text-xs text-on-surface-variant">{{ msg.timestamp|time:"H:i" }}</span>
+                <span class="material-symbols-outlined text-xs text-primary" style="font-variation-settings:'FILL' 1">done_all</span>
             </div>
         </div>
-        {% else %}
-        <!-- Their message (Left) -->
-        <div class="flex justify-start">
-            <div class="bg-white border-2 border-violet-100 p-4 rounded-3xl rounded-tl-sm max-w-[80%] shadow-sm">
-                <p class="font-body-md text-on-surface whitespace-pre-wrap">{{ msg.content }}</p>
-                <p class="text-xs text-outline text-right mt-1">{{ msg.timestamp|time:"H:i" }}</p>
+    </div>
+    {% else %}
+    <!-- Incoming -->
+    <div class="flex items-end gap-3 self-start max-w-[85%]">
+        <div class="flex flex-col gap-1">
+            <div class="bg-white border border-outline-variant/40 rounded-2xl rounded-bl-none px-5 py-3.5 shadow-sm">
+                <p class="text-base leading-relaxed text-on-surface whitespace-pre-wrap">{{ msg.content }}</p>
             </div>
+            <span class="text-xs text-on-surface-variant ml-1">{{ msg.timestamp|time:"H:i" }}</span>
         </div>
-        {% endif %}
-    {% empty %}
-        <div class="text-center py-10">
-            <div class="w-20 h-20 mx-auto bg-primary-fixed rounded-full flex items-center justify-center text-primary mb-4">
-                <span class="material-symbols-outlined text-4xl">waving_hand</span>
-            </div>
-            <p class="text-outline font-body-md">ส่งข้อความทักทายเลย!</p>
-        </div>
+    </div>
     {% endfor %}
+
+    {% if not messages %}
+    <div class="flex-1 flex flex-col items-center justify-center text-center py-10">
+        <div class="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">waving_hand</span>
+        </div>
+        <p class="font-bold text-on-surface text-lg">เริ่มบทสนทนา</p>
+        <p class="text-on-surface-variant text-sm mt-1">ส่งข้อความทักทายเลย!</p>
+    </div>
+    {% endif %}
+
+    <!-- Anchor for auto-scroll -->
+    <div id="chat-bottom"></div>
 </main>
 
-<!-- Reply Form -->
-<div class="flex-none w-full p-4 bg-white border-t-2 border-[#e040a0]/10 shadow-[0_-8px_20px_rgba(224,64,160,0.08)] z-40">
-    <form method="POST" class="max-w-2xl mx-auto flex gap-3">
-        {% csrf_token %}
-        <input type="text" name="content" required placeholder="พิมพ์ข้อความ..." class="flex-1 h-14 px-5 rounded-full border-2 border-primary-fixed focus:border-primary outline-none transition-colors font-body-md bg-surface">
-        <button type="submit" class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary/90 active:scale-95 transition-all shadow-md shrink-0">
-            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">send</span>
+<!-- Input area -->
+<footer class="fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant/30 px-4 py-3 pb-6 z-50">
+    <div class="max-w-2xl mx-auto flex items-center gap-3">
+        <div class="flex-grow relative flex items-center">
+            <input id="message-input" type="text" placeholder="พิมพ์ข้อความ..."
+                class="w-full bg-surface-container rounded-full border-none px-5 py-3.5 text-base text-on-surface focus:ring-2 focus:ring-primary/20 outline-none placeholder:text-on-surface-variant/50"
+                autocomplete="off"/>
+        </div>
+        <button id="send-btn" class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(175,10,120,0.3)] hover:scale-105 active:scale-95 transition-all flex-shrink-0">
+            <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1">send</span>
         </button>
-    </form>
-</div>
+    </div>
+
+    <!-- Connection status -->
+    <div id="ws-status" class="max-w-2xl mx-auto mt-1 px-2 hidden">
+        <span class="text-xs text-outline" id="ws-status-text"></span>
+    </div>
+</footer>
 
 <script>
-    // Auto scroll to bottom
-    const container = document.getElementById('chat-container');
-    container.scrollTop = container.scrollHeight;
+    const myUserId = {{ request.user.id }};
+    const otherId = {{ other_user.id }};
+    const wsScheme = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    const wsUrl = `${wsScheme}://${window.location.host}/ws/chat/${otherId}/`;
+
+    let ws;
+
+    function connect() {
+        ws = new WebSocket(wsUrl);
+
+        ws.onopen = () => {
+            setStatus('');
+        };
+
+        ws.onmessage = (e) => {
+            const data = JSON.parse(e.data);
+            appendMessage(data.content, data.sender_id === myUserId, data.timestamp);
+        };
+
+        ws.onclose = () => {
+            setStatus('การเชื่อมต่อหลุด กำลังเชื่อมต่อใหม่...');
+            setTimeout(connect, 3000);
+        };
+
+        ws.onerror = () => {
+            setStatus('เชื่อมต่อไม่ได้ กำลังลองใหม่...');
+        };
+    }
+
+    function setStatus(msg) {
+        const el = document.getElementById('ws-status');
+        const txt = document.getElementById('ws-status-text');
+        if (msg) {
+            el.classList.remove('hidden');
+            txt.textContent = msg;
+        } else {
+            el.classList.add('hidden');
+        }
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function appendMessage(content, isMine, timestamp) {
+        const container = document.getElementById('chat-container');
+        const bottom = document.getElementById('chat-bottom');
+        const wrapper = document.createElement('div');
+
+        if (isMine) {
+            wrapper.className = 'flex items-end gap-3 self-end max-w-[85%]';
+            wrapper.innerHTML = `
+                <div class="flex flex-col gap-1 items-end">
+                    <div class="bg-primary text-white rounded-2xl rounded-br-none px-5 py-3.5 shadow-[0_4px_12px_rgba(175,10,120,0.2)]">
+                        <p class="text-base leading-relaxed whitespace-pre-wrap">${escapeHtml(content)}</p>
+                    </div>
+                    <div class="flex items-center gap-1 mr-1">
+                        <span class="text-xs text-on-surface-variant">${timestamp}</span>
+                        <span class="material-symbols-outlined text-xs text-primary" style="font-variation-settings:'FILL' 1">done_all</span>
+                    </div>
+                </div>`;
+        } else {
+            wrapper.className = 'flex items-end gap-3 self-start max-w-[85%]';
+            wrapper.innerHTML = `
+                <div class="flex flex-col gap-1">
+                    <div class="bg-white border border-gray-200 rounded-2xl rounded-bl-none px-5 py-3.5 shadow-sm">
+                        <p class="text-base leading-relaxed text-gray-800 whitespace-pre-wrap">${escapeHtml(content)}</p>
+                    </div>
+                    <span class="text-xs text-gray-400 ml-1">${timestamp}</span>
+                </div>`;
+        }
+
+        container.insertBefore(wrapper, bottom);
+        bottom.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('message-input');
+        const content = input.value.trim();
+        if (!content || !ws || ws.readyState !== WebSocket.OPEN) return;
+        ws.send(JSON.stringify({ content }));
+        input.value = '';
+    }
+
+    document.getElementById('send-btn').addEventListener('click', sendMessage);
+    document.getElementById('message-input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // Init
+    connect();
+    document.getElementById('chat-bottom').scrollIntoView();
 </script>
 </body>
 </html>
