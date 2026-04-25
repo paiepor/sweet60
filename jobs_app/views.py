@@ -249,6 +249,11 @@ def help_center(request):
 
 
 @login_required
+def support_chat(request):
+    return render(request, 'support_chat.html')
+
+
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = UserUpdateForm(request.POST, instance=request.user)

@@ -23,6 +23,7 @@ urlpatterns = [
     path('events/', views.events_list, name='events_list'),
     path('emergency/', views.emergency_page, name='emergency'),
     path('help/', views.help_center, name='help_center'),
+    path('support-chat/', views.support_chat, name='support_chat'),
     path('community/', views.community_page, name='community'),
     path('groups/', views.my_groups, name='my_groups'),
     path('groups/explore/', views.explore_groups, name='explore_groups'),
