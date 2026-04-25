@@ -128,15 +128,20 @@ function openGooglePopup(event) {
     const top = Math.round((screen.height - height) / 2);
     const popup = window.open(url, 'google-login', `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no`);
     if (!popup) { window.location.href = url; return; }
+    let wentCrossOrigin = false;
     const check = setInterval(() => {
         if (popup.closed) { clearInterval(check); return; }
         try {
-            if (new URL(popup.location.href).origin === window.location.origin) {
+            const origin = new URL(popup.location.href).origin;
+            if (!wentCrossOrigin) return;
+            if (origin === window.location.origin) {
                 clearInterval(check);
                 popup.close();
                 window.location.href = '/home/';
             }
-        } catch(e) {}
+        } catch(e) {
+            wentCrossOrigin = true;
+        }
     }, 500);
 }
 
