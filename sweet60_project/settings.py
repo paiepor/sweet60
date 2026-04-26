@@ -172,6 +172,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 if os.environ.get('CLOUDINARY_CLOUD_NAME'):
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+# Debug - ลบทิ้งหลังแก้ปัญหาได้
+import sys
+print(f">>> CLOUDINARY_CLOUD_NAME = {os.environ.get('CLOUDINARY_CLOUD_NAME')}", file=sys.stderr)
+print(f">>> DEFAULT_FILE_STORAGE = {globals().get('DEFAULT_FILE_STORAGE', 'NOT SET')}", file=sys.stderr)
+
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
