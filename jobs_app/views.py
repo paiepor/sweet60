@@ -6,6 +6,7 @@ from .models import JobListing, Application, UserProfile, Event, ChatMessage, Co
 from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.urls import reverse
 
 
 def setup_admin(request):
@@ -120,7 +121,7 @@ def apply_job(request, job_id):
         already_applied = Application.objects.filter(job=job, applicant=request.user).exists()
         if not already_applied:
             Application.objects.create(job=job, applicant=request.user)
-    return redirect('job_detail', job_id=job_id)
+    return redirect(reverse('profile') + '#applications')
 
 @login_required
 def profile_page(request):
