@@ -190,6 +190,10 @@
 
 <script>
     (function() {
+
+        // เพิ่มเงื่อนไข: ทำงานเฉพาะตอนที่เป็น popup เท่านั้น
+        if (!window.opener) return;
+        
         var destUrl = window.location.href;
         try {
             var bc = new BroadcastChannel('sweet60_oauth');
