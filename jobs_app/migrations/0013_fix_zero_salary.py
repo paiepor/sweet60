@@ -1,8 +1,8 @@
 from django.db import migrations
 
 def fix_zero_salary(apps, schema_editor):
-    JobListing = apps.get_model('jobs_app', 'JobListing')
-    JobListing.objects.filter(salary__lte=0).update(salary=1)
+    # Already handled in 0012. This is a no-op kept for migration history continuity.
+    pass
 
 class Migration(migrations.Migration):
     dependencies = [

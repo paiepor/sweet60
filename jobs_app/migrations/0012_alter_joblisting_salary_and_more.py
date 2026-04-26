@@ -3,6 +3,10 @@
 from django.conf import settings
 from django.db import migrations, models
 
+def fix_zero_salary(apps, schema_editor):
+    """Set any salary <= 0 to 1 before adding PositiveIntegerField constraint."""
+    JobListing = apps.get_model('jobs_app', 'JobListing')
+    JobListing.objects.filter(salary__lte=0).update(salary=1)
 
 class Migration(migrations.Migration):
 
@@ -12,6 +16,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        # Fix data First, before adding the PositiveIntegerField constraint
+        migrations.RunPython(fix_zero_salary, migrations.RunPython.noop),
         migrations.AlterField(
             model_name='joblisting',
             name='salary',
