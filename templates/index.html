@@ -188,40 +188,6 @@
     </a>
 </nav>
 
-<script>
-    (function() {
-    if (!window.opener) return;
 
-    var destUrl = window.location.href;
-    try {
-        var bc = new BroadcastChannel('sweet60_oauth');
-        bc.postMessage({type: 'oauth_complete', url: destUrl});
-        bc.close();
-    } catch(e) {}
-    try {
-        window.opener.postMessage({type: 'oauth_complete', url: destUrl}, window.location.origin);
-    } catch(e) {}
-    
-    document.body.innerHTML = '<p style="font-family:sans-serif;text-align:center;margin-top:40px">กำลังเข้าสู่ระบบ...</p>';
-    setTimeout(() => window.close(), 100);
-    setTimeout(() => window.close(), 500);
-    setTimeout(() => window.close(), 1000);
-})();
-
-    function toggleDrawer() {
-        const drawer = document.getElementById('drawer');
-        const overlay = document.getElementById('drawer-overlay');
-        if (drawer.classList.contains('translate-x-full')) {
-            drawer.classList.remove('translate-x-full');
-            overlay.classList.remove('hidden');
-            setTimeout(() => { overlay.classList.remove('opacity-0'); overlay.classList.add('opacity-100'); }, 10);
-        } else {
-            drawer.classList.add('translate-x-full');
-            overlay.classList.remove('opacity-100');
-            overlay.classList.add('opacity-0');
-            setTimeout(() => { overlay.classList.add('hidden'); }, 300);
-        }
-    }
-</script>
 </body>
 </html>
