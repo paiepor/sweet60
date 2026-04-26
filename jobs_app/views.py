@@ -51,19 +51,37 @@ def events_list(request):
 def emergency_page(request):
     return render(request, 'emergency.html')
 
+# โค้ดเก่า
+# def jobs_list(request):
+#     query = request.GET.get('q', '').strip()
+#     jobs = JobListing.objects.filter(is_active=True).order_by('-id')
+#     if query:
+#         jobs = (jobs.filter(title__icontains=query) | JobListing.objects.filter(is_active=True, company_name__icontains=query)).distinct().order_by('-id')
+#     return render(request, 'jobs.html', {'jobs': jobs, 'query': query})
 
+# โค้ดใหม่
 def jobs_list(request):
     query = request.GET.get('q', '').strip()
     jobs = JobListing.objects.filter(is_active=True).order_by('-id')
     if query:
         jobs = (jobs.filter(title__icontains=query) | JobListing.objects.filter(is_active=True, company_name__icontains=query)).distinct().order_by('-id')
-    return render(request, 'jobs.html', {'jobs': jobs, 'query': query})
+    applied_job_ids = set()
+    if request.user.is_authenticated:
+        applied_job_ids = set(Application.objects.filter(applicant=request.user).values_list('job_id', flat=True))
+    return render(request, 'jobs.html', {'jobs': jobs, 'query': query, 'applied_job_ids': applied_job_ids})
 
+# โค้ดเก่า
+# def job_detail(request, job_id):
+#     job = get_object_or_404(JobListing, id=job_id)
+#     return render(request, 'job_detail.html', {'job': job})
 
+# โค้ดใหม่
 def job_detail(request, job_id):
     job = get_object_or_404(JobListing, id=job_id)
-    return render(request, 'job_detail.html', {'job': job})
-
+    already_applied = False
+    if request.user.is_authenticated:
+        already_applied = Application.objects.filter(job=job, applicant=request.user).exists()
+    return render(request, 'job_detail.html', {'job': job, 'already_applied': already_applied})
 
 def register_view(request):
     if request.method == 'POST':
