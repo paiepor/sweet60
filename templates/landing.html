@@ -88,29 +88,48 @@
 <div class="fixed bottom-[10%] left-[5%] w-80 h-80 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
 <!-- No BottomNavBar on Transactional Screen per Shell Visibility Rule -->
 <script>
+let _oauthPopup = null;
+let _oauthHandled = false;
+
+const _oauthBC = new BroadcastChannel('sweet60_oauth');
+_oauthBC.onmessage = function(e) {
+    if (_oauthHandled || !_oauthPopup) return;
+    if (e.data && e.data.type === 'oauth_complete') {
+        _oauthHandled = true;
+        _oauthBC.close();
+        if (!_oauthPopup.closed) _oauthPopup.close();
+        window.location.href = e.data.url;
+    }
+};
+
 window.addEventListener('message', function(event) {
+    if (_oauthHandled || !_oauthPopup) return;
     if (event.origin !== window.location.origin) return;
     if (event.data && event.data.type === 'oauth_complete') {
+        _oauthHandled = true;
+        if (!_oauthPopup.closed) _oauthPopup.close();
         window.location.href = event.data.url;
     }
 });
 
 function openGooglePopup(event) {
     event.preventDefault();
+    _oauthHandled = false;
     const url = event.currentTarget.href;
     const width = 500, height = 620;
     const left = Math.round((screen.width - width) / 2);
     const top = Math.round((screen.height - height) / 2);
-    const popup = window.open(url, 'google-login', `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no`);
-    if (!popup) { window.location.href = url; return; }
+    _oauthPopup = window.open(url, 'google-login', `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no`);
+    if (!_oauthPopup) { window.location.href = url; return; }
     const check = setInterval(() => {
-        if (popup.closed) { clearInterval(check); return; }
+        if (_oauthPopup.closed) { clearInterval(check); return; }
         try {
-            const href = popup.location.href;
+            const href = _oauthPopup.location.href;
             const origin = new URL(href).origin;
             if (origin === window.location.origin && href !== url && !href.includes('/callback')) {
                 clearInterval(check);
-                popup.close();
+                _oauthHandled = true;
+                _oauthPopup.close();
                 window.location.href = href;
             }
         } catch(e) { /* cross-origin */ }

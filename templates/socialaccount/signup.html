@@ -129,10 +129,17 @@
 </main>
 
 <script>
-if (window.opener && !window.opener.closed) {
-    window.opener.postMessage({type: 'oauth_complete', url: window.location.href}, window.location.origin);
-    window.close();
-}
+(function() {
+    try {
+        const bc = new BroadcastChannel('sweet60_oauth');
+        bc.postMessage({type: 'oauth_complete', url: window.location.href});
+        bc.close();
+    } catch(e) {}
+    if (window.opener && !window.opener.closed) {
+        try { window.opener.postMessage({type: 'oauth_complete', url: window.location.href}, window.location.origin); } catch(e) {}
+        window.close();
+    }
+})();
 
 document.getElementById('avatar-file').addEventListener('change', function(e) {
     const file = e.target.files[0];
