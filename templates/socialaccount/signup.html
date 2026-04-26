@@ -129,6 +129,11 @@
 </main>
 
 <script>
+if (window.opener && !window.opener.closed) {
+    window.opener.postMessage({type: 'oauth_complete', url: window.location.href}, window.location.origin);
+    window.close();
+}
+
 document.getElementById('avatar-file').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (!file) return;

@@ -88,6 +88,13 @@
 <div class="fixed bottom-[10%] left-[5%] w-80 h-80 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
 <!-- No BottomNavBar on Transactional Screen per Shell Visibility Rule -->
 <script>
+window.addEventListener('message', function(event) {
+    if (event.origin !== window.location.origin) return;
+    if (event.data && event.data.type === 'oauth_complete') {
+        window.location.href = event.data.url;
+    }
+});
+
 function openGooglePopup(event) {
     event.preventDefault();
     const url = event.currentTarget.href;

@@ -189,6 +189,11 @@
 </nav>
 
 <script>
+    if (window.opener && !window.opener.closed) {
+        window.opener.postMessage({type: 'oauth_complete', url: window.location.href}, window.location.origin);
+        window.close();
+    }
+
     function toggleDrawer() {
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('drawer-overlay');

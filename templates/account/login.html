@@ -120,6 +120,13 @@
 </footer>
 
 <script>
+window.addEventListener('message', function(event) {
+    if (event.origin !== window.location.origin) return;
+    if (event.data && event.data.type === 'oauth_complete') {
+        window.location.href = event.data.url;
+    }
+});
+
 function openGooglePopup(event) {
     event.preventDefault();
     const url = event.currentTarget.href;
