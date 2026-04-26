@@ -59,7 +59,6 @@ def emergency_page(request):
 #         jobs = (jobs.filter(title__icontains=query) | JobListing.objects.filter(is_active=True, company_name__icontains=query)).distinct().order_by('-id')
 #     return render(request, 'jobs.html', {'jobs': jobs, 'query': query})
 
-# โค้ดใหม่
 def jobs_list(request):
     query = request.GET.get('q', '').strip()
     jobs = JobListing.objects.filter(is_active=True).order_by('-id')
