@@ -7,12 +7,14 @@ from .models import JobListing, CommunityGroup
 class JobForm(forms.ModelForm):
     class Meta:
         model = JobListing
-        fields = ['title', 'company_name', 'description', 'salary']
+        fields = ['title', 'company_name', 'description', 'salary', 'job_type', 'requirements']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': 'เช่น พนักงานดูแลสวน'}),
             'company_name': forms.TextInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': 'ชื่อร้านหรือบริษัท'}),
             'description': forms.Textarea(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'rows': 4, 'placeholder': 'รายละเอียดหน้าที่งาน...'}),
             'salary': forms.NumberInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': '12,000'}),
+            'job_type': forms.TextInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': 'เช่น พาร์ทไทม์, ฟูลไทม์'}),
+            'requirements': forms.Textarea(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'rows': 4, 'placeholder': 'เช่น อายุ 50 ปีขึ้นไป, สุขภาพแข็งแรง (แต่ละข้อขึ้นบรรทัดใหม่)'})
         }
 
 

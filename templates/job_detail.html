@@ -50,8 +50,9 @@
         </div>
         <div class="bg-tertiary-fixed border-2 border-tertiary/20 p-5 rounded-[28px]">
             <p class="font-label-sm text-label-sm text-tertiary uppercase tracking-widest mb-1">ประเภทงาน</p>
-            <p class="font-headline-md text-on-surface">พาร์ทไทม์</p>
-            <p class="font-label-sm text-label-sm text-on-surface-variant">ยืดหยุ่นได้</p>
+            <p class="font-headline-md text-on-surface">{{ job.job_type }}</p>
+            <!-- <p class="font-headline-md text-on-surface">พาร์ทไทม์</p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">ยืดหยุ่นได้</p> -->
         </div>
     </div>
 
@@ -67,18 +68,14 @@
     <section class="mb-10">
         <h3 class="font-headline-md text-headline-md mb-4">คุณสมบัติที่ต้องการ</h3>
         <div class="bg-surface-container-lowest border-2 border-[#ffd8e8] p-6 rounded-[32px] space-y-3">
+            {% for req in job.requirements.splitlines %}
+            {% if req %}
             <div class="flex items-center gap-3">
                 <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings:'FILL' 1">check_circle</span>
-                <span class="font-body-md text-on-surface">อายุ 50 ปีขึ้นไป</span>
+                <span class="font-body-md text-on-surface">{{ req }}</span>
             </div>
-            <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings:'FILL' 1">check_circle</span>
-                <span class="font-body-md text-on-surface">สุขภาพแข็งแรง</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings:'FILL' 1">check_circle</span>
-                <span class="font-body-md text-on-surface">ไม่จำเป็นต้องมีประสบการณ์</span>
-            </div>
+            {% endif %}
+        {% endfor %}
         </div>
     </section>
 
