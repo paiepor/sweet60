@@ -190,15 +190,16 @@
 
 <script>
     (function() {
+        var destUrl = window.location.href;
         try {
-            const bc = new BroadcastChannel('sweet60_oauth');
-            bc.postMessage({type: 'oauth_complete', url: window.location.href});
+            var bc = new BroadcastChannel('sweet60_oauth');
+            bc.postMessage({type: 'oauth_complete', url: destUrl});
             bc.close();
         } catch(e) {}
         if (window.opener && !window.opener.closed) {
-            try { window.opener.postMessage({type: 'oauth_complete', url: window.location.href}, window.location.origin); } catch(e) {}
-            window.close();
+            try { window.opener.postMessage({type: 'oauth_complete', url: destUrl}, window.location.origin); } catch(e) {}
         }
+        window.close();
     })();
 
     function toggleDrawer() {
