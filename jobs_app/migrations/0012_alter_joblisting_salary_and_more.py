@@ -8,21 +8,38 @@ def fix_zero_salary(apps, schema_editor):
     JobListing = apps.get_model('jobs_app', 'JobListing')
     JobListing.objects.filter(salary__lte=0).update(salary=1)
 
-class Migration(migrations.Migration):
+def deduplicate_applications(apps, schema_editor):
+    """
+    Remove duplicate (job, applicant) applications before adding unique constraint.
+    Keeps the earliest application (lowest pk) for each duplicate pair.
+    """
+    Application = apps.get_model('jobs_app', 'Application')
 
+    seen = set()
+    for app in Application.objects.order_by('pk'):
+        key = (app.job_id, app.applicant_id)
+        if key in seen:
+            app.delete()
+        else:
+            seen.add(key)
+
+class Migration(migrations.Migration):
+ 
     dependencies = [
         ('jobs_app', '0011_convert_salary'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
-
+ 
     operations = [
-        # Fix data First, before adding the PositiveIntegerField constraint
+        # Fix salary data first, before adding PositiveIntegerField constraint
         migrations.RunPython(fix_zero_salary, migrations.RunPython.noop),
         migrations.AlterField(
             model_name='joblisting',
             name='salary',
             field=models.PositiveIntegerField(verbose_name='เงินเดือน/ค่าจ้าง'),
         ),
+        # Remove duplicate applications before adding unique constraint
+        migrations.RunPython(deduplicate_applications, migrations.RunPython.noop),
         migrations.AlterUniqueTogether(
             name='application',
             unique_together={('job', 'applicant')},
