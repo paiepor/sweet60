@@ -166,7 +166,12 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
-MEDIA_URL = '/media/'
+if os.environ.get('CLOUDINARY_CLOUD_NAME'):
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    MEDIA_URL = '/media/cloudinary/'  # เปลี่ยนตรงนี้
+else:
+    MEDIA_URL = '/media/'
+    
 MEDIA_ROOT = BASE_DIR / 'media'
 
 if os.environ.get('CLOUDINARY_CLOUD_NAME'):
