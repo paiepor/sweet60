@@ -237,12 +237,26 @@ function handleAvatarUpload(event) {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = function(e) {
-        document.getElementById('avatar_b64').value = e.target.result;
-        const preview = document.getElementById('avatar-preview');
-        const placeholder = document.getElementById('avatar-placeholder');
-        preview.src = e.target.result;
-        preview.classList.remove('hidden');
-        placeholder.classList.add('hidden');
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const maxSize = 400;
+            let w = img.width, h = img.height;
+            if (w > maxSize || h > maxSize) {
+                if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
+                else { w = Math.round(w * maxSize / h); h = maxSize; }
+            }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            const b64 = canvas.toDataURL('image/jpeg', 0.85);
+            document.getElementById('avatar_b64').value = b64;
+            const preview = document.getElementById('avatar-preview');
+            const placeholder = document.getElementById('avatar-placeholder');
+            preview.src = b64;
+            preview.classList.remove('hidden');
+            placeholder.classList.add('hidden');
+        };
+        img.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }

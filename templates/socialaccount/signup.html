@@ -134,10 +134,23 @@ document.getElementById('avatar-file').addEventListener('change', function(e) {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = function(evt) {
-        const b64 = evt.target.result;
-        document.getElementById('avatar_b64_input').value = b64;
-        const preview = document.getElementById('avatar-preview');
-        preview.innerHTML = `<img src="${b64}" class="w-full h-full object-cover">`;
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const maxSize = 400;
+            let w = img.width, h = img.height;
+            if (w > maxSize || h > maxSize) {
+                if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
+                else { w = Math.round(w * maxSize / h); h = maxSize; }
+            }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            const b64 = canvas.toDataURL('image/jpeg', 0.85);
+            document.getElementById('avatar_b64_input').value = b64;
+            const preview = document.getElementById('avatar-preview');
+            preview.innerHTML = `<img src="${b64}" class="w-full h-full object-cover">`;
+        };
+        img.src = evt.target.result;
     };
     reader.readAsDataURL(file);
 });
