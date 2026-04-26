@@ -29,8 +29,8 @@
 
 <header class="bg-[#fef7ff] flex justify-between items-center px-6 h-20 w-full top-0 border-b-2 border-[#e040a0]/10 shadow-[0_4px_16px_rgba(224,64,160,0.15)] sticky z-50">
     <div class="flex items-center gap-4">
-        <a onclick="history.back()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e040a0]/10 transition-colors active:scale-95">
-            <span class="material-symbols-outlined text-[#e040a0]">arrow_back</span>
+        <a href="{% url 'profile' %}" class="w-12 h-12 rounded-full bg-primary-fixed border-2 border-[#e040a0]/20 overflow-hidden flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+            {% if current_avatar %}<img src="{{ current_avatar }}" class="w-full h-full object-cover" alt=""/>{% else %}<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">person</span>{% endif %}
         </a>
         <h1 class="text-[#e040a0] font-black text-2xl tracking-tighter font-['Plus_Jakarta_Sans']">Sweet Sixty</h1>
     </div>
