@@ -190,21 +190,23 @@
 
 <script>
     (function() {
+    if (!window.opener) return;
 
-        // เพิ่มเงื่อนไข: ทำงานเฉพาะตอนที่เป็น popup เท่านั้น
-        if (!window.opener) return;
-        
-        var destUrl = window.location.href;
-        try {
-            var bc = new BroadcastChannel('sweet60_oauth');
-            bc.postMessage({type: 'oauth_complete', url: destUrl});
-            bc.close();
-        } catch(e) {}
-        if (window.opener && !window.opener.closed) {
-            try { window.opener.postMessage({type: 'oauth_complete', url: destUrl}, window.location.origin); } catch(e) {}
-        }
-        window.close();
-    })();
+    var destUrl = window.location.href;
+    try {
+        var bc = new BroadcastChannel('sweet60_oauth');
+        bc.postMessage({type: 'oauth_complete', url: destUrl});
+        bc.close();
+    } catch(e) {}
+    try {
+        window.opener.postMessage({type: 'oauth_complete', url: destUrl}, window.location.origin);
+    } catch(e) {}
+    
+    document.body.innerHTML = '<p style="font-family:sans-serif;text-align:center;margin-top:40px">กำลังเข้าสู่ระบบ...</p>';
+    setTimeout(() => window.close(), 100);
+    setTimeout(() => window.close(), 500);
+    setTimeout(() => window.close(), 1000);
+})();
 
     function toggleDrawer() {
         const drawer = document.getElementById('drawer');

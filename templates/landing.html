@@ -122,18 +122,18 @@ function openGooglePopup(event) {
     _oauthPopup = window.open(url, 'google-login', `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no`);
     if (!_oauthPopup) { window.location.href = url; return; }
     const check = setInterval(() => {
-        if (_oauthPopup.closed) { clearInterval(check); return; }
-        try {
-            const href = _oauthPopup.location.href;
-            const origin = new URL(href).origin;
-            if (origin === window.location.origin && href !== url && !href.includes('/callback')) {
-                clearInterval(check);
-                _oauthHandled = true;
-                _oauthPopup.close();
-                window.location.href = href;
-            }
-        } catch(e) { /* cross-origin */ }
-    }, 500);
+    if (_oauthPopup.closed) { clearInterval(check); return; }
+    try {
+        const href = _oauthPopup.location.href;
+        const origin = new URL(href).origin;
+        if (origin === window.location.origin && href !== url && !href.includes('/callback')) {
+            clearInterval(check);
+            _oauthHandled = true;
+            window.location.href = href;  // redirect parent ก่อน
+            setTimeout(() => _oauthPopup.close(), 300);  // ค่อย close popup
+        }
+    } catch(e) { /* cross-origin, ยังอยู่ที่ Google */ }
+}, 500);
 }
 </script>
 </body>
