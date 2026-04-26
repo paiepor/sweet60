@@ -42,7 +42,7 @@ class JobListing(models.Model):
     company_name = models.CharField(max_length=200, verbose_name="ชื่อบริษัท/ร้านค้า")
     description = models.TextField(verbose_name="รายละเอียดงาน")
     salary = models.PositiveIntegerField(verbose_name="เงินเดือน/ค่าจ้าง")
-    job_type = models.CharField(max_length=100, verbose_name="ประเภทงาน", default="พาร์ทไทม์")
+    job_type = models.CharField(max_length=100, verbose_name="ประเภทงาน", blank=True)
     requirements = models.TextField(verbose_name="คุณสมบัติที่ต้องการ", blank=True)
     is_active = models.BooleanField(default=True, verbose_name="ยังเปิดรับสมัครอยู่ไหม")
     
