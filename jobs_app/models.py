@@ -41,7 +41,7 @@ class JobListing(models.Model):
     title = models.CharField(max_length=200, verbose_name="ชื่องาน")
     company_name = models.CharField(max_length=200, verbose_name="ชื่อบริษัท/ร้านค้า")
     description = models.TextField(verbose_name="รายละเอียดงาน")
-    salary = models.CharField(max_length=100, verbose_name="เงินเดือน/ค่าจ้าง")
+    salary = models.PositiveIntegerField(verbose_name="เงินเดือน/ค่าจ้าง")
     is_active = models.BooleanField(default=True, verbose_name="ยังเปิดรับสมัครอยู่ไหม")
     
     # 1. ย้ายมาไว้ตรงนี้ 

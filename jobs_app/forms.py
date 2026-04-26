@@ -12,7 +12,7 @@ class JobForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': 'เช่น พนักงานดูแลสวน'}),
             'company_name': forms.TextInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': 'ชื่อร้านหรือบริษัท'}),
             'description': forms.Textarea(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'rows': 4, 'placeholder': 'รายละเอียดหน้าที่งาน...'}),
-            'salary': forms.TextInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': '12,000'}),
+            'salary': forms.NumberInput(attrs={'class': 'w-full p-3 border rounded-xl mb-3', 'placeholder': '12,000'}),
         }
 
 
