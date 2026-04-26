@@ -98,5 +98,8 @@ class Application(models.Model):
     applicant = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     applied_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('job', 'applicant')
+
     def __str__(self):
         return f"{self.applicant.username} -> {self.job.title}"

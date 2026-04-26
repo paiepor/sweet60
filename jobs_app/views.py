@@ -106,13 +106,21 @@ def create_job(request):
     return render(request, 'create_job.html', {'form': form})
 
 
+# @login_required
+# def apply_job(request, job_id):
+#     if request.method == 'POST':
+#         job = get_object_or_404(JobListing, id=job_id)
+#         Application.objects.create(job=job, applicant=request.user)
+#     return redirect('job_detail', job_id=job_id)
+
 @login_required
 def apply_job(request, job_id):
     if request.method == 'POST':
         job = get_object_or_404(JobListing, id=job_id)
-        Application.objects.create(job=job, applicant=request.user)
+        already_applied = Application.objects.filter(job=job, applicant=request.user).exists()
+        if not already_applied:
+            Application.objects.create(job=job, applicant=request.user)
     return redirect('job_detail', job_id=job_id)
-
 
 @login_required
 def profile_page(request):
