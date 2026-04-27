@@ -48,8 +48,8 @@
         {% for group in groups %}
         <a href="{% url 'group_detail' group.id %}" class="bg-white rounded-lg p-4 shadow-[0_4px_16px_rgba(224,64,160,0.1)] hover:scale-[1.02] transition-transform duration-300 ease-out cursor-pointer flex items-center gap-4 {% if group.creator == request.user %}border-l-4 border-tertiary{% endif %} block">
             <div class="relative flex-shrink-0">
-                {% if group.cover_image %}
-                <img src="{{ group.cover_image.url }}" alt="{{ group.name }}" class="w-16 h-16 rounded-lg object-cover"/>
+                {% if group.cover_image_b64 %}
+                <img src="{{ group.cover_image_b64 }}" alt="{{ group.name }}" class="w-16 h-16 rounded-lg object-cover"/>
                 {% else %}
                 <div class="w-16 h-16 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined text-3xl" style="font-variation-settings:'FILL' 1">group</span>

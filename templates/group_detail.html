@@ -43,8 +43,8 @@
 
 <main class="pt-16">
     <!-- Cover image -->
-    {% if group.cover_image %}
-    <img src="{{ group.cover_image.url }}" class="w-full h-44 object-cover" alt="{{ group.name }}"/>
+    {% if group.cover_image_b64 %}
+    <img src="{{ group.cover_image_b64 }}" class="w-full h-44 object-cover" alt="{{ group.name }}"/>
     {% else %}
     <div class="w-full h-44 bg-gradient-to-br from-pink-300 via-pink-200 to-purple-200 flex items-center justify-center">
         <span class="material-symbols-outlined icon-fill text-white" style="font-size:72px">groups</span>
