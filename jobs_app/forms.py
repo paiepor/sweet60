@@ -45,7 +45,7 @@ class UserRegisterForm(UserCreationForm):
 class CommunityGroupForm(forms.ModelForm):
     class Meta:
         model = CommunityGroup
-        fields = ['name', 'category', 'description', 'cover_image', 'is_private', 'location']
+        fields = ['name', 'category', 'description', 'is_private', 'location']
 
 
 class UserUpdateForm(forms.ModelForm):
