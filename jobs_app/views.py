@@ -7,6 +7,8 @@ from .forms import JobForm, UserUpdateForm, UserRegisterForm, CommunityGroupForm
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.urls import reverse
+import base64, io
+from PIL import Image
 
 
 def setup_admin(request):
@@ -281,6 +283,15 @@ def create_group(request):
         if form.is_valid():
             group = form.save(commit=False)
             group.creator = request.user
+            cover_file = request.FILES.get('cover_image')
+            if cover_file:
+                img = Image.open(cover_file)
+                img.thumbnail((800, 400))
+                if img.mode in ('RGBA', 'P', 'LA'):
+                    img = img.convert('RGB')
+                buf = io.BytesIO()
+                img.save(buf, format='JPEG', quality=82)
+                group.cover_image_b64 = 'data:image/jpeg;base64,' + base64.b64encode(buf.getvalue()).decode()
             group.save()
             group.members.add(request.user)
             return redirect('community')

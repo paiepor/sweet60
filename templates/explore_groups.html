@@ -35,8 +35,8 @@
         {% for group in groups %}
         <a href="{% url 'group_detail' group.id %}" class="bg-white rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(224,64,160,0.1)] hover:scale-[1.02] transition-transform duration-300 block">
             <div class="h-48 relative overflow-hidden bg-primary-fixed">
-                {% if group.cover_image %}
-                <img src="{{ group.cover_image.url }}" alt="{{ group.name }}" class="w-full h-full object-cover"/>
+                {% if group.cover_image_b64 %}
+                <img src="{{ group.cover_image_b64 }}" alt="{{ group.name }}" class="w-full h-full object-cover"/>
                 {% else %}
                 <div class="w-full h-full flex items-center justify-center">
                     <span class="material-symbols-outlined text-primary text-7xl" style="font-variation-settings:'FILL' 1">group</span>

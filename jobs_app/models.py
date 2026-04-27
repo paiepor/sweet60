@@ -65,12 +65,13 @@ class CommunityGroup(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, blank=True, verbose_name="หมวดหมู่")
     description = models.TextField(blank=True, verbose_name="คำอธิบาย")
     cover_image = models.ImageField(upload_to='groups/', null=True, blank=True, verbose_name="รูปภาพกลุ่ม")
+    cover_image_b64 = models.TextField(blank=True, default='', verbose_name="รูปภาพกลุ่ม (Base64)")
     is_private = models.BooleanField(default=False, verbose_name="กลุ่มส่วนตัว")
     location = models.CharField(max_length=255, blank=True, verbose_name="สถานที่")
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_groups')
     members = models.ManyToManyField(User, related_name='joined_groups', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    
     def __str__(self):
         return self.name
 
