@@ -294,7 +294,7 @@ def create_group(request):
                 group.cover_image_b64 = 'data:image/jpeg;base64,' + base64.b64encode(buf.getvalue()).decode()
             group.save()
             group.members.add(request.user)
-            return redirect('community')
+            return redirect('my_groups')
     else:
         form = CommunityGroupForm()
     return render(request, 'create_group.html', {'form': form})
